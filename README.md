@@ -1,4 +1,4 @@
-# Vigilant
+# Scout
 
 ### FIRST TIME SET UP
 
