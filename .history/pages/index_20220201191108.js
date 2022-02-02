@@ -1,11 +1,9 @@
 import Image from 'next/image';
 
-const Home = () => {
+export default function Home() {
   return (
     <div>
       asdsad
     </div>
   )
 }
-
-export default Home;
