@@ -1,3 +1,4 @@
+// have static colors just in case for specific use? idk
 const DarkColors = {
     Gunmetal: "#1C2A36",
     Pumpkin: "#F4A259"
