@@ -5,12 +5,17 @@ const DarkColors = {
     White: "#FFFFFF",
     OpaqueWhite: "rgba(255, 255, 255, 0.7)",
     OffWhite: "rgba(196, 196, 196, 0.12)",
+    //glass colors
+    BlueGlass: "rgba(42, 76, 198, 0)",
+    OrangeGlass: "rgba(246, 119, 79, 0.2)"
 }
 
 const LightColors = {
     PapayaWhip: "#FEF2DC",
     Denim: '#175DAF',
-    OffGray: "rgba(0, 5, 21, 0.09)"
+    OffGray: "rgba(0, 5, 21, 0.09)",
+    //glass
+    BlackGlass: "rgba(0, 5, 21, 0.09)"
 };
 
 export const ThemeConfig = {
