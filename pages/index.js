@@ -1,8 +1,9 @@
-import Image from 'next/image';
 import styled from 'styled-components';
 
 import { useTheme } from '../utils/ScoutThemeProvider';
 import MainContentSlider from '../components/MainContentSlider';
+
+import AnimeCard from '../components/AnimeCard';
 
 const Page = styled.div`
   display: flex;
