@@ -19,6 +19,7 @@
 ### PULLING LATEST VERSION OF THE APP INTO YOUR LOCAL MACHINE
 		
 	git pull origin main
+	npm install
 
 ### Resetting a branch after making a mistake
 
