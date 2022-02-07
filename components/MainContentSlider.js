@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Image from 'next/image';
 import { motion } from "framer-motion";
 
-const Container = styled.div`
+const Container = styled(motion.div)`
     width: 60vw;
     height: 597px;
     display: flex;
