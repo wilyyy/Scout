@@ -45,7 +45,6 @@ const Header = styled.h4`
 const Body = styled.p`
   font-size: 18px;
   color: ${props=>props.bodyColor};
-  opacity: ${props=>props.bodyOpacity};
   margin: 0;
 `
 
@@ -83,7 +82,6 @@ const AnimeCard = ({
 
   src = "/anime.png",
   fontFamily = "Poppins-Regular",
-  bodyOpacity = 0.7,
   dividerOpacity = 0.2,
 
 }) => {
@@ -96,25 +94,25 @@ const AnimeCard = ({
       <TextCont>
       <Row>
         <Header 
-        headerColor={ThemeConfig[theme].altText}>Attack On Titan</Header>
+        headerColor={ThemeConfig[theme].cardHeader}>Attack On Titan</Header>
         <IconContext.Provider value={{color: ThemeConfig[theme].text, size: "2em"}}>
           <BsFillBookmarkFill  />
         </IconContext.Provider>
       </Row>
-      <Body bodyColor={ThemeConfig[theme].altText} bodyOpacity={bodyOpacity}>
+      <Body bodyColor={ThemeConfig[theme].cardText}>
         Lorem ipsum dolor sit amet, 
         consectetur adipiscing elit. 
         Volutpat id eget amet cursus fringilla augue.
       </Body>
-      <Divider dividerOpacity={dividerOpacity} dividerColor={ThemeConfig[theme].altText}>------------------</Divider>
+      <Divider dividerOpacity={dividerOpacity} dividerColor={ThemeConfig[theme].cardHeader}>------------------</Divider>
       <DetailCont>
         <div>
-        <Header headerColor={ThemeConfig[theme].altText}>22/77</Header>
-        <Details bodyColor={ThemeConfig[theme].altText} bodyOpacity={bodyOpacity}>Episodes</Details>
+        <Header headerColor={ThemeConfig[theme].cardHeader}>22/77</Header>
+        <Details bodyColor={ThemeConfig[theme].cardText}>Episodes</Details>
         </div>
         <div>
-        <Header headerColor={ThemeConfig[theme].altText}>Ongoing</Header>
-        <Details bodyColor={ThemeConfig[theme].altText} bodyOpacity={bodyOpacity}>Status</Details>
+        <Header headerColor={ThemeConfig[theme].cardHeader}>Ongoing</Header>
+        <Details bodyColor={ThemeConfig[theme].cardText}>Status</Details>
         </div>
       </DetailCont>
       </TextCont>
