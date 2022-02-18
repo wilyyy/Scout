@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useTheme } from '../utils/ScoutThemeProvider';
 
 const Container = styled.div`
-    width: 80vw;
+    width: 100%;
     height: 54px;
     font-family: "Poppins-ExtraLight";
     display: flex;
@@ -19,16 +19,20 @@ const LinkCont = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center; 
+    
+    a:hover{
+        cursor: pointer;
+    }
 `;
 
-const NavigationBar = () => {
+const NavigationBar = ({onHomeClick, onFavouritesClick}) => {
     const {theme, setTheme} = useTheme();
     return (
         <Container>
             <h1>Scout</h1>
             <LinkCont>
-                <a>Home</a>
-                <a>Favourites</a>
+                <a onClick={onHomeClick}>Home</a>
+                <a onClick={onFavouritesClick}>Favourites</a>
             </LinkCont>
             {/* gonna make a different button comp for dark mode */}
             <button 
