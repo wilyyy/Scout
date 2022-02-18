@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
-
 const Container = styled.div`
     width: 80%;
     height: 556px;
