@@ -2,53 +2,37 @@ import styled from "styled-components";
 import Image from 'next/image';
 import { motion } from "framer-motion";
 
-const Container = styled(motion.div)`
-    width: 60vw;
-    height: 597px;
+import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
+
+const Container = styled.div`
+    width: 100%;
+    height: 556px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
     font-family: "Poppins-ExtraLight";
 `;
 
-const ImageCont = styled.div`
-    border-radius: 16px;
-    overflow: hidden;
-`;
-
-//might do this differently
-const AnimeInfo = styled.div`
-    position: absolute;
-    top: 10%;
-    width: 50vw;
-    height: 197px;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    backdrop-filter: blur(10px) saturate(200%);
-    -webkit-backdrop-filter: blur(10px) saturate(200%);
-    border-radius: 16px;
-    background: rgba(196, 196, 196, 0.1);
-`;
-
-const Column = styled.div`
-    
+const CarouselCont = styled.div`
+    width: 100%;
 `
 
 
 const MainContentSlider = () => {
     return (
         <Container>
-            <ImageCont>
-                <Image 
-                    src="/../public/test_demonslayer.jpg" 
-                    width={1188}
-                    height={495}
-                    objectFit="cover"
-                />
-                <AnimeInfo></AnimeInfo>
-            </ImageCont>
+            <CarouselCont>
+            <CarouselProvider
+                naturalSlideWidth={100}
+                naturalSlideHeight={125}
+                totalSlides={3}>
+                <Slider>
+                    <Slide index={0}>I am the first Slide.</Slide>
+                    <Slide index={1}>I am the second Slide.</Slide>
+                    <Slide index={2}>I am the third Slide.</Slide>
+                </Slider>
+            </CarouselProvider>
+            </CarouselCont>
         </Container>
     )
 }

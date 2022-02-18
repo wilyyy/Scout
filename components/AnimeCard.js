@@ -83,6 +83,10 @@ const AnimeCard = ({
   src = "/anime.png",
   fontFamily = "Poppins-Regular",
   dividerOpacity = 0.2,
+  cardTitle = "[Missing Title]",
+  cardDescription = "[Missing Description",
+  cardEpisodeCount = "##/##",
+  cardStatus = "[Missing Status]"
 
   AnimeTitle="[Anime Title]",
   AnimeDesc = "[Anime Description]",
@@ -98,24 +102,23 @@ const AnimeCard = ({
       <CardImage src={src} />
       <TextCont>
       <Row>
-        <Header headerColor={ThemeConfig[theme].cardHeader}>
-          {AnimeTitle}
-        </Header>
+        <Header 
+        headerColor={ThemeConfig[theme].cardHeader}>{cardTitle}</Header>
         <IconContext.Provider value={{color: ThemeConfig[theme].text, size: "2em"}}>
           <BsFillBookmarkFill  />
         </IconContext.Provider>
       </Row>
       <Body bodyColor={ThemeConfig[theme].cardText}>
-        {AnimeDesc}
+        {cardDescription}
       </Body>
       <Divider dividerOpacity={dividerOpacity} dividerColor={ThemeConfig[theme].cardHeader}>------------------</Divider>
       <DetailCont>
         <div>
-        <Header headerColor={ThemeConfig[theme].cardHeader}>{AnimeEps}</Header>
+        <Header headerColor={ThemeConfig[theme].cardHeader}>{cardEpisodeCount}</Header>
         <Details bodyColor={ThemeConfig[theme].cardText}>Episodes</Details>
         </div>
         <div>
-        <Header headerColor={ThemeConfig[theme].cardHeader}>{AnimeStatus}</Header>
+        <Header headerColor={ThemeConfig[theme].cardHeader}>{cardStatus}</Header>
         <Details bodyColor={ThemeConfig[theme].cardText}>Status</Details>
         </div>
       </DetailCont>
