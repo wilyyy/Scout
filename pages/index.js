@@ -9,17 +9,12 @@ const Page = styled.div`
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
-
 `;
 
 const Home = () => {
-  const {theme, setTheme} = useTheme();
   return (
     <Page>
-      <button 
-        onClick={()=>{setTheme(theme === 'dark' ? 'light' : 'dark')}}
-        style={{position: "absolute", right: '2%', top:'2%', width: '100px', height: '50px'}}
-      >test</button>
+      <NavigationBar />
       <MainContentSlider />
     </Page>
   )
