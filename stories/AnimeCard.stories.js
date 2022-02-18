@@ -16,5 +16,4 @@ Default.args = {
   fontFamily: "Poppins-Regular",
   bodyOpacity: 0.7,
   dividerOpacity: 0.2
-
 };
