@@ -111,7 +111,7 @@ const NavigationBar = ({
                 </motion.a>
             </Row>
             <Row right>
-                <SearchBar onSearchClick={()=>console.log("hello")}/>
+                <SearchBar />
                 <FilterIcon onClick={onFilterClick} />
                 <ReactSwitch
                     onChange={()=>{setTheme(theme === 'dark' ? 'light' : 'dark')}}
