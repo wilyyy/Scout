@@ -15,6 +15,7 @@ const GlassCard = ({width, height, children}) => {
         <Container
             width={width}
             height={height}
+            bgcolor="#000"
         >
             {children}
         </Container>

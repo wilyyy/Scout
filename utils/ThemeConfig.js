@@ -1,5 +1,5 @@
 // have static colors just in case for specific use? idk
-const DarkColors = {
+export const DarkColors = {
     Gunmetal: "#1C2A36",
     Pumpkin: "#F4A259",
     White: "#FFFFFF",
@@ -10,7 +10,7 @@ const DarkColors = {
     OrangeGlass: "rgba(246, 119, 79, 0.2)"
 }
 
-const LightColors = {
+export const LightColors = {
     PapayaWhip: "#FEF2DC",
     Denim: '#175DAF',
     OffGray: "rgba(0, 5, 21, 0.09)",

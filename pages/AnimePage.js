@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import NavigationBar from "../components/NavigationBar";
 import GlassCard from "../components/GlassCard";
+import SearchBar from "../components/SearchBar";
 
 const Page = styled.div`
     width: 100%;
@@ -17,6 +18,7 @@ const AnimePage = () => {
     return (
         <Page>
             <NavigationBar />
+            <SearchBar />
             <GlassCard>asdas</GlassCard>
         </Page>
     )

@@ -3,7 +3,7 @@ import {useContext, createContext, useState} from 'react';
 import { ThemeConfig } from './ThemeConfig';
 
 const initialStates = {
-    theme: "light",
+    theme: "dark",
     setTheme: ()=>{}
 }
 

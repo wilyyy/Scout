@@ -86,9 +86,8 @@ const AnimeCard = ({
   cardTitle = "[Missing Title]",
   cardDescription = "[Missing Description",
   cardEpisodeCount = "##/##",
-  cardStatus = "[Missing Status]"
-
-  AnimeTitle="[Anime Title]",
+  cardStatus = "[Missing Status]",
+  AnimeTitle = "[Anime Title]",
   AnimeDesc = "[Anime Description]",
   AnimeEps = "[##/##]",
   AnimeStatus ="[Status]"

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import { useTheme } from '../utils/ScoutThemeProvider';
 import MainContentSlider from '../components/MainContentSlider';
+import NavigationBar from '../components/NavigationBar';
 
 const Page = styled.div`
   display: flex;
