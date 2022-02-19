@@ -1,19 +1,26 @@
 import Link from "next/link";
 import styled from "styled-components";
-import { Switch } from 'antd';
 import { SunFill } from '@styled-icons/bootstrap/SunFill';
 import { MoonStarsFill } from '@styled-icons/bootstrap/MoonStarsFill';
+import ReactSwitch from "react-switch";
+import { motion } from "framer-motion";
+import { useRouter } from 'next/router';
 
 import { useTheme } from '../utils/ScoutThemeProvider';
 import { ThemeConfig } from "../utils/ThemeConfig";
+import { HoverZoom } from "../utils/Animations";
 
 const Container = styled.div`
     width: 100%;
-    height: 54px;
+    height: 75px;
     font-family: "Poppins-ExtraLight";
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
+    h1:hover{
+        cursor: pointer;
+    }
 `;
 
 const LinkCont = styled.div`
@@ -29,12 +36,6 @@ const LinkCont = styled.div`
     }
 `;
 
-const ModeSwitch = styled(Switch)`
-    width: 75px;
-    height: 40px;
-    border-radius: 50px;
-`;
-
 const SunIcon = styled(SunFill)`
     width: 35px;
     height: 35px;
@@ -48,20 +49,40 @@ const MoonIcon = styled(MoonStarsFill)`
 `;
 
 const NavigationBar = ({onHomeClick, onFavouritesClick}) => {
+    const router = useRouter();
     const {theme, setTheme} = useTheme();
+
     return (
         <Container>
-            <h1>Scout</h1>
+            <motion.h1
+                whileHover={HoverZoom.hover}
+                whileTap={HoverZoom.tap}
+                transition={HoverZoom.spring}
+                onClick={()=>router.push('/')}
+            >
+                Scout
+            </motion.h1>
             <LinkCont>
-                <a onClick={onHomeClick}>Home</a>
-                <a onClick={onFavouritesClick}>Favourites</a>
+                <motion.a 
+                    whileHover={HoverZoom.hover}
+                    whileTap={HoverZoom.tap}
+                    transition={HoverZoom.spring}
+                    onClick={onHomeClick}
+                >
+                    Home
+                </motion.a>
+                <motion.a 
+                    whileHover={HoverZoom.hover}
+                    whileTap={HoverZoom.tap}
+                    transition={HoverZoom.spring}
+                    onClick={onHomeClick}
+                >
+                    Your List
+                </motion.a>
             </LinkCont>
-            {/* gonna make a different button comp for dark mode */}
-            <ModeSwitch 
-                unCheckedChildren={<SunIcon color={ThemeConfig[theme].text} />}
-                checkedChildren={<MoonIcon color={ThemeConfig[theme].text} />}
-                defaultChecked
+            <ReactSwitch 
                 onChange={()=>{setTheme(theme === 'dark' ? 'light' : 'dark')}}
+                checked={theme === 'dark' ? false : true}
             />
         </Container>
     )
