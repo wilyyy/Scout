@@ -2,7 +2,6 @@ import React from 'react';
 
 import AnimeCard from '../components/AnimeCard';
 
-
 export default {
   title: 'Anime Card',
   component: AnimeCard,
