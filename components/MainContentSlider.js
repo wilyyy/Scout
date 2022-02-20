@@ -17,6 +17,7 @@ const Container = styled.div`
     justify-content: space-between;
     font-family: "Poppins-ExtraLight";
     padding: 0 5%;
+    margin-bottom: 100px;
 `;
 
 const ImgCont = styled.div`
