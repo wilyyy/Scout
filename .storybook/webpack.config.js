@@ -7,7 +7,7 @@ module.exports = async ({ config }) => {
   });
   
   config.module.rules.push({
-    test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+    test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/,
     use: [
       {
         loader: 'file-loader',

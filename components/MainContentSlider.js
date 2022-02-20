@@ -5,26 +5,27 @@ import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
 import { useTheme } from "../utils/ScoutThemeProvider";
-import { ThemeConfig } from "../utils/ThemeConfig";
 import Button from "./Button";
+import { ThemeConfig } from "../utils/ThemeConfig";
 
 const Container = styled.div`
     width: 80%;
-    height: 556px;
+    height: 494px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     font-family: "Poppins-ExtraLight";
     padding: 0 5%;
-    border: 1px solid red;
 `;
 
 const ImgCont = styled.div`
     width: 100%;
     height: 494px;
     overflow: hidden;
-    background: no-repeat url(${props=>props.bgimage}) top center;
+    background-image: url(${props=>props.bgimage});
+    background-position: top center;
+    background-repeat: no-repeat;
     border-radius: 16px;
     padding: 25px;
     display: flex;
@@ -37,9 +38,10 @@ const BlurCont = styled.div`
     backdrop-filter: blur(89.4px);
     background: rgba(196, 196, 196, 0.1);
     border-radius: 16px;
-    padding: 18px 39px 0;
+    padding: 18px 39px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 `
 
 const Title = styled.div`
@@ -52,15 +54,14 @@ const Title = styled.div`
 
 const BottomText = styled.div`
     font-family: 'Poppins-Regular';
-    font-size: 24px;
+    font-size: 21px;
     line-height: 31px;
     color: ${props=>props.textcolor};
 `
 
 const Description = styled.div`
-    font-family: 'Poppins-Regular';
-    font-size: 24px;
-    line-height: 36px;
+    font-size: 21px;
+    line-height: 28px;
     color: white;
 `
 
@@ -73,16 +74,17 @@ const Row = styled.div`
 display: flex;
 width: 100%;
 justify-content: space-between;
-align-self: flex-start;
-align-items: center;
+align-items: flex-end;
 `
 
 const MainContentSlider = ({
 
-    bgimage = "/test_demonslayer.jpg",
+    bgimage = "test_demonslayer.jpg",
     titletext1 = "Default",
     desctext1 = "Default",
     bottext = "Default",
+    curEp = "##",
+    totEp = "##"
 
 }) => {
 
@@ -107,6 +109,12 @@ const MainContentSlider = ({
                                 <Bookmark>
                                     <RiBookmarkFill size="45px" color={ThemeConfig[theme].text} />
                                 </Bookmark>
+                                <Row>
+                                    <BottomText textcolor="white">
+                                        {bottext} | Episode {curEp}/{totEp}
+                                    </BottomText>
+                                    <Button btnText="Continue" />
+                                </Row>
                             </BlurCont>
                         </ImgCont>
                     </Slide>
@@ -118,6 +126,12 @@ const MainContentSlider = ({
                                 <Bookmark>
                                     <RiBookmarkFill size="45px" color={ThemeConfig[theme].text} />
                                 </Bookmark>
+                                <Row>
+                                    <BottomText textcolor="white">
+                                        {bottext} | Episode {curEp}/{totEp}
+                                    </BottomText>
+                                    <Button btnText="Continue" />
+                                </Row>
                             </BlurCont>
                         </ImgCont>
                     </Slide>
@@ -129,17 +143,17 @@ const MainContentSlider = ({
                                 <Bookmark>
                                     <RiBookmarkFill size="45px" color={ThemeConfig[theme].text} />
                                 </Bookmark>
+                                <Row>
+                                    <BottomText textcolor="white">
+                                        {bottext} | Episode {curEp}/{totEp}
+                                    </BottomText>
+                                    <Button btnText="Continue" />
+                                </Row>
                             </BlurCont>
                         </ImgCont>
                     </Slide>
                 </Slider>
             </CarouselProvider>
-            <Row>
-                <BottomText textcolor={ThemeConfig[theme].cardHeader}>
-                    {bottext}
-                </BottomText>
-                <Button btnText="Continue" />
-            </Row>
         </Container>
     )
 }
