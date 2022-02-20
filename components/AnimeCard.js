@@ -84,7 +84,7 @@ const AnimeCard = ({
   fontFamily = "Poppins-Regular",
   dividerOpacity = 0.2,
   cardTitle = "[Missing Title]",
-  cardDescription = "[Missing Description",
+  cardDescription = "[Missing Description]",
   cardEpisodeCount = "##/##",
   cardStatus = "[Missing Status]"
 
