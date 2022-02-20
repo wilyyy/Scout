@@ -19,7 +19,68 @@ const Container = styled.div`
     padding: 0 5%;
 `;
 
+const ImgCont = styled.div`
+    width: 100%;
+    height: 494px;
+    overflow: hidden;
+    background: no-repeat url("/test_demonslayer.jpg") top center;
+    border-radius: 16px;
+    padding: 25px;
+    display: flex;
+    align-items: flex-end;
+`;
+
+const BlurCont = styled.div`
+    height: 200px;
+    width: 100%;
+    backdrop-filter: blur(89.4px);
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 16px;
+    padding: 18px 39px 0;
+    display: flex;
+    flex-direction: column;
+`
+
+const Title = styled.div`
+    font-family: 'Poppins-Regular';
+    font-size: 24px;
+    line-height: 31px;
+    color: white;
+    margin-bottom: 16px;
+`
+
+const BottomText = styled.div`
+    font-family: 'Poppins-Regular';
+    font-size: 24px;
+    line-height: 31px;
+    color: ${props=>props.textcolor};
+`
+
+const Description = styled.div`
+    font-family: 'Poppins-Regular';
+    font-size: 24px;
+    line-height: 36px;
+    color: white;
+`
+
+const Bookmark = styled.div`
+    position: absolute;
+    right: 25px;
+`
+
+const Row = styled.div`
+display: flex;
+width: 100%;
+justify-content: space-between;
+align-self: flex-start;
+align-items: center;
+`
+
 const MainContentSlider = ({
+
+    titletext1 = "Default",
+    desctext1 = "Default",
+    bottext = "Default",
 
 }) => {
 
@@ -27,7 +88,56 @@ const MainContentSlider = ({
 
     return (
         <Container>
-            
+            <CarouselProvider
+                naturalSlideWidth={1000}
+                naturalSlideHeight={494}
+                totalSlides={3}
+                infinite={true}
+                isPlaying={true}
+                className="Carousel"
+                >
+                <Slider className="slider">
+                    <Slide index={0} className="slide">
+                        <ImgCont>
+                            <BlurCont>
+                                <Title>{titletext1}</Title>
+                                <Description>{desctext1}</Description>
+                                <Bookmark>
+                                    <RiBookmarkFill size="45px" color={ThemeConfig[theme].text} />
+                                </Bookmark>
+                            </BlurCont>
+                        </ImgCont>
+                    </Slide>
+                    <Slide index={1} className="slide">
+                        <ImgCont>
+                            <BlurCont>
+                                <Title>{titletext1}</Title>
+                                <Description>{desctext1}</Description>
+                                <Bookmark>
+                                    <RiBookmarkFill size="45px" color={ThemeConfig[theme].text} />
+                                </Bookmark>
+                            </BlurCont>
+                        </ImgCont>
+                    </Slide>
+                    <Slide index={2} className="slide">
+                        <ImgCont>
+                            <BlurCont>
+                                <Title>{titletext1}</Title>
+                                <Description>{desctext1}</Description>
+                                <Bookmark>
+                                    <RiBookmarkFill size="45px" color={ThemeConfig[theme].text} />
+                                </Bookmark>
+                            </BlurCont>
+                        </ImgCont>
+                    </Slide>
+                </Slider>
+            </CarouselProvider>
+            <Row>
+                <BottomText textcolor={ThemeConfig[theme].cardHeader}>
+                    {bottext}
+                </BottomText>
+                <Button btnText="Continue" />
+            </Row>
         </Container>
     )
 }
