@@ -4,6 +4,7 @@ import { useTheme } from '@/utils/ScoutThemeProvider';
 
 import NavigationBar from '@/components/NavigationBar';
 import MainContentSlider from '@/components/MainContentSlider';
+import SettingsModal from '@/components/SettingsModal';
 
 import { IoMdFunnel } from 'react-icons/io';
 
@@ -54,6 +55,7 @@ const Home = () => {
         <IoMdFunnel color={ThemeConfig[theme].text} size="32" />
       </BodyHeader>
       <AnimeCardCont>
+        <SettingsModal />
       </AnimeCardCont>
     </Page>
   )

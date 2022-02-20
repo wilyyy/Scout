@@ -6,10 +6,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "storybook": "start-storybook -p 6060 -c .storybook watch-css -s public",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@mui/material": "^5.4.2",
+    "@mui/styled-engine-sc": "^5.4.2",
     "axios": "^0.25.0",
     "framer-motion": "^6.2.3",
     "next": "12.0.10",
@@ -21,10 +22,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.0",
-    "@storybook/addon-actions": "^6.4.18",
-    "@storybook/addon-essentials": "^6.4.18",
-    "@storybook/addon-links": "^6.4.18",
-    "@storybook/react": "^6.4.18",
     "babel-loader": "^8.2.3",
     "eslint": "8.8.0",
     "eslint-config-next": "12.0.10",
