@@ -88,11 +88,6 @@ const AnimeCard = ({
   cardEpisodeCount = "##/##",
   cardStatus = "[Missing Status]"
 
-  AnimeTitle="[Anime Title]",
-  AnimeDesc = "[Anime Description]",
-  AnimeEps = "[##/##]",
-  AnimeStatus ="[Status]"
-
 }) => {
 
   const { theme } = useTheme();

@@ -14,7 +14,6 @@ const Page = styled.div`
 const Home = () => {
   return (
     <Page>
-      <NavigationBar />
       <MainContentSlider />
     </Page>
   )

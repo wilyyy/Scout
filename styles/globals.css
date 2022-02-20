@@ -40,20 +40,3 @@ a {
 #__next {
   width: 100%;
 }
-
-
-/* Carousel stuff */
-.carousel {
-  width: 100%;
-  min-height: 494px;
-  max-height: 494px;
-}
-.slider {
-  min-height: 494px;
-  max-height: 494px;
-}
-.slide {
-  overflow: hidden;
-  min-height: 494px;
-  max-height: 494px;
-  }
