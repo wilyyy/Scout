@@ -13,7 +13,8 @@ const ButtonCont = styled.div`
     align-items: center;
     color: ${props=>props.btncolor};
     font-size: 24;
-    font-family: "Poppins-Regular";
+    font-family: "Poppins";
+    font-weight: 400;
 `
 
 const Button = ({

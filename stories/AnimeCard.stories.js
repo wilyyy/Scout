@@ -1,4 +1,3 @@
-import { urlObjectKeys } from 'next/dist/shared/lib/utils';
 import React from 'react';
 
 import AnimeCard from '../components/AnimeCard';
@@ -99,7 +98,7 @@ Dark.parameters = {
 
 Dark.args = {
   src: 'anime.png',
-  fontFamily: "Poppins-Regular",
+  fontFamily: "Poppins",
   bgcolor: ThemeConfig['dark'].cardBackground,
   hcolor: ThemeConfig['dark'].cardHeader,
   bcolor: ThemeConfig['dark'].cardText,
@@ -118,7 +117,7 @@ Light.parameters = {
 
 Light.args = {
   src: 'anime.png',
-  fontFamily: "Poppins-Regular",
+  fontFamily: "Poppins",
   bgcolor: ThemeConfig['light'].cardBackground,
   hcolor: ThemeConfig['light'].cardHeader,
   bcolor: ThemeConfig['light'].cardText,

@@ -6,7 +6,8 @@ import { useTheme } from '../utils/ScoutThemeProvider';
 const Container = styled.div`
     width: 80vw;
     height: 54px;
-    font-family: "Poppins-ExtraLight";
+    font-family: "Poppins";
+    font-weight: 200;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -15,7 +16,8 @@ const Container = styled.div`
 const LinkCont = styled.div`
     width: 15%;
     height: 54px;
-    font-family: "Poppins-ExtraLight";
+    font-family: "Poppins";
+    font-weight: 200;
     display: flex;
     justify-content: space-between;
     align-items: center; 

@@ -46,7 +46,8 @@ const BlurCont = styled.div`
 `
 
 const Title = styled.div`
-    font-family: 'Poppins-Regular';
+    font-family: 'Poppins';
+    font-weight: 400;
     font-size: 24px;
     line-height: 31px;
     color: white;
@@ -54,13 +55,15 @@ const Title = styled.div`
 `
 
 const BottomText = styled.div`
-    font-family: 'Poppins-Regular';
+    font-family: 'Poppins';
+
     font-size: 21px;
     line-height: 31px;
     color: ${props=>props.textcolor};
 `
 
 const Description = styled.div`
+    font-family: 'Poppins';
     font-size: 21px;
     line-height: 28px;
     color: white;
