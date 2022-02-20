@@ -17,13 +17,14 @@ const Container = styled.div`
     justify-content: space-between;
     font-family: "Poppins-ExtraLight";
     padding: 0 5%;
+    border: 1px solid red;
 `;
 
 const ImgCont = styled.div`
     width: 100%;
     height: 494px;
     overflow: hidden;
-    background: no-repeat url("/test_demonslayer.jpg") top center;
+    background: no-repeat url(${props=>props.bgimage}) top center;
     border-radius: 16px;
     padding: 25px;
     display: flex;
@@ -78,6 +79,7 @@ align-items: center;
 
 const MainContentSlider = ({
 
+    bgimage = "/test_demonslayer.jpg",
     titletext1 = "Default",
     desctext1 = "Default",
     bottext = "Default",
@@ -98,7 +100,7 @@ const MainContentSlider = ({
                 >
                 <Slider className="slider">
                     <Slide index={0} className="slide">
-                        <ImgCont>
+                        <ImgCont bgimage={bgimage}>
                             <BlurCont>
                                 <Title>{titletext1}</Title>
                                 <Description>{desctext1}</Description>
@@ -109,7 +111,7 @@ const MainContentSlider = ({
                         </ImgCont>
                     </Slide>
                     <Slide index={1} className="slide">
-                        <ImgCont>
+                        <ImgCont bgimage={bgimage}>
                             <BlurCont>
                                 <Title>{titletext1}</Title>
                                 <Description>{desctext1}</Description>
@@ -120,7 +122,7 @@ const MainContentSlider = ({
                         </ImgCont>
                     </Slide>
                     <Slide index={2} className="slide">
-                        <ImgCont>
+                        <ImgCont bgimage={bgimage}>
                             <BlurCont>
                                 <Title>{titletext1}</Title>
                                 <Description>{desctext1}</Description>

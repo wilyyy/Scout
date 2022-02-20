@@ -16,7 +16,7 @@ const CardCont = styled.div`
   padding: 20px;
   border-radius: 16px;
 
-  background-color: ${props=>props.backgroundColor};
+  background-color: ${props=>props.bgcolor};
   font-family: ${props=>props.fontFamily};
 `
 
@@ -38,20 +38,20 @@ const Row = styled.div`
 const Header = styled.h4`
   margin: 0;
   font-size: 18px;
-  color: ${props=>props.headerColor};
+  color: ${props=>props.hcolor};
   font-weight: 400;
 `
 
 const Body = styled.p`
   font-size: 18px;
-  color: ${props=>props.bodyColor};
+  color: ${props=>props.bcolor};
   margin: 0;
 `
 
 const Details = styled.p`
   font-size: 16px;
-  color: ${props=>props.bodyColor};
-  opacity: ${props=>props.bodyOpacity};
+  color: ${props=>props.bcolor};
+  opacity: ${props=>props.bopacity};
   margin: 0;
 `
 
@@ -73,8 +73,8 @@ const TextCont = styled.div`
 
 const Divider = styled.p`
   font-size: 18px;
-  color: ${props=>props.dividerColor};
-  opacity: ${props=>props.dividerOpacity};
+  color: ${props=>props.dcolor};
+  opacity: ${props=>props.dopacity};
   margin: 15px 0;
 `
 
@@ -82,39 +82,45 @@ const AnimeCard = ({
 
   src = "/anime.png",
   fontFamily = "Poppins-Regular",
-  dividerOpacity = 0.2,
   cardTitle = "[Missing Title]",
   cardDescription = "[Missing Description]",
-  cardEpisodeCount = "##/##",
-  cardStatus = "[Missing Status]"
+  cardCurEp = "##",
+  cardTotEp = "##",
+  cardStatus = "[Missing Status]",
+  bgcolor,
+  hcolor,
+  bcolor,
+  dcolor,
+  icolor,
+
 
 }) => {
 
   const { theme } = useTheme();
 
   return (
-    <CardCont backgroundColor={ThemeConfig[theme].cardBackground} fontFamily={fontFamily}>
+    <CardCont bgcolor={bgcolor} fontFamily={fontFamily}>
       <CardImage src={src} />
       <TextCont>
       <Row>
         <Header 
-        headerColor={ThemeConfig[theme].cardHeader}>{cardTitle}</Header>
-        <IconContext.Provider value={{color: ThemeConfig[theme].text, size: "2em"}}>
+        hcolor={hcolor}>{cardTitle}</Header>
+        <IconContext.Provider value={{color: icolor, size: "2em"}}>
           <BsFillBookmarkFill  />
         </IconContext.Provider>
       </Row>
-      <Body bodyColor={ThemeConfig[theme].cardText}>
+      <Body bcolor={bcolor}>
         {cardDescription}
       </Body>
-      <Divider dividerOpacity={dividerOpacity} dividerColor={ThemeConfig[theme].cardHeader}>------------------</Divider>
+      <Divider dopacity="0.2" dcolor={dcolor}>------------------</Divider>
       <DetailCont>
         <div>
-        <Header headerColor={ThemeConfig[theme].cardHeader}>{cardEpisodeCount}</Header>
-        <Details bodyColor={ThemeConfig[theme].cardText}>Episodes</Details>
+        <Header hcolor={hcolor}>{cardCurEp}/{cardTotEp}</Header>
+        <Details bcolor={bcolor}>Episodes</Details>
         </div>
         <div>
-        <Header headerColor={ThemeConfig[theme].cardHeader}>{cardStatus}</Header>
-        <Details bodyColor={ThemeConfig[theme].cardText}>Status</Details>
+        <Header hcolor={hcolor}>{cardStatus}</Header>
+        <Details bcolor={bcolor}>Status</Details>
         </div>
       </DetailCont>
       </TextCont>
