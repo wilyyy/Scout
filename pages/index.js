@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { ThemeConfig } from '../utils/ThemeConfig';
-import { useTheme } from '../utils/ScoutThemeProvider';
+import { ThemeConfig } from '@/utils/ThemeConfig';
+import { useTheme } from '@/utils/ScoutThemeProvider';
 
-import NavigationBar from '../components/NavigationBar';
-import MainContentSlider from '../components/MainContentSlider';
+import NavigationBar from '@/components/NavigationBar';
+import MainContentSlider from '@/components/MainContentSlider';
 
 import { IoMdFunnel } from 'react-icons/io';
 

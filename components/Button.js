@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import { useTheme } from "../utils/ScoutThemeProvider";
-import { ThemeConfig } from "../utils/ThemeConfig";
+import { useTheme } from "@/utils/ScoutThemeProvider";
+import { ThemeConfig } from "@/utils/ThemeConfig";
 
 const ButtonCont = styled.div`
     width: 166px;

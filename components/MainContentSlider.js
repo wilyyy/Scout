@@ -4,9 +4,9 @@ import { RiBookmarkFill } from "react-icons/ri"
 import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
-import { useTheme } from "../utils/ScoutThemeProvider";
+import { useTheme } from "@/utils/ScoutThemeProvider";
 import Button from "./Button";
-import { ThemeConfig } from "../utils/ThemeConfig";
+import { ThemeConfig } from "@/utils/ThemeConfig"
 
 const Container = styled.div`
     width: 80%;
