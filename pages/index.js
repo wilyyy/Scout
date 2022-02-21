@@ -1,8 +1,12 @@
 import styled from 'styled-components';
+import Router from 'next/router';
 
 import { useTheme } from '../utils/ScoutThemeProvider';
 import MainContentSlider from '../components/MainContentSlider';
 import NavigationBar from '../components/NavigationBar';
+
+import ax from 'axios';
+import { useState } from 'react';
 
 const Page = styled.div`
   display: flex;
@@ -17,7 +21,11 @@ const Home = () => {
     <Page>
       <NavigationBar />
       <MainContentSlider />
-      {/* 🐳🐳🐳🐳🐳🐳 willy shit for merge 🐳🐳🐳🐳🐳🐳 */}
+
+      {/* 🐳🐳🐳🐳🐳🐳 willy stuff for merge delete or take stuff from later? 🐳🐳🐳🐳🐳🐳 */}
+      
+      
+      {/* 🐳🐳🐳🐳🐳🐳 willy stuff end🐳🐳🐳🐳🐳🐳 */}
     </Page>
   )
 }

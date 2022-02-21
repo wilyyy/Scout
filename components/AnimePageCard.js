@@ -3,12 +3,12 @@
 import Image from "next/image";
 import styled from "styled-components";
 
-import { useTheme } from '../../utils/ScoutThemeProvider';
-import { ThemeConfig } from "../../utils/ThemeConfig";
+import { useTheme } from '../utils/ScoutThemeProvider';
+import { ThemeConfig } from "../utils/ThemeConfig";
 
 const Container = styled.div`
-    width: 80%;
-    height: 300px;
+    width: 1200px;
+    height: 400px;
     display: flex;
     border-radius: 15px;
     justify-content: space-between;
@@ -19,8 +19,8 @@ const Container = styled.div`
 
 const Card = styled.div`
     width: 85%;
-    height: 300px;
-    background: #000;
+    height: 400px;
+    background: purple;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,8 +31,8 @@ const Row = styled.div`
     align-items: center;
 
     ${({large}) => large && `
-        width: 90%;
-        height: 236px;
+        width: 95%;
+        height: 306px;
         justify-content: space-between;
         background: green;
     `}
@@ -45,6 +45,12 @@ const Row = styled.div`
     ${({score}) => score && `
         width: 277px;
         height: 36px;
+        justify-content: space-between;
+    `}
+
+    ${({midright}) => midright && `
+        width: 421px;
+        height: 103px;
         justify-content: space-between;
     `}
 `;
@@ -68,7 +74,20 @@ const Column = styled.div`
 
     ${({right}) => right && `
         width: 421px;
-        height: 236px;
+        height: 100%;
+        justify-content: space-between;
+        align-items: center;
+    `}
+
+    ${({midright}) => midright && `
+        width: 133px;
+        height: 100px;
+        justify-content: space-evenly;
+    `}
+
+    ${({match}) => match && `
+        width: auto;
+        height: 84px;
         justify-content: space-between;
         align-items: center;
     `}
@@ -100,6 +119,13 @@ const Divider = styled.div`
     background-color: ${props=> props.color};
 `;
 
+const MatchBar = styled.div`
+    width: 421px;
+    height: 20px;
+    background: red;
+`;
+
+//replace with next img or nah? decide later
 const Testimg = styled.img`
     width: 20%;
     height: auto;
@@ -109,12 +135,13 @@ const AnimePageCard = ({
     title="Demon Slayer", 
     sypnosis ="It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a living, finds his family slaughtered by a demon. To make matters worse, his younger sister Nezuko, the sole survivor, has been transformed into a demon hers", 
     score="8.67",
-    ranked, 
-    popularity,
-    genres,
+    ranked="48", 
+    popularity="36",
+    genres="action, adventure, fighting",
     aired="Finished Airing",
-    episodes,
-    img_url
+    episodes="24",
+    img_url,
+    matchPercent=86
 }) => {
     const {theme, setTheme} = useTheme();
 
@@ -137,6 +164,27 @@ const AnimePageCard = ({
                             <Text para1 color={ThemeConfig[theme].body}>|</Text>
                             <Text para1 color={ThemeConfig[theme].body}>{aired}</Text>
                         </Row>
+                        <Row midright>
+                            <Column midright>
+                                <Text Para1>Rank</Text>
+                                <Text H2>#{ranked}</Text>
+                                <Text Para1>Seasons: 1</Text>
+                            </Column>
+                            <Column midright>
+                                <Text Para1>Popularity</Text>
+                                <Text H2>#{popularity}</Text>
+                                <Text Para1>Episodes: {episodes}</Text>
+                            </Column>
+                            <Column midright>
+                                <Text Para1>Genres</Text>
+                                <Text H2>{genres}</Text>
+                            </Column>
+                        </Row>
+                        <Column match>
+                            <Text Para1>Based on your favourites, {title} is a</Text>
+                            <MatchBar />
+                            <Text Para1>{matchPercent}% match</Text>
+                        </Column>
                     </Column>
                 </Row>
             </Card>
