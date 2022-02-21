@@ -5,6 +5,7 @@ import NavigationBar from "../components/NavigationBar";
 import GlassCard from "../components/GlassCard";
 import SearchBar from "../components/SearchBar";
 import AnimePageCard from "../components/AnimePageCard";
+import AnimePageRecCard from "../components/AnimePageRecCard";
 
 const Page = styled.div`
     width: 100%;
@@ -20,6 +21,7 @@ const AnimePage = () => {
         <Page>
             <NavigationBar />
             <AnimePageCard />
+            <AnimePageRecCard title="Bleach" genres="Action, Mystery" onFavClick={()=>console.log("hi")}/>
         </Page>
     )
 }   

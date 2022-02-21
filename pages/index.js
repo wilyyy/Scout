@@ -17,6 +17,7 @@ const Home = () => {
     <Page>
       <NavigationBar />
       <MainContentSlider />
+      {/* 🐳🐳🐳🐳🐳🐳 willy shit for merge 🐳🐳🐳🐳🐳🐳 */}
     </Page>
   )
 }
