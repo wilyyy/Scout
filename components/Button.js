@@ -15,18 +15,20 @@ const ButtonCont = styled.div`
     font-size: 24;
     font-family: "Poppins";
     font-weight: 400;
+    cursor: pointer;
 `
 
 const Button = ({
 
-    btnText = "Default"
+    btnText = "Default",
+    onClick = () => {}
 
 }) => {
 
     const {theme} = useTheme();
 
     return (
-        <ButtonCont bgcolor={ThemeConfig[theme].text} btncolor={ThemeConfig[theme].background}>
+        <ButtonCont onClick={onClick} bgcolor={ThemeConfig[theme].text} btncolor={ThemeConfig[theme].background}>
             {btnText}
         </ButtonCont>
     )

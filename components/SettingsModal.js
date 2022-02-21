@@ -1,19 +1,11 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { useTheme } from "@/utils/ScoutThemeProvider";
+import { ThemeConfig } from "@/utils/ThemeConfig";
 
-import { useTheme } from "../utils/ScoutThemeProvider";
-import { ThemeConfig } from "../utils/ThemeConfig";
+//GenreFilter
 import { Genres } from "@/utils/genres";
-
-import * as React from 'react';
-
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import ListItemText from '@mui/material/ListItemText';
-import Checkbox from '@mui/material/Checkbox';
-import Select from '@mui/material/Select';
-import { BsFillCaretDownFill } from 'react-icons/bs';
+import { FormControl, Select, MenuItem, ListItemText, Checkbox  } from "@mui/material";
 
 import Button from "./Button";
 
@@ -72,8 +64,8 @@ const SectionHeader = styled.label`
   margin-bottom: 22px;
 `
 
-const ITEM_HEIGHT = 40;
-const ITEM_PADDING_TOP = 4;
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
 const MenuProps = {
   PaperProps: {
     style: {
@@ -81,10 +73,6 @@ const MenuProps = {
       width: 250,
     },
   },
-
-  disableScrollLock: true,
-  padding: 0
-
 };
 
 const SettingsModal = ({
@@ -94,14 +82,15 @@ const SettingsModal = ({
   const {theme} = useTheme();
   const [genre, setGenre] = useState([]);
 
-  const handleGenre = (e) => {
+  const handleGenre = (event) => {
     const {
       target: { value },
-    } = e;
+    } = event;
     setGenre(
+      // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
-    )
-  }
+    );
+  };
 
   return (
     <SettingsCont>
@@ -156,7 +145,7 @@ const SettingsModal = ({
           <SectionTitle tcolor={tcolor}>Sort By</SectionTitle>
         </SectionCont>
       </SettingsRow>
-      <Button btnText="Apply" />
+      <Button btnText="Apply" onClick={()=>console.log(genre)} />
     </SettingsCont>
   )
 }
