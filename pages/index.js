@@ -55,7 +55,7 @@ const Home = () => {
         <IoMdFunnel color={ThemeConfig[theme].text} size="32" />
       </BodyHeader>
       <AnimeCardCont>
-        <SettingsModal />
+        <SettingsModal tcolor={ThemeConfig[theme].cardHeader} />
       </AnimeCardCont>
     </Page>
   )
