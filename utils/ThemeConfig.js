@@ -24,13 +24,15 @@ export const ThemeConfig = {
         text: DarkColors.Pumpkin,
         cardHeader: DarkColors.White,
         cardText: DarkColors.OpaqueWhite,
-        cardBackground: DarkColors.OffWhite
+        cardBackground: DarkColors.OffWhite,
+        body: "#fff"
     },
     light: {
         background: LightColors.PapayaWhip,
         text: LightColors.Denim,
         cardHeader: DarkColors.Gunmetal,
         cardText: DarkColors.Gunmetal,
-        cardBackground: LightColors.OffGray
+        cardBackground: LightColors.OffGray,
+        body: "#000"
     }
 }
