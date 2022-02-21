@@ -72,8 +72,8 @@ const SectionHeader = styled.label`
   margin-bottom: 22px;
 `
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 2;
+const ITEM_HEIGHT = 40;
+const ITEM_PADDING_TOP = 4;
 const MenuProps = {
   PaperProps: {
     style: {
@@ -81,6 +81,10 @@ const MenuProps = {
       width: 250,
     },
   },
+
+  disableScrollLock: true,
+  padding: 0
+
 };
 
 const SettingsModal = ({
@@ -113,14 +117,11 @@ const SettingsModal = ({
                 multiple
                 value={genre}
                 onChange={handleGenre}
-                input={
-                  <Select 
-                    sx={{
-                      backgroundColor: 'white', 
-                      fontFamily: 'Inter, sans-serif',
-                      height: 30
-                    }} 
-                  />}
+                sx={{
+                  backgroundColor: 'white', 
+                  fontFamily: 'Inter, sans-serif',
+                  height: 30
+                }} 
                 renderValue={(selected) => selected.join(', ')}
                 MenuProps={MenuProps}
               >
