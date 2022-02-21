@@ -3,15 +3,17 @@ import { useState } from "react";
 
 import { useTheme } from "../utils/ScoutThemeProvider";
 import { ThemeConfig } from "../utils/ThemeConfig";
+import { Genres } from "@/utils/genres";
 
 import * as React from 'react';
-import OutlinedInput from '@mui/material/OutlinedInput';
+
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
-import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
+import Select from '@mui/material/Select';
+import { BsFillCaretDownFill } from 'react-icons/bs';
 
 import Button from "./Button";
 
@@ -50,6 +52,11 @@ const SubSection = styled.div`
   justify-content: space-between;
 `
 
+const SortCont = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 const SectionTitle = styled.div`
   font-family: Inter, sans-serif;
   font-size: 22px;
@@ -58,61 +65,15 @@ const SectionTitle = styled.div`
   margin-bottom: 22px;
 `
 
-const SectionHeader = styled.div`
+const SectionHeader = styled.label`
   font-family: Inter, sans-serif;
   font-size: 18px;
   color: ${props=>props.tcolor};
+  margin-bottom: 22px;
 `
 
-const Genres = [
-  'Action',
-  'Adventure',
-  'Avant Garde',
-  'Award Winning',
-  'Boys Love',
-  'Comedy',
-  'Drama',
-  'Fantasy',
-  'Girls Love',
-  'Gourmet',
-  'Horror',
-  'Mystery',
-  'Romance',
-  'Sci-Fi',
-  'Slice of Life',
-  'Sports',
-  'Supernatural',
-  'Suspense',
-  'Work Life',
-  'Ecchi',
-  'Erotica',
-  'Hentai',
-  'Cars',
-  'Demons',
-  'Game',
-  'Harem',
-  'Historical',
-  'Martial Arts',
-  'Mecha',
-  'Military',
-  'Music',
-  'Parody',
-  'Police',
-  'Psychological',
-  'Samurai',
-  'School',
-  'Space',
-  'Super Power',
-  'Vampire',
-  'Josei',
-  'Kids',
-  'Seinen',
-  'Shoujo',
-  'Shounen'
-];
-
 const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
+const ITEM_PADDING_TOP = 2;
 const MenuProps = {
   PaperProps: {
     style: {
@@ -123,9 +84,7 @@ const MenuProps = {
 };
 
 const SettingsModal = ({
-
   tcolor,
-
 }) => {
 
   const {theme} = useTheme();
@@ -146,35 +105,50 @@ const SettingsModal = ({
         <SectionCont>
           <SectionTitle tcolor={tcolor}>Filter By</SectionTitle>
           <SubSection>
-            <SectionHeader tcolor={tcolor}>Genre</SectionHeader>
-            <FormControl sx={{ m: 1, width: 250 }}>
-              <InputLabel id="demo-multiple-checkbox-label">Genre</InputLabel>
+            <SortCont>
+              <SectionHeader for="genre" tcolor={tcolor}>Genre</SectionHeader>
+              <FormControl sx={{width: 250}}>
               <Select
-                labelId="demo-multiple-checkbox-label"
-                id="demo-multiple-checkbox"
+                labelId="genre"
                 multiple
                 value={genre}
                 onChange={handleGenre}
-                input={<OutlinedInput label="Genre" />}
+                input={
+                  <Select 
+                    sx={{
+                      backgroundColor: 'white', 
+                      fontFamily: 'Inter, sans-serif',
+                      height: 30
+                    }} 
+                  />}
                 renderValue={(selected) => selected.join(', ')}
                 MenuProps={MenuProps}
               >
                 {Genres.map((name) => (
-                  <MenuItem key={name} value={name}>
+                  <MenuItem key={name} value={name} sx={{py: 0}}>
+                    <ListItemText 
+                      primary={name} 
+                      primaryTypographyProps={{fontFamily: 'Inter, sans-serif'}}
+                      />
                     <Checkbox 
-                      sx={{color:ThemeConfig[theme].text,
+                      checked={genre.indexOf(name) > -1}
+                      sx={{
+                        color: ThemeConfig[theme].text,
                         '&.Mui-checked': {
-                          color:ThemeConfig[theme].text,
+                          color: ThemeConfig[theme].text,
                         },
-                      }} 
-                      checked={genre.indexOf(name) > -1} />
-                    <ListItemText primary={name} />
+                      }} />
                   </MenuItem>
                 ))}
               </Select>
-            </FormControl>
+              </FormControl>
+            </SortCont>
+            <SortCont>
             <SectionHeader tcolor={tcolor}>Score</SectionHeader>
+            </SortCont>
+            <SortCont>
             <SectionHeader tcolor={tcolor}>Episodes</SectionHeader>
+            </SortCont>
           </SubSection>
         </SectionCont>
         <SectionCont>
