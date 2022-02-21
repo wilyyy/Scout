@@ -4,8 +4,6 @@ export function filtering(
     title: null, 
     genre: null,
     episodes: null,
-    popularity: null,
-    score: null,
   }
 
 ) {
@@ -17,7 +15,7 @@ export function filtering(
     episodes, 
   } = config;
 
-  if(title || genre || episodes || popularity || score) {
+  if(title || genre || episodes ) {
     
     const filtered_arr = arr.filter((o) => {
       
@@ -73,7 +71,7 @@ filtering(books, {
 
 export function sortArr(
   arr=[],
-  config={key:null}
+  config={key:null, type:null}
 ) {
   
   const {key, type} = config;

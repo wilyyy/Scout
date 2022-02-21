@@ -15,9 +15,10 @@ import { DarkColors, LightColors } from "../utils/ThemeConfig";
 import SearchBar from "./SearchBar";
 
 const Container = styled.div`
-    width: 100%;
-    height: 75px;
-    font-family: "Poppins-ExtraLight";
+    width: 80vw;
+    height: 54px;
+    font-family: "Poppins";
+    font-weight: 200;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -40,7 +41,8 @@ const Row = styled.div`
         justify-content: flex-end;
     `}
 
-    font-family: "Poppins-ExtraLight";
+    font-family: "Poppins";
+    font-weight: 200;
     display: flex;
     align-items: center; 
     
