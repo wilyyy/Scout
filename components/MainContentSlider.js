@@ -15,7 +15,8 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    font-family: "Poppins-ExtraLight";
+    font-family: "Poppins";
+    font-weight: 400;
     padding: 0 5%;
     margin-bottom: 100px;
 `;

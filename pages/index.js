@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { ThemeConfig } from '@/utils/ThemeConfig';
 import { useTheme } from '@/utils/ScoutThemeProvider';
 
-<<<<<<< HEAD
 import NavigationBar from '@/components/NavigationBar';
 import MainContentSlider from '@/components/MainContentSlider';
 import SettingsModal from '@/components/SettingsModal';

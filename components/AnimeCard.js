@@ -81,20 +81,8 @@ const Divider = styled.p`
 const AnimeCard = ({
 
   src = "/anime.png",
-  fontFamily = "Poppins-Regular",
+  fontFamily = "Poppins",
   cardTitle = "[Missing Title]",
-<<<<<<< HEAD
-  cardDescription = "[Missing Description]",
-  cardCurEp = "##",
-  cardTotEp = "##",
-  cardStatus = "[Missing Status]",
-  bgcolor,
-  hcolor,
-  bcolor,
-  dcolor,
-  icolor,
-
-=======
   cardDescription = "[Missing Description",
   cardEpisodeCount = "##/##",
   cardStatus = "[Missing Status]",
@@ -102,7 +90,6 @@ const AnimeCard = ({
   AnimeDesc = "[Anime Description]",
   AnimeEps = "[##/##]",
   AnimeStatus ="[Status]"
->>>>>>> 75e3f743e3d90292a4ded6657a39a14efa8caa2c
 
 }) => {
 

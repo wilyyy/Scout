@@ -41,7 +41,8 @@ const Row = styled.div`
         justify-content: flex-end;
     `}
 
-    font-family: "Poppins-ExtraLight";
+    font-family: "Poppins";
+    font-weight: 200;
     display: flex;
     align-items: center; 
     
