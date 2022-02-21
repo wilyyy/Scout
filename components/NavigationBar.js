@@ -15,16 +15,10 @@ import { DarkColors, LightColors } from "../utils/ThemeConfig";
 import SearchBar from "./SearchBar";
 
 const Container = styled.div`
-<<<<<<< HEAD
     width: 80vw;
     height: 54px;
     font-family: "Poppins";
     font-weight: 200;
-=======
-    width: 100%;
-    height: 75px;
-    font-family: "Poppins-ExtraLight";
->>>>>>> 75e3f743e3d90292a4ded6657a39a14efa8caa2c
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -34,13 +28,6 @@ const Container = styled.div`
     }
 `;
 
-<<<<<<< HEAD
-const LinkCont = styled.div`
-    width: 15%;
-    height: 54px;
-    font-family: "Poppins";
-    font-weight: 200;
-=======
 const Row = styled.div`
     ${({links})=> links && `
         width: 15%;
@@ -55,7 +42,6 @@ const Row = styled.div`
     `}
 
     font-family: "Poppins-ExtraLight";
->>>>>>> 75e3f743e3d90292a4ded6657a39a14efa8caa2c
     display: flex;
     align-items: center; 
     

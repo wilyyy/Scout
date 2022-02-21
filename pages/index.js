@@ -11,11 +11,6 @@ import { IoMdFunnel } from 'react-icons/io';
 
 import ax from 'axios';
 import { useState } from 'react';
-=======
-import { useTheme } from '../utils/ScoutThemeProvider';
-import MainContentSlider from '../components/MainContentSlider';
-import NavigationBar from '../components/NavigationBar';
->>>>>>> 75e3f743e3d90292a4ded6657a39a14efa8caa2c
 
 const Page = styled.div`
   display: flex;
