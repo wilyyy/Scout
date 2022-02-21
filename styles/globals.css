@@ -1,24 +1,15 @@
-@font-face {
-  font-family: "Poppins-Regular";
-  src: url("../public/fonts/Poppins-Regular.ttf");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Poppins-ExtraLight";
-  src: url("../public/fonts/Poppins-ExtraLight.ttf");
-  font-style: normal;
-  font-display: swap;
-}
-
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+body {
+  width: 85vw;
 }
 
 a {
@@ -28,4 +19,33 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+
+#__next {
+  width: 100%;
+}
+
+
+/* Carousel stuff */
+.carousel {
+  width: 100%;
+  height: 494px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.slider {
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  width: 100%;
+  height: 100%;
+}
+
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+  padding: 5px 10px;
 }
