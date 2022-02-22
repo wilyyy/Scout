@@ -27,17 +27,22 @@ export const ThemeConfig = {
     dark: {
         background: DarkColors.Gunmetal,
         text: DarkColors.Pumpkin,
-        
+        //animepagecard
+        cardGradient: DarkColors.BlueGlass,
+        cardGradient2: DarkColors.OrangeGlass,
         //card
         cardHeader: DarkColors.White,
         cardText: DarkColors.FadedWhite,
         cardBackground: DarkColors.OffGrayGlass,
+
         body: "#fff"
     },
     light: {
         background: LightColors.PapayaWhip,
         text: LightColors.Denim,
-        
+        //animepagecard
+        cardGradient: LightColors.BlackGlass,
+        cardGradient2: LightColors.BlackGlass,
         //card
         cardHeader: DarkColors.Gunmetal,
         cardText: DarkColors.Gunmetal,

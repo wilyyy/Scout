@@ -108,7 +108,7 @@ const AnimeCard = ({
       transition={HoverZoom.spring}
       bgcolor={ThemeConfig[theme].cardBackground}
     >
-      <CardImage src={img_url} />
+      <CardImage src={img_url} alt="anime image"/>
       <TextCont>
       <Row>
         <Header 

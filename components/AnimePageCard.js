@@ -13,7 +13,6 @@ const Container = styled.div`
     border-radius: 15px;
     justify-content: space-between;
     overflow: hidden;
-    background: pink;
     font-family: Inter, sans-serif;
 `;
 
@@ -24,6 +23,7 @@ const Card = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(152.97deg, ${props=>props.gradient1} 0%, ${props=>props.gradient2} 100%);
 `;
 
 const Row = styled.div`
@@ -32,9 +32,8 @@ const Row = styled.div`
 
     ${({large}) => large && `
         width: 95%;
-        height: 306px;
+        height: 350px;
         justify-content: space-between;
-        background: green;
     `}
 
     ${({small}) => small && `
@@ -63,7 +62,6 @@ const Column = styled.div`
         width: 430px;
         height: 100%;
         justify-content: space-between;
-        background: yellow;
     `}
 
     ${({sypnosis}) => sypnosis && `
@@ -148,8 +146,11 @@ const AnimePageCard = ({
 
     return (
         <Container>
-            <Testimg src={img_url} />
-            <Card>
+            <Testimg src={img_url} alt="anime image"/>
+            <Card
+                gradient1={ThemeConfig[theme].cardGradient}
+                gradient2={ThemeConfig[theme].cardGradient2}
+            >
                 <Row large>
                     <Column title>
                         <Text H1>{title}</Text>
