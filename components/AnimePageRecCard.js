@@ -75,6 +75,7 @@ const AnimePageRecCard = ({
         <Container>
             <Testimg
                 src={img_url}
+                alt="anime image"
             />
             <Card>
                 <Column>

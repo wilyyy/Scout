@@ -134,6 +134,7 @@ const NavigationBar = ({
                 >
                     <img
                         src="https://placekitten.com/100/100"
+                        alt="profile image"
                     />
                 </AvatarCont>
             </Row>
