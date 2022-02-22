@@ -29,14 +29,8 @@ export const ThemeConfig = {
         
         //card
         cardHeader: DarkColors.White,
-<<<<<<< HEAD
-        cardText: DarkColors.OpaqueWhite,
-        cardBackground: DarkColors.OffWhite,
-        body: "#fff"
-=======
         cardText: DarkColors.FadedWhite,
         cardBackground: DarkColors.SoftWhite
->>>>>>> 253fee9663bde64f4f1f110ed41b6f402981276a
     },
     light: {
         background: LightColors.PapayaWhip,
