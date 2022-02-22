@@ -33,8 +33,6 @@ const Options = styled.h4`
     color: ${props=>props.headerColor};
     font-weight: 400;
 `
-const 
-
 
 const FilterModal = ({
     fontFamily = "Inter",
