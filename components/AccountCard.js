@@ -25,7 +25,7 @@ const UserImage = styled.img`
     width: 155px;
     margin-top: 63px;
     margin-bottom: 7px;
-    border-radius: 75px;
+    border-radius: 50%;
 `;
 
 const NameCont = styled.div`
