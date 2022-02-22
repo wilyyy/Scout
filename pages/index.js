@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Router from 'next/router';
+import {Router, useRouter} from 'next/router';
 import { ThemeConfig } from '@/utils/ThemeConfig';
 import { useTheme } from '@/utils/ScoutThemeProvider';
 
@@ -9,8 +9,9 @@ import SettingsModal from '@/components/SettingsModal';
 
 import { IoMdFunnel } from 'react-icons/io';
 
-import ax from 'axios';
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import AnimeCard from '@/components/AnimeCard';
 
 const Page = styled.div`
   display: flex;
@@ -33,22 +34,31 @@ const HeaderText = styled.div`
 const AnimeCardCont = styled.div`
   width: 100%;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 `
 
 const Home = () => {
+  const router = useRouter();
 
   const {theme} = useTheme();
   const [data, setData] = useState([]);
 
+  useEffect(()=>{
+    const GetAnime = async()=>{
+      const result = await axios.get("/api/anime");
+      console.log(result.data);
+      setData(result.data);
+    }
+
+    GetAnime();
+  }, [])
+
+  
+
   return (
     <Page>
       <NavigationBar />
-
-      {/* 🐳🐳🐳🐳🐳🐳 willy stuff for merge delete or take stuff from later? 🐳🐳🐳🐳🐳🐳 */}
-      
-      
-      {/* 🐳🐳🐳🐳🐳🐳 willy stuff end🐳🐳🐳🐳🐳🐳 */}
       <MainContentSlider 
         titletext1='Demon Slayer' 
         desctext1='After a demon attack leaves his family slain and his sister cursed, Tanjiro embarks upon a perilious journey to find a cure and avenge those he’s lost.'
@@ -60,8 +70,21 @@ const Home = () => {
         <HeaderText>Explore</HeaderText>
         <IoMdFunnel color={ThemeConfig[theme].text} size="32" />
       </BodyHeader>
-      <AnimeCardCont>
         <SettingsModal tcolor={ThemeConfig[theme].cardHeader} />
+      <AnimeCardCont>
+        
+        {data.map((el, index) => 
+          <AnimeCard 
+            key={index}
+            title={el.title}
+            synopsis={el.synopsis}
+            episodes={el.episodes}
+            cardStatus={el.aired}
+            img_url={el.img_url}
+            aired={el.aired}
+            onButtonClick={()=>router.push(`./${el.uid}`)}
+          />
+        )}
       </AnimeCardCont>
     </Page>
   )

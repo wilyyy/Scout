@@ -134,7 +134,7 @@ const Testimg = styled.img`
 const AnimePageCard = ({
     uid,
     title, 
-    sypnosis,
+    synopsis,
     score,
     ranked,
     popularity,
@@ -155,7 +155,7 @@ const AnimePageCard = ({
                         <Text H1>{title}</Text>
                         <Column sypnosis>
                             <Text H2>Overview</Text>
-                            <Text Para2 color={ThemeConfig[theme].body}>{sypnosis}</Text>
+                            <Text Para2 color={ThemeConfig[theme].body}>{synopsis}</Text>
                         </Column>
                     </Column>
                     <Divider color={ThemeConfig[theme].text} />
