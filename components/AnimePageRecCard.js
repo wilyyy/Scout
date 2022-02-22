@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Bookmark } from "@styled-icons/bootstrap/Bookmark";
 import { BookmarkCheckFill } from "@styled-icons/bootstrap/BookmarkCheckFill";
 
@@ -41,8 +41,19 @@ const BookmarkCheckIcon = styled(BookmarkCheckFill)`
     height: 27px;
 `;
 
-const AnimePageRecCard = ({title, genres, onFavClick}) => {
+const AnimePageRecCard = ({uid, title, genres, onFavClick}) => {
     const [icon, setIcon] = useState(false);
+    const [firstTwoGenres, setFirstTwoGenres] = useState(genres);
+
+    //once genre parse works, use this func
+    // useEffect(()=>{
+    //     let splicedGenres = [];
+    //     const SpliceGenres = () => {
+    //         splicedGenres = firstTwoGenres.splice(0, 2);
+    //         setFirstTwoGenres(splicedGenres);
+    //     }
+    //     SpliceGenres();
+    // }, [])
 
     const ClickFav = () => {
         setIcon(!icon);
@@ -58,7 +69,7 @@ const AnimePageRecCard = ({title, genres, onFavClick}) => {
                 <Column>
                     {title}
                     <br />
-                    {genres}
+                    {genres} 
                 </Column>
                 <div onClick={ClickFav}>
                     {icon === false ? (
