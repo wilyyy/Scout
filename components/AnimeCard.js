@@ -100,8 +100,8 @@ const AnimeCard = ({
       bgcolor="pink" 
       fontFamily={fontFamily}
       onClick={onButtonClick}
-      whileHover={HoverZoom.hover}
-      whileTap={HoverZoom.tap}
+      whileHover={{scale: 1.1}}
+      whileTap={{scale: 0.96}}
       transition={HoverZoom.spring}
     >
       <CardImage src={img_url} />
