@@ -1,3 +1,11 @@
+const anime = require("./animes.json");
+
+export function GetAllAnime(shows=[]){
+  const results = shows.splice(0, 20);
+
+  return results;
+}
+
 export function filtering(
   arr = [],
   config = {
