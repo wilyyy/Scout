@@ -6,6 +6,7 @@ export const DarkColors = {
     //glass colors
     BlueGlass: "rgba(42, 76, 198, 0)",
     OrangeGlass: "rgba(246, 119, 79, 0.2)",
+    OffGrayGlass: "rgba(196, 196, 196, 0.12)",
 
     //card stuff
     FadedWhite: "rgba(255, 255, 255, 0.7)",
@@ -16,10 +17,10 @@ export const LightColors = {
     PapayaWhip: "#FEF2DC",
     Denim: '#175DAF',
     //glass
-    BlackGlass: "rgba(0, 5, 21, 0.09)",
+    BlackGlass: "rgba(0, 0, 0, 0.12)",
 
     //cardstuff
-    OffGray: "rgba(105, 105, 105, 0.12)"
+    
 };
 
 export const ThemeConfig = {
@@ -30,7 +31,7 @@ export const ThemeConfig = {
         //card
         cardHeader: DarkColors.White,
         cardText: DarkColors.FadedWhite,
-        cardBackground: DarkColors.SoftWhite,
+        cardBackground: DarkColors.OffGrayGlass,
         body: "#fff"
     },
     light: {
@@ -40,7 +41,7 @@ export const ThemeConfig = {
         //card
         cardHeader: DarkColors.Gunmetal,
         cardText: DarkColors.Gunmetal,
-        cardBackground: LightColors.OffGray,
+        cardBackground: LightColors.BlackGlass,
         body: "#000"
     }
 }

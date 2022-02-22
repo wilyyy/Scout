@@ -19,7 +19,11 @@ const CardCont = styled(motion.div)`
   margin: 5px;
   cursor: pointer;
 
-  background-color: ${props=>props.bgcolor};
+  background: ${props=>props.bgcolor};
+  box-shadow: inset 43.3333px -43.3333px 43.3333px rgba(149, 149, 149, 0.1), 
+              inset -43.3333px 43.3333px 43.3333px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px) saturate(164%);
+  -webkit-backdrop-filter: blur(20px) saturate(164%);
   font-family: ${props=>props.fontFamily};
 `
 
@@ -97,12 +101,12 @@ const AnimeCard = ({
 
   return (
     <CardCont 
-      bgcolor="pink" 
       fontFamily={fontFamily}
       onClick={onButtonClick}
       whileHover={{scale: 1.1}}
       whileTap={{scale: 0.96}}
       transition={HoverZoom.spring}
+      bgcolor={ThemeConfig[theme].cardBackground}
     >
       <CardImage src={img_url} />
       <TextCont>

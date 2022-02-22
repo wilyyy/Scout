@@ -56,7 +56,7 @@ const AnimePage = () => {
             <Page>
                 <NavigationBar />
                 <Error>
-                    Can't find this anime
+                    <p>Error - Anime not found</p>
                 </Error>
             </Page>
         )

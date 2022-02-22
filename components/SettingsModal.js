@@ -13,7 +13,7 @@ import Button from "./Button";
 const SettingsCont = styled.div`
   width: 600px;
   height: 500px;
-  background-color: rgba(196, 196, 196, 0.1);
+  background: ${props=>props.bgcolor};
   box-shadow: inset 43.3333px -43.3333px 43.3333px rgba(149, 149, 149, 0.1), 
               inset -43.3333px 43.3333px 43.3333px rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(86.6667px);
@@ -170,7 +170,7 @@ const SettingsModal = ({
   }
 
   return (
-    <SettingsCont>
+    <SettingsCont bgcolor={ThemeConfig[theme].cardBackground}>
       <SettingsRow>
         <SectionCont>
           <SectionTitle tcolor={tcolor}>Filter By</SectionTitle>
