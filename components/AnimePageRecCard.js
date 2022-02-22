@@ -6,7 +6,7 @@ import { BookmarkCheckFill } from "@styled-icons/bootstrap/BookmarkCheckFill";
 
 const Container = styled.div`
     width: 200px;
-    height: 275px;
+    height: 325px;
     display: flex;
     flex-direction: column;
     border-radius: 15px;
@@ -15,7 +15,7 @@ const Container = styled.div`
 
 const Card = styled.div`
     width: 100%;
-    height: 70px;
+    height: 120px;
     background-color: #000;
     display: flex;
     justify-content: space-evenly;
@@ -41,7 +41,18 @@ const BookmarkCheckIcon = styled(BookmarkCheckFill)`
     height: 27px;
 `;
 
-const AnimePageRecCard = ({uid, title, genres, onFavClick}) => {
+const Testimg = styled.img`
+    width: 200px;
+    height: 250px;
+`;
+
+const AnimePageRecCard = ({
+    uid, 
+    title, 
+    genres,
+    img_url,
+    onFavClick
+}) => {
     const [icon, setIcon] = useState(false);
     const [firstTwoGenres, setFirstTwoGenres] = useState(genres);
 
@@ -62,8 +73,8 @@ const AnimePageRecCard = ({uid, title, genres, onFavClick}) => {
     
     return (
         <Container>
-            <img
-                src="https://placekitten.com/200/199"
+            <Testimg
+                src={img_url}
             />
             <Card>
                 <Column>
