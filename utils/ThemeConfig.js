@@ -39,6 +39,7 @@ export const ThemeConfig = {
         //card
         cardHeader: DarkColors.Gunmetal,
         cardText: DarkColors.Gunmetal,
-        cardBackground: LightColors.OffGray
+        cardBackground: LightColors.OffGray,
+        body: "#000"
     }
 }
