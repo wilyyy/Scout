@@ -81,7 +81,7 @@ const Line = styled.div`
 
 const SortCont = styled.div`
   width: 200px;
-  height: 80px;
+  height: 60px;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
@@ -130,15 +130,15 @@ const SettingsModal = ({
   const [genre, setGenre] = useState([]);
   const [score, setScore] = useState([0, 10]);
   const [episode, setEpisode] = useState([0, 100]);
-  const [key, setKey] = useState('');
-  const [type, setType] = useState('');
+  const [key, setKey] = useState('title');
+  const [type, setType] = useState('asc');
 
   const resetFilter = () => {
     setGenre([]);
     setScore([0, 10]);
     setEpisode([0, 100]);
-    setKey('');
-    setType('');
+    setKey('title');
+    setType('asc');
   }
 
   const handleGenre = (event) => {
@@ -238,6 +238,23 @@ const SettingsModal = ({
         <SectionCont>
           <SectionTitle tcolor={tcolor}>Sort By</SectionTitle>
           <SubSection>
+          <SortCont>
+              <SortLabel sortlabelcolor={key === 'title' ? ThemeConfig[theme].text : '#D8D8D8'}>
+                Title
+              </SortLabel>
+              <SortArrowCont>
+                <BsCaretUpFill 
+                  size="32px" 
+                  onClick={()=>handleSort('title', 'asc')} 
+                  color={key === 'title' && type === 'asc' ? ThemeConfig[theme].text : 'black'}
+                  style={{cursor: 'pointer'}}/>
+                <BsCaretDownFill 
+                  size="32px" 
+                  onClick={()=>handleSort('title', 'desc')} 
+                  color={key === 'title' && type === 'desc' ? ThemeConfig[theme].text : 'black'}
+                  style={{cursor: 'pointer' }}/>
+              </SortArrowCont>
+            </SortCont>
             <SortCont>
               <SortLabel sortlabelcolor={key === 'score' ? ThemeConfig[theme].text : '#D8D8D8'}>
                 Score
