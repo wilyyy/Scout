@@ -1,11 +1,12 @@
-// change to make this dynamic later ([animeID].js)
+//New animepage
+import {useRouter} from 'next/router';
 import styled from "styled-components";
 
 import NavigationBar from "../components/NavigationBar";
 import GlassCard from "../components/GlassCard";
 import SearchBar from "../components/SearchBar";
-import AnimePageCard from "../components/AnimePageCard";
-import AnimePageRecCard from "../components/AnimePageRecCard";
+import AnimePageCard from "../components/AnimePageCard/AnimePageCard";
+import AnimePageRecCard from "../components/AnimePageRecCard/AnimePageRecCard";
 
 const Page = styled.div`
     width: 100%;
@@ -17,6 +18,9 @@ const Page = styled.div`
 `;
 
 const AnimePage = () => {
+    const router = useRouter();
+    const {id} = router.query;
+
     return (
         <Page>
             <NavigationBar />
