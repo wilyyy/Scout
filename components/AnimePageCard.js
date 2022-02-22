@@ -14,7 +14,7 @@ const Container = styled.div`
     justify-content: space-between;
     overflow: hidden;
     background: pink;
-    font-family: "Poppins-ExtraLight";
+    font-family: Inter, sans-serif;
 `;
 
 const Card = styled.div`
