@@ -3,6 +3,9 @@ import { useTheme } from '../utils/ScoutThemeProvider';
 import { ThemeConfig } from '../utils/ThemeConfig';
 
 import { Twitter } from '@styled-icons/boxicons-logos/Twitter';
+import { RedditAlien } from '@styled-icons/fa-brands/RedditAlien';
+import { DiscordAlt } from '@styled-icons/boxicons-logos/DiscordAlt';
+import { InstagramAlt } from '@styled-icons/boxicons-logos/InstagramAlt';
 
 
 const AccountCont = styled.div`
@@ -96,6 +99,8 @@ const AccountCard = ({
     cardInfo = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus ornare feugiat dolor elit felis, ultrices. Sed lectus magna morbi gravida nunc, praesent. Mattis molestie pharetra aliquam morbi. Commodo fames id morbi semper vitae morbi accumsan. Rhoncus lorem sed turpis lorem enim, lorem augue scelerisque. Pulvinar sit nunc, arcu, at eu fames eleifend. Diam viverra pellentesque aliquet in id sit donec viverra. Ullamcorper in velit magna id odio amet, id duis. Lacus viverra egestas quisque mauris sollicitudin.",
     infoFont = "Roboto",
     memberYear = "2016",
+    width = "40px",
+    height = "40px",
     fontFamily = "Poppins-Regular"
     
     // memberInfo = "Member since 2018",
@@ -117,10 +122,17 @@ const AccountCard = ({
             </MemConst>
             <MediaCont>
                 <MediaBox>
+                    <RedditAlien width={width} height={height} />
                 </MediaBox>
-                <MediaBox/>
-                <MediaBox/>
-                <MediaBox/>
+                <MediaBox>
+                    <Twitter width={width} height={height}/>
+                </MediaBox>
+                <MediaBox>
+                    <DiscordAlt width={width} height={height}/>
+                </MediaBox>
+                <MediaBox>
+                    <InstagramAlt width={width} height={height}/>
+                </MediaBox>
             </MediaCont>
         </AccountCont>
     )
