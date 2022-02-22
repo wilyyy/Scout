@@ -5,8 +5,6 @@ export default async function handler(req, res) {
 
   console.log(req.query, req.body);
 
-
-
   var lists = null;
   if(req.query.a_id){
     lists = anime.filter(o => o.uid === Number(req.query.a_id));

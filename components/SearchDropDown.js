@@ -16,6 +16,7 @@ const DropdownCont = styled.div`
     height: auto;
     background-color: #000;
     padding: 10px;
+    z-index: 2;
 `;
 
 const SearchDropDown = ({children}) => {

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { useTheme } from "@/utils/ScoutThemeProvider";
+import { useTheme, useGenre, useScore, useEpisodes, useSortKey, useSortType } from "@/utils/ScoutThemeProvider";
 import { ThemeConfig } from "@/utils/ThemeConfig";
 
 //Filter Stuff
@@ -81,7 +81,7 @@ const Line = styled.div`
 
 const SortCont = styled.div`
   width: 200px;
-  height: 80px;
+  height: 60px;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
@@ -127,18 +127,23 @@ const SettingsModal = ({
 }) => {
 
   const {theme} = useTheme();
-  const [genre, setGenre] = useState([]);
-  const [score, setScore] = useState([0, 10]);
-  const [episode, setEpisode] = useState([0, 100]);
-  const [sort, setSort] = useState('');
-  const [type, setType] = useState('');
+  // const [genre, setGenre] = useState([]);
+  const {genre, setGenre} = useGenre();
+  // const [score, setScore] = useState([0, 10]);
+  const {score, setScore} = useScore();
+  // const [episode, setEpisode] = useState([0, 100]);
+  const {episodes, setEpisodes} = useEpisodes();
+  // const [key, setKey] = useState('title');
+  const {sortKey, setSortKey} = useSortKey();
+  // const [type, setType] = useState('asc');
+  const {sortType, setSortType} = useSortType();
 
   const resetFilter = () => {
     setGenre([]);
     setScore([0, 10]);
-    setEpisode([0, 100]);
-    setSort('');
-    setType('');
+    setEpisodes([0, 100]);
+    setSortKey('title');
+    setSortType('asc');
   }
 
   const handleGenre = (event) => {
@@ -155,13 +160,13 @@ const SettingsModal = ({
     setScore(newScore);
   };
 
-  const handleEpisode = (event, newEpisode) => {
-    setEpisode(newEpisode);
+  const handleEpisodes = (event, newEpisodes) => {
+    setEpisodes(newEpisodes);
   }
 
-  const handleSort = (newSort, newType) => {
-    setSort(newSort);
-    setType(newType);
+  const handleSort = (newKey, newType) => {
+    setSortKey(newKey);
+    setSortType(newType);
   }
 
   return (
@@ -226,8 +231,8 @@ const SettingsModal = ({
               <Slider
                 sx={{color: ThemeConfig[theme].text}}
                 valueLabelDisplay="on"
-                value={episode}
-                onChange={handleEpisode}
+                value={episodes}
+                onChange={handleEpisodes}
                 marks={EpisodeMarks}
               />
             </Box>
@@ -238,54 +243,71 @@ const SettingsModal = ({
         <SectionCont>
           <SectionTitle tcolor={tcolor}>Sort By</SectionTitle>
           <SubSection>
+          <SortCont>
+              <SortLabel sortlabelcolor={sortKey === 'title' ? ThemeConfig[theme].text : '#D8D8D8'}>
+                Title
+              </SortLabel>
+              <SortArrowCont>
+                <BsCaretUpFill 
+                  size="32px" 
+                  onClick={()=>handleSort('title', 'asc')} 
+                  color={sortKey === 'title' && sortType === 'asc' ? ThemeConfig[theme].text : 'black'}
+                  style={{cursor: 'pointer'}}/>
+                <BsCaretDownFill 
+                  size="32px" 
+                  onClick={()=>handleSort('title', 'desc')} 
+                  color={sortKey === 'title' && sortType === 'desc' ? ThemeConfig[theme].text : 'black'}
+                  style={{cursor: 'pointer' }}/>
+              </SortArrowCont>
+            </SortCont>
             <SortCont>
-              <SortLabel sortlabelcolor={sort === 'score' ? ThemeConfig[theme].text : '#D8D8D8'}>
+              <SortLabel sortlabelcolor={sortKey === 'score' ? ThemeConfig[theme].text : '#D8D8D8'}>
                 Score
               </SortLabel>
               <SortArrowCont>
                 <BsCaretUpFill 
                   size="32px" 
                   onClick={()=>handleSort('score', 'asc')} 
-                  color={sort === 'score' && type === 'asc' ? ThemeConfig[theme].text : 'black'}
+                  color={sortKey === 'score' && sortType === 'asc' ? ThemeConfig[theme].text : 'black'}
                   style={{cursor: 'pointer'}}/>
                 <BsCaretDownFill 
                   size="32px" 
                   onClick={()=>handleSort('score', 'desc')} 
-                  color={sort === 'score' && type === 'desc' ? ThemeConfig[theme].text : 'black'}
+                  color={sortKey === 'score' && sortType === 'desc' ? ThemeConfig[theme].text : 'black'}
                   style={{cursor: 'pointer' }}/>
               </SortArrowCont>
             </SortCont>
             <SortCont>
-            <SortLabel sortlabelcolor={sort === 'popularity' ? ThemeConfig[theme].text : '#D8D8D8'}>
+            <SortLabel sortlabelcolor={sortKey === 'popularity' ? ThemeConfig[theme].text : '#D8D8D8'}>
                   Popularity
               </SortLabel>
               <SortArrowCont>
                 <BsCaretUpFill 
                   size="32px" 
                   onClick={()=>handleSort('popularity', 'asc')} 
-                  color={sort === 'popularity' && type === 'asc' ? ThemeConfig[theme].text : 'black'}
+                  color={sortKey === 'popularity' && sortType === 'asc' ? ThemeConfig[theme].text : 'black'}
                   style={{cursor: 'pointer' }}/>
                 <BsCaretDownFill
                   size="32px" 
                   onClick={()=>handleSort('popularity', 'desc')} 
-                  color={sort === 'popularity' && type === 'desc' ? ThemeConfig[theme].text : 'black'}
+                  color={sortKey === 'popularity' && sortType === 'desc' ? ThemeConfig[theme].text : 'black'}
                   style={{cursor: 'pointer' }}/>
               </SortArrowCont>
             </SortCont>
             <SortCont>
-            <SortLabel sortlabelcolor={sort === 'releasedate' ? ThemeConfig[theme].text : '#D8D8D8'}>
+            <SortLabel sortlabelcolor={sortKey === 'releasedate' ? ThemeConfig[theme].text : '#D8D8D8'}>
                 Release Date
               </SortLabel>
               <SortArrowCont>
               <BsCaretUpFill 
                   size="32px" 
                   onClick={()=>handleSort('releasedate', 'asc')} 
-                  color={sort === 'releasedate' && type === 'asc' ? ThemeConfig[theme].text : 'black'}
+                  color={sortKey === 'releasedate' && sortType === 'asc' ? ThemeConfig[theme].text : 'black'}
                   style={{cursor: 'pointer' }}/>
                 <BsCaretDownFill
                   size="32px" 
                   onClick={()=>handleSort('releasedate', 'desc')} 
-                  color={sort === 'releasedate' && type === 'desc' ? ThemeConfig[theme].text : 'black'}
+                  color={sortKey === 'releasedate' && sortType === 'desc' ? ThemeConfig[theme].text : 'black'}
                   style={{cursor: 'pointer' }}/>
               </SortArrowCont>
             </SortCont>
@@ -293,7 +315,7 @@ const SettingsModal = ({
         </SectionCont>
       </SettingsRow>
       <Row>
-        <Button btnText="Apply" onClick={()=>console.log(sort, type)} btnwidth="120px" btnmargin="0 10px" />
+        <Button btnText="Apply" onClick={()=>console.log(sortKey, sortType)} btnwidth="120px" btnmargin="0 10px" />
         <Button btnText="Reset" onClick={resetFilter} btnwidth="120px" btnmargin="0 10px" />
       </Row>
     </SettingsCont>
