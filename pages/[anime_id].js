@@ -68,7 +68,7 @@ const AnimePage = () => {
             <AnimePageCard 
                 uid={data.uid}
                 title={data.title}
-                sypnosis={data.sypnosis}
+                synopsis={data.synopsis}
                 score={data.score}
                 ranked={data.ranked}
                 popularity={data.popularity}
