@@ -13,8 +13,7 @@ const Container = styled.div`
     border-radius: 15px;
     justify-content: space-between;
     overflow: hidden;
-    background: pink;
-    font-family: "Poppins-ExtraLight";
+    font-family: Inter, sans-serif;
 `;
 
 const Card = styled.div`
@@ -24,6 +23,7 @@ const Card = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(152.97deg, ${props=>props.gradient1} 0%, ${props=>props.gradient2} 100%);
 `;
 
 const Row = styled.div`
@@ -32,9 +32,8 @@ const Row = styled.div`
 
     ${({large}) => large && `
         width: 95%;
-        height: 306px;
+        height: 350px;
         justify-content: space-between;
-        background: green;
     `}
 
     ${({small}) => small && `
@@ -63,7 +62,6 @@ const Column = styled.div`
         width: 430px;
         height: 100%;
         justify-content: space-between;
-        background: yellow;
     `}
 
     ${({sypnosis}) => sypnosis && `
@@ -131,46 +129,34 @@ const Testimg = styled.img`
     height: auto;
 `;
 
-const testData = {
-    "uid": 28891,
-    "title": "Haikyuu!! Sson",
-    "synopsis": "Following their pn at the Inter-High, the Karasuno High School volleyball team attempts to refocus their efforts, aiming to conquer the Spring tournament instead.  \n \nWhen they receive an invitation from long-standing rival Nekoma High, Karasuno agrees to take part in a large training camp alongside many notable volleyball teams in Tokyo and even some national level players. By playing with some of the toughest teams in Japan, they hope not only to sharpen their skills, but also come up with new attacks that would strengthen them. Moreover, Hinata and Kageyama attempt to devise a more powerful weapon, one that could possibly break the sturdiest of blocks.  \n \nFacing what may be their last chance at victory before the senior players graduate, the members of Karasuno's volleyball team must learn to settle their differences and train harder than ever if they hope to overcome formidable opponents old and new—including their archrival Aoba Jousai and its world-class setter Tooru Oikawa. \n \n[Written by MAL Rewrite]",
-    "genre": "['Comedy', 'Sports', 'Drama', 'School', 'Shounen']",
-    "aired": "Oct 4, 2015 to Mar 27, 2016",
-    "episodes": 25,
-    "members": 489888,
-    "popularity": 141,
-    "ranked": 25,
-    "score": "8.82",
-    "img_url": "https://cdn.myanimelist.net/images/anime/9/76662.jpg",
-    "link": "https://myanimelist.net/anime/28891/Haikyuu_Second_Season"
-};
-
 const AnimePageCard = ({
-    uid = testData.uid,
-    title = testData.title, 
-    sypnosis = testData.synopsis,
-    score = testData.score,
-    ranked = testData.score,
-    popularity = testData.popularity,
-    genre = testData.genre,
-    aired = testData.aired,
-    episodes = testData.episodes,
-    img_url = testData.img_url,
+    uid,
+    title, 
+    synopsis,
+    score,
+    ranked,
+    popularity,
+    genre,
+    aired,
+    episodes,
+    img_url,
     matchPercent=86
 }) => {
     const {theme, setTheme} = useTheme();
 
     return (
         <Container>
-            <Testimg src={img_url} />
-            <Card>
+            <Testimg src={img_url} alt="anime image"/>
+            <Card
+                gradient1={ThemeConfig[theme].cardGradient}
+                gradient2={ThemeConfig[theme].cardGradient2}
+            >
                 <Row large>
                     <Column title>
                         <Text H1>{title}</Text>
                         <Column sypnosis>
                             <Text H2>Overview</Text>
-                            <Text Para2 color={ThemeConfig[theme].body}>{sypnosis}</Text>
+                            <Text Para2 color={ThemeConfig[theme].body}>{synopsis}</Text>
                         </Column>
                     </Column>
                     <Divider color={ThemeConfig[theme].text} />

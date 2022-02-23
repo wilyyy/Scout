@@ -31,7 +31,7 @@ const AnimePage = () => {
     const router = useRouter();
     const {anime_id} = router.query;
 
-    const [data, setData] = useState({});
+    const [data, setData] = useState(null);
 
     useEffect(()=>{
         if(anime_id){
@@ -39,11 +39,13 @@ const AnimePage = () => {
                 //get the show and setData to result
                 const result = await axios.get("./api/anime", {
                     params: {
-                        uid: anime_id
+                        a_id: anime_id
                     }
                 });
                 console.log(result);
-                setData(result.data[0]);
+                if(result.data[0]){
+                    setData(result.data[0]);
+                }
             }
             GetAnime();
         }
@@ -54,7 +56,7 @@ const AnimePage = () => {
             <Page>
                 <NavigationBar />
                 <Error>
-                    Can't find this anime
+                    <p>Error - Anime not found</p>
                 </Error>
             </Page>
         )
@@ -66,18 +68,19 @@ const AnimePage = () => {
             <AnimePageCard 
                 uid={data.uid}
                 title={data.title}
-                sypnosis={data.sypnosis}
+                synopsis={data.synopsis}
                 score={data.score}
                 ranked={data.ranked}
                 popularity={data.popularity}
-                genres={data.genres}
+                genre={data.genre}
                 aired={data.aired}
                 episodes={data.episodes}
                 img_url={data.img_url}
             />
             <AnimePageRecCard 
                 title={data.title} 
-                genres={data.genre} 
+                genres={data.genre}
+                img_url={data.img_url}
                 onFavClick={()=>console.log("hi")} //post to fav list
             />
         </Page>
