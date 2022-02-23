@@ -4,6 +4,7 @@ import anime from '@/utils/animes.json';
 
 export default async function handler(req, res) {
   const {
+    a_id,
     txt,
     genreFilter,
     scoreFilter,
@@ -18,6 +19,7 @@ export default async function handler(req, res) {
   const sortKey = sortKeyFilter;
   const sortType = sortTypeFilter;
 
+
   if(typeof genre === 'string') {
     const names = (v) => [].concat(v).map(name => name)
     genre = names(genre);
@@ -28,9 +30,6 @@ export default async function handler(req, res) {
   if(req.query){
     lists = GetAllAnime(anime);
   }
-
-
-  console.log(genre);
 
   //Only triggers if there's at least one letter in the search bar
   if(txt) {
@@ -49,6 +48,10 @@ export default async function handler(req, res) {
     })
   }
   
+
+  if(req.query.a_id){
+    lists = anime.filter(o => o.uid === Number(req.query.a_id));
+  }
 
   lists = lists.slice(0,20);
 
