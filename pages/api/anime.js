@@ -2,7 +2,6 @@ import { filtering, sortArr } from "../../utils/functions";
 import animes from '@/utils/animes.json';
 
 export default async function handler(req, res) {
-
   const {
     txt,
     genreFilter,
@@ -35,5 +34,4 @@ export default async function handler(req, res) {
   }
 
   res.status(200).json(lists);
-
 }

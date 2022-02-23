@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Router from 'next/router';
 import { ThemeConfig } from '@/utils/ThemeConfig';
 import { useTheme } from '@/utils/ScoutThemeProvider';
 
@@ -43,6 +44,11 @@ const Home = () => {
   return (
     <Page>
       <NavigationBar />
+
+      {/* 🐳🐳🐳🐳🐳🐳 willy stuff for merge delete or take stuff from later? 🐳🐳🐳🐳🐳🐳 */}
+      
+      
+      {/* 🐳🐳🐳🐳🐳🐳 willy stuff end🐳🐳🐳🐳🐳🐳 */}
       <MainContentSlider 
         titletext1='Demon Slayer' 
         desctext1='After a demon attack leaves his family slain and his sister cursed, Tanjiro embarks upon a perilious journey to find a cure and avenge those he’s lost.'
