@@ -176,7 +176,7 @@ const SettingsModal = ({
           <SectionTitle tcolor={tcolor}>Filter By</SectionTitle>
           <SubSection>
             <FilterCont>
-              <SectionHeader for="genre" tcolor={tcolor}>Genre</SectionHeader>
+              <SectionHeader tcolor={tcolor}>Genre</SectionHeader>
               <FormControl sx={{width: 220}}>
               <Select
                 labelId="genre"
