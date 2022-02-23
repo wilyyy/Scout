@@ -19,6 +19,7 @@ const Page = styled.div`
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
+  margin-top: 20px;
 `;
 
 const BodyHeader = styled.div`
@@ -82,7 +83,7 @@ const Home = () => {
             cardStatus={el.aired}
             img_url={el.img_url}
             aired={el.aired}
-            onButtonClick={()=>router.push(`./${el.uid}`)}
+            onButtonClick={()=>router.push(`./anime/${el.uid}`)}
           />
         )}
       </AnimeCardCont>

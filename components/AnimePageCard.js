@@ -1,19 +1,18 @@
-//delete and put in dynamic comp later
-
-import Image from "next/image";
 import styled from "styled-components";
+import { useState, useEffect } from "react";
 
 import { useTheme } from '../utils/ScoutThemeProvider';
 import { ThemeConfig } from "../utils/ThemeConfig";
 
 const Container = styled.div`
-    width: 1200px;
+    width: 90%;
     height: 400px;
     display: flex;
     border-radius: 15px;
     justify-content: space-between;
     overflow: hidden;
     font-family: Inter, sans-serif;
+    border: 1px solid #6D7992;
 `;
 
 const Card = styled.div`
@@ -24,6 +23,10 @@ const Card = styled.div`
     justify-content: center;
     align-items: center;
     background: linear-gradient(152.97deg, ${props=>props.gradient1} 0%, ${props=>props.gradient2} 100%);
+    box-shadow: inset 43.3333px -43.3333px 43.3333px rgba(149, 149, 149, 0.1), 
+              inset -43.3333px 43.3333px 43.3333px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px) saturate(164%);
+    -webkit-backdrop-filter: blur(20px) saturate(164%);
 `;
 
 const Row = styled.div`
@@ -32,8 +35,9 @@ const Row = styled.div`
 
     ${({large}) => large && `
         width: 95%;
-        height: 350px;
-        justify-content: space-between;
+        height: 90%;
+        justify-content: space-evenly;
+        align-items: center;
     `}
 
     ${({small}) => small && `
@@ -42,9 +46,9 @@ const Row = styled.div`
     `}
 
     ${({score}) => score && `
-        width: 277px;
+        width: 100%;
         height: 36px;
-        justify-content: space-between;
+        justify-content: space-evenly;
     `}
 
     ${({midright}) => midright && `
@@ -59,7 +63,7 @@ const Column = styled.div`
     flex-direction: column;
 
     ${({title}) => title && `
-        width: 430px;
+        width: 50%;
         height: 100%;
         justify-content: space-between;
     `}
@@ -71,7 +75,7 @@ const Column = styled.div`
     `}
 
     ${({right}) => right && `
-        width: 421px;
+        width: 100%;
         height: 100%;
         justify-content: space-between;
         align-items: center;
@@ -115,12 +119,13 @@ const Divider = styled.div`
     width: 2px;
     height: 100%;
     background-color: ${props=> props.color};
+    margin-left: 10px;
 `;
 
 const MatchBar = styled.div`
     width: 421px;
     height: 20px;
-    background: red;
+    background-color: red;
 `;
 
 //replace with next img or nah? decide later
@@ -136,13 +141,25 @@ const AnimePageCard = ({
     score,
     ranked,
     popularity,
-    genre,
+    genre=[],
     aired,
     episodes,
     img_url,
     matchPercent=86
 }) => {
     const {theme, setTheme} = useTheme();
+    const [genreFix, setGenreFix] = useState([]);
+
+    useEffect(()=>{
+        const AddSpaceToGenre = () => {
+            let FinalArray = [];
+            genre.forEach((el) => {
+                FinalArray.push(el + ", ");
+            })
+            setGenreFix(FinalArray);
+        }
+        AddSpaceToGenre();
+    }, [])
 
     return (
         <Container>
@@ -179,7 +196,7 @@ const AnimePageCard = ({
                             </Column>
                             <Column midright>
                                 <Text Para1>Genres</Text>
-                                <Text H2>{genre}</Text>
+                                <Text H2>{genreFix}</Text>
                             </Column>
                         </Row>
                         <Column match>

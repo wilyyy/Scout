@@ -22,8 +22,8 @@ const CardCont = styled(motion.div)`
   background: ${props=>props.bgcolor};
   box-shadow: inset 43.3333px -43.3333px 43.3333px rgba(149, 149, 149, 0.1), 
               inset -43.3333px 43.3333px 43.3333px rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px) saturate(164%);
-  -webkit-backdrop-filter: blur(20px) saturate(164%);
+  backdrop-filter: blur(5px) saturate(164%);
+  -webkit-backdrop-filter: blur(5px) saturate(164%);
   font-family: ${props=>props.fontFamily};
 `
 
