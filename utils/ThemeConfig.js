@@ -14,7 +14,7 @@ export const DarkColors = {
 }
 
 export const LightColors = {
-    PapayaWhip: "#FEF2DC",
+    PapayaWhip: "#EFEFEF",
     Denim: '#175DAF',
     //glass
     BlackGlass: "rgba(0, 0, 0, 0.12)",
