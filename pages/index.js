@@ -80,9 +80,8 @@ const Home = () => {
             title={el.title}
             synopsis={el.synopsis}
             episodes={el.episodes}
-            cardStatus={el.aired}
             img_url={el.img_url}
-            aired={el.aired}
+            aired={el.score}
             onButtonClick={()=>router.push(`./anime/${el.uid}`)}
           />
         )}
