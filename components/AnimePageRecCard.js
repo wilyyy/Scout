@@ -85,7 +85,7 @@ const AnimePageRecCard = ({
         })
         FinalArray = FinalArray.splice(0, 2);
         setGenreFix(FinalArray);
-    }, [])
+    }, [genre])
 
     const ClickFav = () => {
         setIcon(!icon);
