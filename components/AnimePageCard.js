@@ -151,14 +151,11 @@ const AnimePageCard = ({
     const [genreFix, setGenreFix] = useState([]);
 
     useEffect(()=>{
-        const AddSpaceToGenre = () => {
-            let FinalArray = [];
-            genre.forEach((el) => {
-                FinalArray.push(el + ", ");
-            })
-            setGenreFix(FinalArray);
-        }
-        AddSpaceToGenre();
+        let FinalArray = [];
+        genre.forEach((el) => {
+            FinalArray.push(el + ", ");
+        })
+        setGenreFix(FinalArray);
     }, [])
 
     return (

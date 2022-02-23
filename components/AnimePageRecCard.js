@@ -79,15 +79,12 @@ const AnimePageRecCard = ({
     const [genreFix, setGenreFix] = useState([]);
 
     useEffect(()=>{
-        const AddSpaceToGenre = () => {
-            let FinalArray = [];
-            genre.forEach((el) => {
-                FinalArray.push(el + ", ");
-            })
-            FinalArray = FinalArray.splice(0, 2);
-            setGenreFix(FinalArray);
-        }
-        AddSpaceToGenre();
+        let FinalArray = [];
+        genre.forEach((el) => {
+            FinalArray.push(el + ", ");
+        })
+        FinalArray = FinalArray.splice(0, 2);
+        setGenreFix(FinalArray);
     }, [])
 
     const ClickFav = () => {
