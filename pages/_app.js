@@ -19,18 +19,6 @@ function MyApp({ Component, pageProps }) {
           name="description" 
           content="scout description go here" 
         />
-        <link
-            rel="preload"
-            href="../public/fonts/Poppins-Regular.ttf"
-            as="font"
-            crossOrigin=""
-        />
-        <link
-            rel="preload"
-            href="../public/fonts/Poppins-ExtraLight.ttf"
-            as="font"
-            crossOrigin=""
-        />
       </Head>
       <Component {...pageProps} />
     </ScoutThemeProvider>

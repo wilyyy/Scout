@@ -18,6 +18,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     padding: 2px 0 2px 15px;
+    z-index: 2;
 `;
 
 const Icon = styled(SearchAlt)`

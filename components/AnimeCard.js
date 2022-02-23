@@ -1,12 +1,13 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 import { IconContext } from 'react-icons';
 import { BsFillBookmarkFill } from 'react-icons/bs';
-
 import { useTheme } from '../utils/ScoutThemeProvider';
 import { ThemeConfig } from '../utils/ThemeConfig';
+import { HoverZoom } from "../utils/Animations";
 
-const CardCont = styled.div`
+const CardCont = styled(motion.div)`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -15,8 +16,14 @@ const CardCont = styled.div`
   height: 578px;
   padding: 20px;
   border-radius: 16px;
+  margin: 5px;
+  cursor: pointer;
 
-  background-color: ${props=>props.backgroundColor};
+  background: ${props=>props.bgcolor};
+  box-shadow: inset 43.3333px -43.3333px 43.3333px rgba(149, 149, 149, 0.1), 
+              inset -43.3333px 43.3333px 43.3333px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px) saturate(164%);
+  -webkit-backdrop-filter: blur(20px) saturate(164%);
   font-family: ${props=>props.fontFamily};
 `
 
@@ -38,20 +45,20 @@ const Row = styled.div`
 const Header = styled.h4`
   margin: 0;
   font-size: 18px;
-  color: ${props=>props.headerColor};
+  color: ${props=>props.hcolor};
   font-weight: 400;
 `
 
 const Body = styled.p`
   font-size: 18px;
-  color: ${props=>props.bodyColor};
+  color: ${props=>props.bcolor};
   margin: 0;
 `
 
 const Details = styled.p`
   font-size: 16px;
-  color: ${props=>props.bodyColor};
-  opacity: ${props=>props.bodyOpacity};
+  color: ${props=>props.bcolor};
+  opacity: ${props=>props.bopacity};
   margin: 0;
 `
 
@@ -73,52 +80,55 @@ const TextCont = styled.div`
 
 const Divider = styled.p`
   font-size: 18px;
-  color: ${props=>props.dividerColor};
-  opacity: ${props=>props.dividerOpacity};
+  color: ${props=>props.dcolor};
+  opacity: ${props=>props.dopacity};
   margin: 15px 0;
 `
 
 const AnimeCard = ({
-
-  src = "/anime.png",
-  fontFamily = "Poppins-Regular",
-  dividerOpacity = 0.2,
-  cardTitle = "[Missing Title]",
-  cardDescription = "[Missing Description",
-  cardEpisodeCount = "##/##",
-  cardStatus = "[Missing Status]",
-  AnimeTitle = "[Anime Title]",
-  AnimeDesc = "[Anime Description]",
-  AnimeEps = "[##/##]",
-  AnimeStatus ="[Status]"
-
+  img_url = "/anime.png",
+  fontFamily = "Poppins",
+  title = "[Missing Title]",
+  synopsis = "[Missing Description",
+  episodes = "24",
+  aired = "[Missing Status]",
+  onButtonClick
 }) => {
 
   const { theme } = useTheme();
 
+  const SynopsisSubstr = synopsis.substring(0, 80);
+
   return (
-    <CardCont backgroundColor={ThemeConfig[theme].cardBackground} fontFamily={fontFamily}>
-      <CardImage src={src} />
+    <CardCont 
+      fontFamily={fontFamily}
+      onClick={onButtonClick}
+      whileHover={{scale: 1.1}}
+      whileTap={{scale: 0.96}}
+      transition={HoverZoom.spring}
+      bgcolor={ThemeConfig[theme].cardBackground}
+    >
+      <CardImage src={img_url} alt="anime image"/>
       <TextCont>
       <Row>
         <Header 
-        headerColor={ThemeConfig[theme].cardHeader}>{cardTitle}</Header>
-        <IconContext.Provider value={{color: ThemeConfig[theme].text, size: "2em"}}>
+        hcolor={ThemeConfig[theme].body}>{title}</Header>
+        <IconContext.Provider value={{color: "red", size: "2em"}}>
           <BsFillBookmarkFill  />
         </IconContext.Provider>
       </Row>
-      <Body bodyColor={ThemeConfig[theme].cardText}>
-        {cardDescription}
+      <Body bcolor={ThemeConfig[theme].body}>
+        {SynopsisSubstr}...
       </Body>
-      <Divider dividerOpacity={dividerOpacity} dividerColor={ThemeConfig[theme].cardHeader}>------------------</Divider>
+      <Divider dopacity="0.2" dcolor={ThemeConfig[theme].body}>------------------</Divider>
       <DetailCont>
         <div>
-        <Header headerColor={ThemeConfig[theme].cardHeader}>{cardEpisodeCount}</Header>
-        <Details bodyColor={ThemeConfig[theme].cardText}>Episodes</Details>
+        <Header hcolor={ThemeConfig[theme].body}>21/{episodes}</Header>
+        <Details bcolor={ThemeConfig[theme].body}>Episodes</Details>
         </div>
         <div>
-        <Header headerColor={ThemeConfig[theme].cardHeader}>{cardStatus}</Header>
-        <Details bodyColor={ThemeConfig[theme].cardText}>Status</Details>
+        <Header hcolor={ThemeConfig[theme].body}>{aired}</Header>
+        <Details bcolor={ThemeConfig[theme].body}>Status</Details>
         </div>
       </DetailCont>
       </TextCont>

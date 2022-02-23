@@ -1,23 +1,30 @@
+const anime = require("./animes.json");
+
+export function GetAllAnime(shows=[]){
+  const results = shows.splice(0, 20);
+
+  return results;
+}
+
 export function filtering(
   arr = [],
   config = {
     title: null, 
-    genre: null,
-    episodes: null,
-    popularity: null,
-    score: null,
+    genre: [], //don't work, ask Chris
+    score: [],
+    episodes: []
   }
 
 ) {
-  //console.log(arr);
 
   const {
     title, 
     genre, 
-    episodes, 
+    score,
+    episodes,
   } = config;
 
-  if(title || genre || episodes || popularity || score) {
+  if(title || genre || score || episodes ) {
     
     const filtered_arr = arr.filter((o) => {
       
@@ -31,49 +38,66 @@ export function filtering(
         cond = cond && o.genre.includes(genre);
       }
       
+      if(score) {
+        cond = cond && Number(score[0]) <= Number(o.score) && Number(o.score) <= Number(score[1]);
+      }
+
       if(episodes) {
-        cond = cond && Number(o.average_rating) >= Number(rating);
-        //have episodes be an array of lower and higher value of range, set lower range as
-        //episodes[0] and upper range as episodes[1] and return all anime with episodes in that value
+        cond = cond && Number(episodes[0]) <= Number(o.episodes) && Number(o.episodes) <= Number(episodes[1]);
       }
 
       return cond;
     })
     
-    // console.log(filtered_arr);
     return filtered_arr;
   } else {
     return [];
   }
-
-  //const filtered_arr = arr.filter(o => o.bookID === req.query.bookID);
 }
 
-// const books = require('./books.json')
 
-/*
-bag 1 is empty
-bag 2 has books
-filtering is saying if the book matches this condition, clone it and put it into bag 1
-*/
-// filtering(books, {
-//   page: 700,
-//   rating: 4.5,
-//   title: "The"
-// });
+// use to test, add console.log(filtered_arr) to function
+// const animes = require('./animes.json');
+// filtering(animes, {
+//   genre: ['Action', 'Comedy']
+// })
 
-/*
-filtering(books, {
-  title: "Harry"
-  pages: 123,
-  rating: 5.5
-})
-//FOR THE EXERCISE, also filter language_code, authors, ratings_count, and text_reviews_count
-*/
+function splitDate (
+  string = null
+) {
+
+  const Months = {
+    Jan: '01',
+    Feb: '02',
+    Mar: '03',
+    Apr: '04',
+    May: '05',
+    Jun: '06',
+    Jul: '07',
+    Aug: '08',
+    Sep: '09',
+    Oct: '10',
+    Nov: '11',
+    Dec: '12',
+  }
+
+  const splitString = string.split(" ");
+  const noComma = splitString.map(function (e) {
+    return e.replace(',', '');
+});
+
+
+  let monthNumber = Months[noComma[0]];
+
+  const newArray = [];
+  newArray.push(noComma[2], monthNumber, noComma[1]);
+  console.log(newArray.join(''));
+  return newArray.join('');
+}
 
 export function sortArr(
   arr=[],
-  config={key:null}
+  config={key:null, type:null}
 ) {
   
   const {key, type} = config;
@@ -81,10 +105,14 @@ export function sortArr(
   if(key) {
     arr.sort((cur, next) => {
 
-      var num1 = Number(cur[key])
-      var num2 = Number(next[key])
+      let num1 = Number(cur[key])
+      let num2 = Number(next[key])
 
-      //Change this if statement to account for popularity, score, airing date
+      if(cur[key] === 'aired') {
+        num1 = splitDate(cur[key])
+        num2 = splitDate(next[key])
+      }
+
       if(isNaN(cur[key])){
         num1 = cur[key]
         num2 = next[key]
@@ -109,8 +137,12 @@ export function sortArr(
       return 0;
     })
 
-    // console.log(arr.slice(0, 10))
     return arr;
 
   }
 }
+
+// sortArr(animes, {
+//   key: 'aired',
+//   type: 'desc'
+// })
