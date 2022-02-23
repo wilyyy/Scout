@@ -79,7 +79,8 @@ const NavigationBar = ({
     onHomeClick, 
     onFavClick, 
     onProfileClick,
-    onFilterClick
+    onFilterClick,
+    onSearchType = () => {}
 }) => {
     const router = useRouter();
     const {theme, setTheme} = useTheme();
@@ -113,7 +114,7 @@ const NavigationBar = ({
                 </motion.a>
             </Row>
             <Row right>
-                <SearchBar />
+                <SearchBar onChange={onSearchType} />
                 <FilterIcon onClick={onFilterClick} />
                 <ReactSwitch
                     onChange={()=>{setTheme(theme === 'dark' ? 'light' : 'dark')}}

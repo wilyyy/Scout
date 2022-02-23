@@ -6,6 +6,8 @@ import { useTheme } from '../utils/ScoutThemeProvider';
 import { ThemeConfig } from "../utils/ThemeConfig";
 import SearchDropDown from "./SearchDropDown";
 
+import { useSearch } from "../utils/ScoutThemeProvider";
+
 // Search Bar stuff
 const Container = styled.div`
     width: 250px;
@@ -48,19 +50,22 @@ const test = [
     "violet evergarden"
 ]
 
-const SearchBar = ({onSearchClick}) => {
+const SearchBar = ({
+    onSearchClick,
+    onChange = () => {}
+}) => {
     const { theme } = useTheme();
-    const [dropdown, setDropdown] = useState(null);
+    const {search, setSearch} = useSearch();
     
     return (
         <Container>
             <Input 
-                placeholder={dropdown !== null ? dropdown : "Search"}
+                placeholder={search !== null ? search : "Search"}
                 color={ThemeConfig[theme].text}
-                onChange={(e)=>setDropdown(e)}
+                onChange = {onChange}
             />
             <Icon onClick={onSearchClick}/>
-            {dropdown !== null &&
+            {search !== null &&
                 <SearchDropDown>
                     {test.map((o, i)=>
                         <div key={i}>{o}</div> //make styled comp for this
