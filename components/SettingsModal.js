@@ -81,7 +81,7 @@ const Line = styled.div`
 
 const SortCont = styled.div`
   width: 200px;
-  height: 60px;
+  height: 80px;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
@@ -291,23 +291,6 @@ const SettingsModal = ({
                   size="32px" 
                   onClick={()=>handleSort('popularity', 'desc')} 
                   color={sortKey === 'popularity' && sortType === 'desc' ? ThemeConfig[theme].text : 'black'}
-                  style={{cursor: 'pointer' }}/>
-              </SortArrowCont>
-            </SortCont>
-            <SortCont>
-            <SortLabel sortlabelcolor={sortKey === 'releasedate' ? ThemeConfig[theme].text : '#D8D8D8'}>
-                Release Date
-              </SortLabel>
-              <SortArrowCont>
-              <BsCaretUpFill 
-                  size="32px" 
-                  onClick={()=>handleSort('releasedate', 'asc')} 
-                  color={sortKey === 'releasedate' && sortType === 'asc' ? ThemeConfig[theme].text : 'black'}
-                  style={{cursor: 'pointer' }}/>
-                <BsCaretDownFill
-                  size="32px" 
-                  onClick={()=>handleSort('releasedate', 'desc')} 
-                  color={sortKey === 'releasedate' && sortType === 'desc' ? ThemeConfig[theme].text : 'black'}
                   style={{cursor: 'pointer' }}/>
               </SortArrowCont>
             </SortCont>
