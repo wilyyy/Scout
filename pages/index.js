@@ -10,8 +10,16 @@ import SettingsModal from '@/components/SettingsModal';
 import { IoMdFunnel } from 'react-icons/io';
 
 import axios from 'axios';
+import qs from 'qs';
 import { useEffect, useState } from 'react';
 import AnimeCard from '@/components/AnimeCard';
+
+import {
+  useGenre, 
+  useScore, 
+  useEpisodes, 
+  useSortKey, 
+  useSortType} from '@/utils/ScoutThemeProvider';
 
 const Page = styled.div`
   display: flex;
@@ -39,11 +47,18 @@ const AnimeCardCont = styled.div`
   flex-wrap: wrap;
 `
 
+let timer = null;
+
 const Home = () => {
   const router = useRouter();
 
   const {theme} = useTheme();
   const [data, setData] = useState([]);
+  const {genre} = useGenre();
+  const {score} = useScore();
+  const {episodes} = useEpisodes();
+  const {sortKey} = useSortKey();
+  const {sortType} = useSortType();
 
   useEffect(()=>{
     const GetAnime = async()=>{
@@ -55,11 +70,46 @@ const Home = () => {
     GetAnime();
   }, [])
 
-  
+  const inputFilter = async (txt) => {
+
+    console.log(txt);
+    if(timer){
+      clearTimeout(timer);
+      timer = null;
+    }
+
+    if(timer === null) {
+      timer = setTimeout(async ()=>{
+        console.log('async call');
+
+        const res = await axios.get("/api/anime", {
+          params: {
+            txt:txt,
+            genreFilter: genre,
+            scoreFilter: score,
+            episodeFilter: episodes,
+            sortKeyFilter: sortKey,
+            sortTypeFilter: sortType
+          },
+
+          paramsSerializer: params => {
+            
+            return qs.stringify(params, { arrayFormat: "repeat"})
+          }
+        })
+
+        console.log(res);
+        setData(res.data);
+        timer = null;
+    }, 1000)
+  }
+
+  }
 
   return (
     <Page>
-      <NavigationBar />
+      <NavigationBar onSearchType={(e)=>{inputFilter(e.target.value)}}/>
+      <button onClick={()=>console.log(genre)}>Button Check</button>
       <MainContentSlider 
         titletext1='Demon Slayer' 
         desctext1='After a demon attack leaves his family slain and his sister cursed, Tanjiro embarks upon a perilious journey to find a cure and avenge those he’s lost.'

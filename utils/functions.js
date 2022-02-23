@@ -34,8 +34,14 @@ export function filtering(
         cond = cond && o.title.includes(title);
       }
       
-      if(genre) {
-        cond = cond && o.genre.includes(genre);
+      if(genre){
+        if(genre.length != 0) {
+          const containsAll = genre.every(element => {
+            return o.genre.includes(element);
+          })
+
+          cond = cond && containsAll;
+        }
       }
       
       if(score) {

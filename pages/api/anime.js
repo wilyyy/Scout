@@ -1,10 +1,6 @@
 import { filtering, sortArr, GetAllAnime } from "../../utils/functions";
-import anime from '@/utils/animes.json';
 
-//Danny API
-/*
-import { filtering, sortArr } from "../../utils/functions";
-import animes from '@/utils/animes.json';
+import anime from '@/utils/animes.json';
 
 export default async function handler(req, res) {
   const {
@@ -12,22 +8,37 @@ export default async function handler(req, res) {
     genreFilter,
     scoreFilter,
     episodeFilter,
-    sortKey,
-    sortType
+    sortKeyFilter,
+    sortTypeFilter
   } = req.query;
 
-  const genre = genreFilter;
+  let genre = genreFilter;
   const score = scoreFilter;
   const episodes = episodeFilter;
+  const sortKey = sortKeyFilter;
+  const sortType = sortTypeFilter;
 
-  let lists = [];
+  if(typeof genre === 'string') {
+    const names = (v) => [].concat(v).map(name => name)
+    genre = names(genre);
+  }
 
+  var lists = [];
+
+  if(req.query){
+    lists = GetAllAnime(anime);
+  }
+
+
+  console.log(genre);
+
+  //Only triggers if there's at least one letter in the search bar
   if(txt) {
-    lists = filtering(animes, {
+    lists = filtering(anime, {
       title: txt,
-      genre: [genre],
-      score = [score],
-      episodes = [episodes]
+      genre: genre,
+      score: score,
+      episodes: episodes
     })
   }
 
@@ -37,25 +48,10 @@ export default async function handler(req, res) {
       type: sortType
     })
   }
+  
+
+  lists = lists.slice(0,20);
 
   res.status(200).json(lists);
-}
-*/
-
-export default async function handler(req, res) {
-
-  console.log(req.query, req.body);
-
-  var lists = null;
-
-  if(req.query){
-    lists = GetAllAnime(anime);
-  }
-
-  if(req.query.a_id){
-    lists = anime.filter(o => o.uid === Number(req.query.a_id));
-  }
-  res.status(200).json(lists);
-
 }
 

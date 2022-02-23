@@ -298,7 +298,7 @@ const SettingsModal = ({
         </SectionCont>
       </SettingsRow>
       <Row>
-        <Button btnText="Apply" onClick={()=>console.log(sortKey, sortType)} btnwidth="120px" btnmargin="0 10px" />
+        <Button btnText="Apply" btnwidth="120px" btnmargin="0 10px" />
         <Button btnText="Reset" onClick={resetFilter} btnwidth="120px" btnmargin="0 10px" />
       </Row>
     </SettingsCont>
