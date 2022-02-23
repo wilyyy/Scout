@@ -19,6 +19,7 @@ const Page = styled.div`
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
+  margin-top: 20px;
 `;
 
 const BodyHeader = styled.div`
