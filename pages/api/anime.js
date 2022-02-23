@@ -25,6 +25,8 @@ export default async function handler(req, res) {
     genre = names(genre);
   }
 
+  console.log(genre);
+
   var lists = [];
 
   if(req.query){

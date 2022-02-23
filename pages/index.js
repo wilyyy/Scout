@@ -19,7 +19,9 @@ import {
   useScore, 
   useEpisodes, 
   useSortKey, 
-  useSortType} from '@/utils/ScoutThemeProvider';
+  useSortType,
+  useSearch,
+  useData} from '@/utils/ScoutThemeProvider';
 
 const Page = styled.div`
   display: flex;
@@ -53,12 +55,14 @@ const Home = () => {
   const router = useRouter();
 
   const {theme} = useTheme();
-  const [data, setData] = useState([]);
+  const {data, setData} = useData();
+
   const {genre} = useGenre();
   const {score} = useScore();
   const {episodes} = useEpisodes();
   const {sortKey} = useSortKey();
   const {sortType} = useSortType();
+  const {search, setSearch} = useSearch();
 
   useEffect(()=>{
     const GetAnime = async()=>{
@@ -71,8 +75,8 @@ const Home = () => {
   }, [])
 
   const inputFilter = async (txt) => {
-
-    console.log(txt);
+    setSearch(txt)
+    console.log(search);
     if(timer){
       clearTimeout(timer);
       timer = null;
@@ -81,6 +85,8 @@ const Home = () => {
     if(timer === null) {
       timer = setTimeout(async ()=>{
         console.log('async call');
+
+        console.log(genre);
 
         const res = await axios.get("/api/anime", {
           params: {
@@ -98,7 +104,6 @@ const Home = () => {
           }
         })
 
-        console.log(res);
         setData(res.data);
         timer = null;
     }, 1000)
@@ -109,7 +114,7 @@ const Home = () => {
   return (
     <Page>
       <NavigationBar onSearchType={(e)=>{inputFilter(e.target.value)}}/>
-      <button onClick={()=>console.log(genre)}>Button Check</button>
+      <button onClick={()=>console.log(search)}>Button Check</button>
       <MainContentSlider 
         titletext1='Demon Slayer' 
         desctext1='After a demon attack leaves his family slain and his sister cursed, Tanjiro embarks upon a perilious journey to find a cure and avenge those he’s lost.'
@@ -121,7 +126,9 @@ const Home = () => {
         <HeaderText>Explore</HeaderText>
         <IoMdFunnel color={ThemeConfig[theme].text} size="32" />
       </BodyHeader>
-        <SettingsModal tcolor={ThemeConfig[theme].cardHeader} />
+        <SettingsModal 
+          tcolor={ThemeConfig[theme].cardHeader}
+          />
       <AnimeCardCont>
         
         {data.map((el, index) => 

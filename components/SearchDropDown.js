@@ -28,3 +28,10 @@ const SearchDropDown = ({children}) => {
 }
 
 export default SearchDropDown;
+
+//To make the search dropdown work, we make a useState (doesnt have to be a provider)
+//and make it an array. Using the search bar, we use the api to search the first x amount
+//of results and display title only. Only display 3-5 in the window. Fix the height, make it
+//a scroll container. At the end of the mapping, have a button/div to display more. When clicked,
+//Sends the search results to the main mapping function and automatically scroll down to the anime
+//cards section
