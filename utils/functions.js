@@ -27,7 +27,7 @@ export function filtering(
   if(title || genre || score || episodes ) {
     
     const filtered_arr = arr.filter((o) => {
-      
+
       var cond = true;
       
       if(title){

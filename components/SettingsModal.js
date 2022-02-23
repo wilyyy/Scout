@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { useTheme, useGenre, useScore, useEpisodes, useSortKey, useSortType } from "@/utils/ScoutThemeProvider";
+import axios from "axios";
+import qs from 'qs';
+import { useTheme, useGenre, useScore, useEpisodes, useSortKey, useSortType, useSearch, useData } from "@/utils/ScoutThemeProvider";
 import { ThemeConfig } from "@/utils/ThemeConfig";
 
 //Filter Stuff
@@ -123,51 +125,89 @@ const MenuProps = {
 };
 
 const SettingsModal = ({
-  tcolor,
+  tcolor
 }) => {
 
   const {theme} = useTheme();
-  // const [genre, setGenre] = useState([]);
+  const {search} = useSearch();
+  const {data, setData} = useData();
+  
+  //Provider states for actual filtering
   const {genre, setGenre} = useGenre();
-  // const [score, setScore] = useState([0, 10]);
   const {score, setScore} = useScore();
-  // const [episode, setEpisode] = useState([0, 100]);
   const {episodes, setEpisodes} = useEpisodes();
-  // const [key, setKey] = useState('title');
   const {sortKey, setSortKey} = useSortKey();
-  // const [type, setType] = useState('asc');
   const {sortType, setSortType} = useSortType();
 
-  const resetFilter = () => {
-    setGenre([]);
-    setScore([0, 10]);
-    setEpisodes([0, 100]);
-    setSortKey('title');
-    setSortType('asc');
-  }
+  //Temporary states to set filters to before pressing apply
+  const [tempGenre, setTempGenre] = useState([]);
+  const [tempScore, setTempScore] = useState([0, 10]);
+  const [tempEpisodes, setTempEpisodes] = useState([0, 100]);
+  const [tempKey, setTempKey] = useState('title');
+  const [tempType, setTempType] = useState('asc');
 
-  const handleGenre = (event) => {
+  const handleTempGenre = (event) => {
     const {
       target: { value },
     } = event;
-    setGenre(
+    setTempGenre(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
   };
 
-  const handleScore = (event, newScore) => {
-    setScore(newScore);
+  const handleTempScore = (event, newScore) => {
+    setTempScore(newScore);
   };
 
-  const handleEpisodes = (event, newEpisodes) => {
-    setEpisodes(newEpisodes);
+  const handleTempEpisodes = (event, newEpisodes) => {
+    setTempEpisodes(newEpisodes);
   }
 
-  const handleSort = (newKey, newType) => {
-    setSortKey(newKey);
-    setSortType(newType);
+  const handleTempSort = (newKey, newType) => {
+    setTempKey(newKey);
+    setTempType(newType);
   }
+
+  const ApplyFilters = async () => {
+    setGenre(tempGenre);
+    setScore(tempScore);
+    setEpisodes(tempEpisodes);
+    setSortKey(tempKey);
+    setSortType(tempType);
+    const res = await axios.get("/api/anime", {
+      params: {
+        txt: search,
+        genreFilter: genre,
+        scoreFilter: score,
+        episodeFilter: episodes,
+        sortKeyFilter: sortKey,
+        sortTypeFilter: sortType
+      },
+
+      paramsSerializer: params => {     
+        return qs.stringify(params, { arrayFormat: "repeat"})
+      }
+    });
+
+    setData(res.data);
+
+  }
+
+  const ResetFilters = () => {
+    setGenre([]);
+    setScore([0, 10]);
+    setEpisodes([0, 100]);
+    setSortKey('title');
+    setSortType('asc');
+    
+    setTempGenre([]);
+    setTempScore([0, 10]);
+    setTempEpisodes([0, 100]);
+    setTempKey(['title']);
+    setTempType(['asc'])
+  }
+
 
   return (
     <SettingsCont bgcolor={ThemeConfig[theme].cardBackground}>
@@ -179,10 +219,9 @@ const SettingsModal = ({
               <SectionHeader tcolor={tcolor}>Genre</SectionHeader>
               <FormControl sx={{width: 220}}>
               <Select
-                labelId="genre"
                 multiple
-                value={genre}
-                onChange={handleGenre}
+                value={tempGenre}
+                onChange={handleTempGenre}
                 sx={{
                   backgroundColor: 'white', 
                   fontFamily: 'Inter, sans-serif',
@@ -198,7 +237,7 @@ const SettingsModal = ({
                       primaryTypographyProps={{fontFamily: 'Inter, sans-serif'}}
                       />
                     <Checkbox 
-                      checked={genre.indexOf(name) > -1}
+                      checked={tempGenre.indexOf(name) > -1}
                       sx={{
                         color: ThemeConfig[theme].text,
                         '&.Mui-checked': {
@@ -219,8 +258,8 @@ const SettingsModal = ({
                 step={0.1}
                 max={10}
                 valueLabelDisplay="on"
-                value={score}
-                onChange={handleScore}
+                value={tempScore}
+                onChange={handleTempScore}
                 marks={ScoreMarks}
               />
             </Box>
@@ -231,8 +270,8 @@ const SettingsModal = ({
               <Slider
                 sx={{color: ThemeConfig[theme].text}}
                 valueLabelDisplay="on"
-                value={episodes}
-                onChange={handleEpisodes}
+                value={tempEpisodes}
+                onChange={handleTempEpisodes}
                 marks={EpisodeMarks}
               />
             </Box>
@@ -244,53 +283,53 @@ const SettingsModal = ({
           <SectionTitle tcolor={tcolor}>Sort By</SectionTitle>
           <SubSection>
           <SortCont>
-              <SortLabel sortlabelcolor={sortKey === 'title' ? ThemeConfig[theme].text : '#D8D8D8'}>
+              <SortLabel sortlabelcolor={tempKey === 'title' ? ThemeConfig[theme].text : '#D8D8D8'}>
                 Title
               </SortLabel>
               <SortArrowCont>
                 <BsCaretUpFill 
                   size="32px" 
-                  onClick={()=>handleSort('title', 'asc')} 
-                  color={sortKey === 'title' && sortType === 'asc' ? ThemeConfig[theme].text : 'black'}
+                  onClick={()=>handleTempSort('title', 'asc')} 
+                  color={tempKey === 'title' && tempType === 'asc' ? ThemeConfig[theme].text : 'black'}
                   style={{cursor: 'pointer'}}/>
                 <BsCaretDownFill 
                   size="32px" 
-                  onClick={()=>handleSort('title', 'desc')} 
-                  color={sortKey === 'title' && sortType === 'desc' ? ThemeConfig[theme].text : 'black'}
+                  onClick={()=>handleTempSort('title', 'desc')} 
+                  color={tempKey === 'title' && tempType === 'desc' ? ThemeConfig[theme].text : 'black'}
                   style={{cursor: 'pointer' }}/>
               </SortArrowCont>
             </SortCont>
             <SortCont>
-              <SortLabel sortlabelcolor={sortKey === 'score' ? ThemeConfig[theme].text : '#D8D8D8'}>
+              <SortLabel sortlabelcolor={tempKey === 'score' ? ThemeConfig[theme].text : '#D8D8D8'}>
                 Score
               </SortLabel>
               <SortArrowCont>
                 <BsCaretUpFill 
                   size="32px" 
-                  onClick={()=>handleSort('score', 'asc')} 
-                  color={sortKey === 'score' && sortType === 'asc' ? ThemeConfig[theme].text : 'black'}
+                  onClick={()=>handleTempSort('score', 'asc')} 
+                  color={tempKey === 'score' && tempType === 'asc' ? ThemeConfig[theme].text : 'black'}
                   style={{cursor: 'pointer'}}/>
                 <BsCaretDownFill 
                   size="32px" 
-                  onClick={()=>handleSort('score', 'desc')} 
-                  color={sortKey === 'score' && sortType === 'desc' ? ThemeConfig[theme].text : 'black'}
+                  onClick={()=>handleTempSort('score', 'desc')} 
+                  color={tempKey === 'score' && tempType === 'desc' ? ThemeConfig[theme].text : 'black'}
                   style={{cursor: 'pointer' }}/>
               </SortArrowCont>
             </SortCont>
             <SortCont>
-            <SortLabel sortlabelcolor={sortKey === 'popularity' ? ThemeConfig[theme].text : '#D8D8D8'}>
+            <SortLabel sortlabelcolor={tempKey === 'popularity' ? ThemeConfig[theme].text : '#D8D8D8'}>
                   Popularity
               </SortLabel>
               <SortArrowCont>
                 <BsCaretUpFill 
                   size="32px" 
-                  onClick={()=>handleSort('popularity', 'asc')} 
-                  color={sortKey === 'popularity' && sortType === 'asc' ? ThemeConfig[theme].text : 'black'}
+                  onClick={()=>handleTempSort('popularity', 'asc')} 
+                  color={tempKey === 'popularity' && tempType === 'asc' ? ThemeConfig[theme].text : 'black'}
                   style={{cursor: 'pointer' }}/>
                 <BsCaretDownFill
                   size="32px" 
-                  onClick={()=>handleSort('popularity', 'desc')} 
-                  color={sortKey === 'popularity' && sortType === 'desc' ? ThemeConfig[theme].text : 'black'}
+                  onClick={()=>handleTempSort('popularity', 'desc')} 
+                  color={tempKey === 'popularity' && tempType === 'desc' ? ThemeConfig[theme].text : 'black'}
                   style={{cursor: 'pointer' }}/>
               </SortArrowCont>
             </SortCont>
@@ -298,9 +337,18 @@ const SettingsModal = ({
         </SectionCont>
       </SettingsRow>
       <Row>
-        <Button btnText="Apply" btnwidth="120px" btnmargin="0 10px" />
-        <Button btnText="Reset" onClick={resetFilter} btnwidth="120px" btnmargin="0 10px" />
+        <Button 
+          btnText="Apply" 
+          onClick={ApplyFilters} 
+          btnwidth="120px" 
+          btnmargin="0 10px" />
+        <Button 
+          btnText="Reset" 
+          onClick={ResetFilters}  
+          btnwidth="120px" 
+          btnmargin="0 10px" />
       </Row>
+      <button onClick={()=>console.log('Temp', tempGenre, 'Real', genre)}>Button Check</button>
     </SettingsCont>
   )
 }
