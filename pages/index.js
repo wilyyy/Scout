@@ -82,7 +82,7 @@ const Home = () => {
             cardStatus={el.aired}
             img_url={el.img_url}
             aired={el.aired}
-            onButtonClick={()=>router.push(`./${el.uid}`)}
+            onButtonClick={()=>router.push(`./anime/${el.uid}`)}
           />
         )}
       </AnimeCardCont>

@@ -37,7 +37,7 @@ const AnimePage = () => {
         if(anime_id){
             const GetAnime = async()=>{
                 //get the show and setData to result
-                const result = await axios.get("./api/anime", {
+                const result = await axios.get("../api/anime", {
                     params: {
                         a_id: anime_id
                     }
@@ -50,6 +50,7 @@ const AnimePage = () => {
             GetAnime();
         }
     }, [anime_id])
+
 
     if(data === null){
         return (

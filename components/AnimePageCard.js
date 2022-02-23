@@ -1,7 +1,5 @@
-//delete and put in dynamic comp later
-
-import Image from "next/image";
 import styled from "styled-components";
+import { useState, useEffect } from "react";
 
 import { useTheme } from '../utils/ScoutThemeProvider';
 import { ThemeConfig } from "../utils/ThemeConfig";
@@ -120,7 +118,7 @@ const Divider = styled.div`
 const MatchBar = styled.div`
     width: 421px;
     height: 20px;
-    background: red;
+    background-color: red;
 `;
 
 //replace with next img or nah? decide later
@@ -136,13 +134,25 @@ const AnimePageCard = ({
     score,
     ranked,
     popularity,
-    genre,
+    genre=[],
     aired,
     episodes,
     img_url,
     matchPercent=86
 }) => {
     const {theme, setTheme} = useTheme();
+    const [genreFix, setGenreFix] = useState([]);
+
+    useEffect(()=>{
+        const AddSpaceToGenre = () => {
+            let FinalArray = [];
+            genre.forEach((el) => {
+                FinalArray.push(el + " ");
+            })
+            setGenreFix(FinalArray);
+        }
+        AddSpaceToGenre();
+    }, [])
 
     return (
         <Container>
@@ -179,7 +189,7 @@ const AnimePageCard = ({
                             </Column>
                             <Column midright>
                                 <Text Para1>Genres</Text>
-                                <Text H2>{genre}</Text>
+                                <Text H2>{genreFix}</Text>
                             </Column>
                         </Row>
                         <Column match>
