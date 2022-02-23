@@ -156,7 +156,7 @@ const AnimePageCard = ({
             FinalArray.push(el + ", ");
         })
         setGenreFix(FinalArray);
-    }, [])
+    }, [genre])
 
     return (
         <Container>
