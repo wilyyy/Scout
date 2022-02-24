@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {Router, useRouter} from 'next/router';
-import { ThemeConfig } from '@/utils/ThemeConfig';
+import { LightColors, ThemeConfig } from '@/utils/ThemeConfig';
 import { useTheme } from '@/utils/ScoutThemeProvider';
 
 import NavigationBar from '@/components/NavigationBar';
@@ -49,14 +49,26 @@ const AnimeCardCont = styled.div`
   flex-wrap: wrap;
 `
 
+const DarkenBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: ${props=>props.darkz};
+  opacity: ${props=>props.darkop};
+  transition: opacity 0.5s;
+`;
+
 let timer = null;
 
 const Home = () => {
   const router = useRouter();
+  const [modalVisible, setModalVisible] = useState(false);
 
   const {theme} = useTheme();
   const {data, setData} = useData();
-
   const {genre} = useGenre();
   const {score} = useScore();
   const {episodes} = useEpisodes();
@@ -106,15 +118,29 @@ const Home = () => {
 
         setData(res.data);
         timer = null;
-    }, 1000)
+      }, 1000)
+    }
   }
 
+  const SettingsAppear = () => {
+    setModalVisible(true);
+  }
+
+  const SettingsExit = () => {
+    setModalVisible(false);
   }
 
   return (
     <Page>
-      <NavigationBar onSearchType={(e)=>{inputFilter(e.target.value)}}/>
-      <button onClick={()=>console.log(search)}>Button Check</button>
+      <DarkenBackground 
+        darkz = {modalVisible === true ? 5 : -5}
+        darkop = {modalVisible === true ? 1 : 0}
+        onClick = {SettingsExit}
+      />
+      <NavigationBar 
+      onSearchType={(e)=>{inputFilter(e.target.value)}}
+      onFilterClick={SettingsAppear}
+      />
       <MainContentSlider 
         titletext1='Demon Slayer' 
         desctext1='After a demon attack leaves his family slain and his sister cursed, Tanjiro embarks upon a perilious journey to find a cure and avenge those he’s lost.'
@@ -124,10 +150,12 @@ const Home = () => {
         />
       <BodyHeader>
         <HeaderText>Explore</HeaderText>
-        <IoMdFunnel color={ThemeConfig[theme].text} size="32" />
       </BodyHeader>
         <SettingsModal 
-          tcolor={ThemeConfig[theme].cardHeader}
+          tcolor={LightColors.PapayaWhip}
+          ExitClick={SettingsExit}
+          setScaleFactor={modalVisible ? 1 : 0.5}
+          setOp = {modalVisible ? 1 : 0}
           />
       <AnimeCardCont>
         
@@ -143,6 +171,7 @@ const Home = () => {
           />
         )}
       </AnimeCardCont>
+      <button onClick={()=>console.log(modalVisible)}>Button Check</button>
     </Page>
   )
 }

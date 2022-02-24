@@ -66,6 +66,7 @@ const MoonIcon = styled(MoonStarsFill)`
 const FilterIcon = styled(Filter)`
     width: 40px;
     height: 26px;
+    cursor: pointer;
 `;
 
 const AvatarCont = styled(motion.div)`
@@ -117,12 +118,12 @@ const NavigationBar = ({
                 <SearchBar onChange={onSearchType} />
                 <FilterIcon onClick={onFilterClick} />
                 <ReactSwitch
-                    onChange={()=>{setTheme(theme === 'dark' ? 'light' : 'dark')}}
-                    checked={theme === 'dark' ? false : true}
-                    offColor = "#FFf"
-                    offHandleColor = {DarkColors.Pumpkin}
-                    onColor = "#1E1E1E"
-                    onHandleColor ={LightColors.Denim} 
+                    onChange={()=>{setTheme(theme === 'light' ? 'dark' : 'light')}}
+                    checked={theme === 'light' ? false : true}
+                    offColor = "#E0E0E0"
+                    offHandleColor = {DarkColors.Gunmetal}
+                    onColor = "#1C2A36"
+                    onHandleColor ={LightColors.PapayaWhip} 
                     activeBoxShadow="0px 0px 1px 2px #fffc35"
                     uncheckedIcon={<SunIcon />}
                     checkedIcon={<MoonIcon />}
