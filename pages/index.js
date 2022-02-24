@@ -171,7 +171,7 @@ const Home = () => {
           />
         )}
       </AnimeCardCont>
-      <button onClick={()=>console.log(modalVisible)}>Button Check</button>
+      <button onClick={()=>console.log(search)}>Button Check</button>
     </Page>
   )
 }

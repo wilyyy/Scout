@@ -104,14 +104,12 @@ const DataRow = styled.div`
   display: flex;
   justify-content: space-between;
 `
-
-const iconStyle = {
-  position: 'absolute',
-  right: 5,
-  top: 10,
-  stroke: props=>props.iconStroke,
-  strokeWidth: 1,
-  overflow: 'visible'
+function truncateString(string, limit) {
+  if (string.length > limit) {
+    return string.substring(0, limit) + "..."
+  } else {
+    return string
+  }
 }
 
 const AnimeCard = ({
@@ -128,6 +126,8 @@ const AnimeCard = ({
 
   const [favourite, setFavourite] = useState(true);
 
+  const TitleSubstr = title.substring(0, 120);
+
   const SynopsisSubstr = synopsis.substring(0, 80);
 
   return (
@@ -142,11 +142,13 @@ const AnimeCard = ({
       <CardImage src={img_url} alt="anime image"/>
       <TextCont>
         <Row>
-        <Header hcolor={ThemeConfig[theme].body}>{title}</Header>
+        <Header hcolor={ThemeConfig[theme].body}>
+          {truncateString(title, 30)}
+        </Header>
         {favourite === true ? (<BsBookmarkCheckFill size="40px"  />) : (<BsBookmark size="40px"/>) }
         </Row>
         <Body bcolor={ThemeConfig[theme].body}>
-          {SynopsisSubstr}...
+          {truncateString(synopsis, 120)}
         </Body>
         <Divider dopacity="0.2" dcolor={ThemeConfig[theme].body}>------------------</Divider>
         <DetailCont>
