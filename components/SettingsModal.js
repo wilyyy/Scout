@@ -30,7 +30,7 @@ const SettingsCont = styled.div`
   left: 50%;
   margin-top: -300px;
   margin-left: -250px;
-  z-index: 10;
+  z-index: ${props=>props.setZ};
   transform: scale(${props=>props.setScaleFactor});
   opacity: ${props=>props.setOp};
   transition: 0.25s;
@@ -151,7 +151,8 @@ const SettingsModal = ({
   tcolor,
   ExitClick = () => {},
   setScaleFactor = 1,
-  setOp = 1
+  setOp = 1,
+  setZ = -5
 }) => {
 
   const {theme} = useTheme();
@@ -240,6 +241,7 @@ const SettingsModal = ({
       bgcolor={ThemeConfig[theme].cardBackground}
       setScaleFactor = {setScaleFactor}
       setOp = {setOp}
+      setZ = {setZ}
       >
       <ExitCont onClick={ExitClick}>
         <AiOutlineClose size="30px"/>

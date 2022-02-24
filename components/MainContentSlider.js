@@ -1,12 +1,17 @@
 import styled from "styled-components";
-import { RiBookmarkFill } from "react-icons/ri"
+import { useState } from 'react';
+import { BsBookmarkCheckFill, BsBookmark } from 'react-icons/bs';
 
-import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
+import { CarouselProvider, Slider } from 'pure-react-carousel';
+import MySlide from '@/components/CarouselSlide'
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
 import { useTheme } from "@/utils/ScoutThemeProvider";
 import Button from "./Button";
 import { ThemeConfig } from "@/utils/ThemeConfig"
+
+import axios from 'axios';
+import qs from 'qs';
 
 const Container = styled.div`
     width: 80%;
@@ -66,6 +71,7 @@ const BottomText = styled.div`
 const Description = styled.div`
     font-family: 'Poppins';
     font-size: 21px;
+    font-weight: 300;
     line-height: 28px;
     color: white;
 `
@@ -94,6 +100,7 @@ const MainContentSlider = ({
 }) => {
 
     const {theme} = useTheme();
+    const [favourite, setFavourite] = useState(true);
 
     return (
         <Container>
@@ -106,57 +113,9 @@ const MainContentSlider = ({
                 className="Carousel"
                 >
                 <Slider className="slider">
-                    <Slide index={0} className="slide">
-                        <ImgCont bgimage={bgimage}>
-                            <BlurCont>
-                                <Title>{titletext1}</Title>
-                                <Description>{desctext1}</Description>
-                                <Bookmark>
-                                    <RiBookmarkFill size="45px" color={ThemeConfig[theme].text} />
-                                </Bookmark>
-                                <Row>
-                                    <BottomText textcolor="white">
-                                        {bottext} | Episode {curEp}/{totEp}
-                                    </BottomText>
-                                    <Button btnText="Continue" />
-                                </Row>
-                            </BlurCont>
-                        </ImgCont>
-                    </Slide>
-                    <Slide index={1} className="slide">
-                        <ImgCont bgimage={bgimage}>
-                            <BlurCont>
-                                <Title>{titletext1}</Title>
-                                <Description>{desctext1}</Description>
-                                <Bookmark>
-                                    <RiBookmarkFill size="45px" color={ThemeConfig[theme].text} />
-                                </Bookmark>
-                                <Row>
-                                    <BottomText textcolor="white">
-                                        {bottext} | Episode {curEp}/{totEp}
-                                    </BottomText>
-                                    <Button btnText="Continue" />
-                                </Row>
-                            </BlurCont>
-                        </ImgCont>
-                    </Slide>
-                    <Slide index={2} className="slide">
-                        <ImgCont bgimage={bgimage}>
-                            <BlurCont>
-                                <Title>{titletext1}</Title>
-                                <Description>{desctext1}</Description>
-                                <Bookmark>
-                                    <RiBookmarkFill size="45px" color={ThemeConfig[theme].text} />
-                                </Bookmark>
-                                <Row>
-                                    <BottomText textcolor="white">
-                                        {bottext} | Episode {curEp}/{totEp}
-                                    </BottomText>
-                                    <Button btnText="Continue" />
-                                </Row>
-                            </BlurCont>
-                        </ImgCont>
-                    </Slide>
+                    <MySlide slideIndex={0}/>
+                    <MySlide slideIndex={1}/>
+                    <MySlide slideIndex={2}/>
                 </Slider>
             </CarouselProvider>
         </Container>

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
-import { IconContext } from 'react-icons';
 import { BsBookmarkCheckFill, BsBookmark } from 'react-icons/bs';
 import { useTheme } from '../utils/ScoutThemeProvider';
 import { ThemeConfig } from '../utils/ThemeConfig';
@@ -104,6 +103,7 @@ const DataRow = styled.div`
   display: flex;
   justify-content: space-between;
 `
+
 function truncateString(string, limit) {
   if (string.length > limit) {
     return string.substring(0, limit) + "..."
@@ -125,10 +125,6 @@ const AnimeCard = ({
   const { theme } = useTheme();
 
   const [favourite, setFavourite] = useState(true);
-
-  const TitleSubstr = title.substring(0, 120);
-
-  const SynopsisSubstr = synopsis.substring(0, 80);
 
   return (
     <CardCont 

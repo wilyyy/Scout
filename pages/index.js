@@ -156,6 +156,7 @@ const Home = () => {
           ExitClick={SettingsExit}
           setScaleFactor={modalVisible ? 1 : 0.5}
           setOp = {modalVisible ? 1 : 0}
+          setZ = {modalVisible? 10 : -10}
           />
       <AnimeCardCont>
         
