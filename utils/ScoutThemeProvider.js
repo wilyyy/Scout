@@ -25,7 +25,10 @@ const initialStates = {
     setSearch: ()=>{},
 
     data: [],
-    setData: ()=>{}
+    setData: ()=>{},
+
+    yourList: {},
+    setYourList: ()=>{},
 
 }
 
@@ -41,6 +44,7 @@ const ScoutThemeProvider = ({children}) => {
     const [sortType, setSortType] = useState(initialStates.sortType);
     const [search, setSearch] = useState(initialStates.search);
     const [data, setData] = useState(initialStates.data);
+    const [yourList, setYourList] = useState(initialStates.yourList);
 
     return (
         <MyContext.Provider value={{
@@ -51,8 +55,9 @@ const ScoutThemeProvider = ({children}) => {
             sortKey, setSortKey,
             sortType, setSortType,
             search, setSearch,
-            data, setData
-            }}>
+            data, setData,
+            yourList, setYourList
+        }}>
             <style jsx global>
                 {`
                     body {
@@ -109,6 +114,11 @@ export const useSearch = () => {
 export const useData = () => {
     const {data, setData} = useContext(MyContext);
     return {data, setData};
+}
+
+export const useYourList = () => {
+    const {yourList, setYourList} = useContext(MyContext);
+    return {yourList, setYourList};
 }
 
 
