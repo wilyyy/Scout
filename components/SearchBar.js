@@ -1,12 +1,16 @@
 import styled from "styled-components";
 import { SearchAlt } from "styled-icons/boxicons-regular";
-import { useState } from "react";
 
 import { useTheme } from '../utils/ScoutThemeProvider';
 import { ThemeConfig } from "../utils/ThemeConfig";
-import SearchDropDown from "./SearchDropDown";
 
 import { useSearch } from "../utils/ScoutThemeProvider";
+
+import axios from 'axios';
+import qs from 'qs';
+import {useEffect} from 'react';
+import { useRouter } from 'next/router';
+import { useSearchRes } from "../utils/ScoutThemeProvider";
 
 // Search Bar stuff
 const Container = styled.div`
@@ -43,6 +47,28 @@ const Input = styled.input`
         outline: none;
     }
 `;
+
+const DropdownCont = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    width: 250px;
+    height: auto;
+    background-color: ${props=>props.ddcolor};
+    padding: 10px;
+    z-index: 2;
+`;
+
+const DropdownList = styled.div`
+    text-align: center;
+    cursor: pointer;
+`
+
+
 const test = [
     "Made in Abyss",
     "My Hero Academia",
@@ -53,25 +79,55 @@ const test = [
 
 const SearchBar = ({
     onSearchClick,
-    onChange = () => {}
+    onChange = () => {},
+    onSearchResClick = () => {}
 }) => {
     const { theme } = useTheme();
     const {search, setSearch} = useSearch();
+
+    const router = useRouter();
+    const {searchRes, setSearchRes} = useSearchRes();
+
+    const onSearch = async (txt) => {
+        setSearch(txt)
+        const result = await axios.get("/api/anime", {
+            params: {
+                txt: txt,
+                origin: 'dropdownlist'
+            },
+
+            paramsSerializer: params => {
+            
+                return qs.stringify(params, { arrayFormat: "repeat"})
+            }
+        });
+        
+        console.log(result.data);
+        setSearchRes(result.data);
+    }
+
+    const SearchClick = (o) => {
+        router.push(`./anime/${o.uid}`)
+        setSearch('');
+    }
     
     return (
         <Container>
             <Input 
                 placeholder={"Search"}
                 color={ThemeConfig[theme].text}
-                onChange = {onChange}
+                onChange = {(e)=>{onSearch(e.target.value)}}
             />
             <Icon onClick={onSearchClick}/>
-            {search !== null &&
-                <SearchDropDown>
-                    {test.map((o, i)=>
-                        <div key={i}>{o}</div> //make styled comp for this
+            {search != '' &&
+                <DropdownCont ddcolor={ThemeConfig[theme].background}>
+                    {searchRes.map((o, i)=>
+                        <DropdownList 
+                        key={i}
+                        onClick={()=>SearchClick(o)}>{o.title} <br /> -----------------------------
+                        </DropdownList> //make styled comp for this
                     )}
-                </SearchDropDown>
+                </DropdownCont>
             }
         </Container>
     )

@@ -31,7 +31,10 @@ const initialStates = {
     setYourList: ()=>{},
 
     carousel: [],
-    setCarousel: ()=>{}
+    setCarousel: ()=>{},
+
+    searchRes: [],
+    setSearchRes: ()=>{}
 
 }
 
@@ -49,6 +52,7 @@ const ScoutThemeProvider = ({children}) => {
     const [data, setData] = useState(initialStates.data);
     const [yourList, setYourList] = useState(initialStates.yourList);
     const [carousel, setCarousel] = useState(initialStates.carousel);
+    const [searchRes, setSearchRes] = useState(initialStates.searchRes);
 
     return (
         <MyContext.Provider value={{
@@ -61,7 +65,8 @@ const ScoutThemeProvider = ({children}) => {
             search, setSearch,
             data, setData,
             yourList, setYourList,
-            carousel, setCarousel
+            carousel, setCarousel,
+            searchRes, setSearchRes
         }}>
             <style jsx global>
                 {`
@@ -129,6 +134,11 @@ export const useYourList = () => {
 export const useCarousel = () => {
     const {carousel, setCarousel} = useContext(MyContext);
     return {carousel, setCarousel};
+};
+
+export const useSearchRes = () => {
+    const {searchRes, setSearchRes} = useContext(MyContext);
+    return {searchRes, setSearchRes};
 }
 
 

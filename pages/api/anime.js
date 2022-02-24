@@ -26,13 +26,22 @@ export default async function handler(req, res) {
     genre = names(genre);
   }
 
-  console.log(genre);
-
   var lists = [];
 
   if(req.query){
     lists = GetAllAnime(anime);
   }
+
+  if(origin === 'dropdownlist') {
+    if(txt !='') {
+      lists = GetAllAnime(anime);
+    }
+
+    else {
+      lists = [];
+    }
+  }
+
 
   //Only triggers if there's at least one letter in the search bar
   if(txt) {
@@ -56,7 +65,7 @@ export default async function handler(req, res) {
     lists = anime.filter(o => o.uid === Number(req.query.a_id));
   }
 
-  lists = lists.slice(0,20);
+  lists = lists.slice(0,50);
 
   res.status(200).json(lists);
 }

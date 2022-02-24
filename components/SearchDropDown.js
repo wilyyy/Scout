@@ -19,10 +19,9 @@ const DropdownCont = styled.div`
     z-index: 2;
 `;
 
-const SearchDropDown = ({children}) => {
+const SearchDropDown = () => {
     return (
         <DropdownCont>
-            {children}
         </DropdownCont>
     )
 }

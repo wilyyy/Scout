@@ -13,7 +13,6 @@ import Button from "./Button";
 import { ThemeConfig } from "@/utils/ThemeConfig"
 
 import axios from 'axios';
-import qs from 'qs';
 
 const Container = styled.div`
     width: 80%;
