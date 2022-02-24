@@ -3,12 +3,15 @@ import {useRouter} from 'next/router';
 import styled from "styled-components";
 import { useState, useEffect } from 'react';
 import axios from "axios";
+import { LightColors, ThemeConfig } from '@/utils/ThemeConfig';
+import { v4 as uuidv4 } from 'uuid';
 
 import NavigationBar from "@/components/NavigationBar";
 import GlassCard from "@/components/GlassCard";
 import SearchBar from "@/components/SearchBar";
 import AnimePageCard from "@/components/AnimePageCard";
 import AnimePageRecs from '@/components/AnimePageRecs';
+import SettingsModal from '@/components/SettingsModal';
 import AnimePageRecCard from '@/components/AnimePageRecCard';
 
 const Page = styled.div`
@@ -40,11 +43,32 @@ const Content = styled.div`
     align-items: center;
 `;
 
+const DarkenBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: ${props=>props.darkz};
+  opacity: ${props=>props.darkop};
+  transition: opacity 0.5s;
+`;
+
 const AnimePage = () => {
     const router = useRouter();
     const {anime_id} = router.query;
 
     const [data, setData] = useState(null);
+    const [modalVisible, setModalVisible] = useState(false);
+
+    const SettingsAppear = () => {
+        setModalVisible(true);
+    }
+
+    const SettingsExit = () => {
+        setModalVisible(false);
+    }
 
     useEffect(()=>{
         if(anime_id){
@@ -68,7 +92,11 @@ const AnimePage = () => {
     if(data === null){
         return (
             <Page>
-                <NavigationBar />
+                <NavigationBar 
+                    onSearchType={(e)=>{inputFilter(e.target.value)}}
+                    onFilterClick={SettingsAppear}
+                    onYourListClick={()=>router.push('./blah')} 
+                />
                 <Error>
                     <p>Error - Anime not found</p>
                 </Error>
@@ -78,7 +106,23 @@ const AnimePage = () => {
 
     return (
         <Page>
-            <NavigationBar />
+            <DarkenBackground 
+                darkz = {modalVisible === true ? 5 : -5}
+                darkop = {modalVisible === true ? 1 : 0}
+                onClick = {SettingsExit}
+            />
+            <NavigationBar 
+                onSearchType={(e)=>{inputFilter(e.target.value)}}
+                onFilterClick={SettingsAppear}
+                onYourListClick={()=>router.push(`../yourlist/${uuidv4()}`)} 
+            />
+            <SettingsModal 
+                tcolor={LightColors.PapayaWhip}
+                ExitClick={SettingsExit}
+                setScaleFactor={modalVisible ? 1 : 0.5}
+                setOp = {modalVisible ? 1 : 0}
+                setZ = {modalVisible? 10 : -10}
+            />
             <Content>
                 <AnimePageCard 
                     uid={data.uid}

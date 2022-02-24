@@ -82,8 +82,7 @@ const AvatarCont = styled(motion.div)`
 `;
 
 const NavigationBar = ({
-    onHomeClick, 
-    onFavClick, 
+    onYourListClick, 
     onProfileClick,
     onFilterClick,
     onSearchType = () => {}
@@ -106,7 +105,7 @@ const NavigationBar = ({
                     whileHover={HoverZoom.hover}
                     whileTap={HoverZoom.tap}
                     transition={HoverZoom.spring}
-                    onClick={onHomeClick}
+                    onClick={()=>router.push('/')}
                 >
                     Home
                 </motion.a>
@@ -114,7 +113,7 @@ const NavigationBar = ({
                     whileHover={HoverZoom.hover}
                     whileTap={HoverZoom.tap}
                     transition={HoverZoom.spring}
-                    onClick={onFavClick}
+                    onClick={onYourListClick}
                 >
                     Your List
                 </motion.a>
