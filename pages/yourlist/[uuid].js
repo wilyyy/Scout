@@ -117,7 +117,7 @@ const YourList = () => {
                     episodes={el.episodes}
                     img_url={el.img_url}
                     aired={el.score}
-                    onButtonClick={()=>router.push(`./anime/${el.uid}`)}
+                    onButtonClick={()=>router.push(`../anime/${el.uid}`)}
                 />
             )}
             </AnimeCardCont>
