@@ -7,25 +7,13 @@ import Button from "./Button";
 import { ThemeConfig } from "@/utils/ThemeConfig";
 import { useState } from 'react';
 
-const Container = styled.div`
-    width: 80%;
-    height: 494px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    font-family: "Poppins";
-    font-weight: 400;
-    padding: 0 5%;
-    margin-bottom: 100px;
-`;
-
 const ImgCont = styled.div`
     width: 100%;
     height: 494px;
     overflow: hidden;
     background-image: url(${props=>props.bgimage});
-    background-position: top center;
+    background-position: center center;
+    background-size: cover;
     background-repeat: no-repeat;
     border-radius: 16px;
     padding: 25px;
@@ -36,8 +24,8 @@ const ImgCont = styled.div`
 const BlurCont = styled.div`
     height: 200px;
     width: 100%;
-    backdrop-filter: blur(89.4px);
-    background: rgba(196, 196, 196, 0.1);
+    backdrop-filter: blur(49.4px);
+    background: rgba(26, 26, 26, 0.6);
     border-radius: 16px;
     padding: 18px 39px;
     display: flex;
@@ -82,10 +70,18 @@ justify-content: space-between;
 align-items: flex-end;
 `
 
+function truncateString(string, limit) {
+  if (string.length > limit) {
+    return string.substring(0, limit) + "..."
+  } else {
+    return string
+  }
+}
+
 const MySlide = ({
     bgimage = "test_demonslayer.jpg",
-    titletext1 = "Default",
-    desctext1 = "Default",
+    titletext = "Default",
+    desctext = "Default",
     bottext = "Default",
     curEp = "##",
     totEp = "##",
@@ -98,8 +94,8 @@ const MySlide = ({
     <Slide index={slideIndex} className="slide">
       <ImgCont bgimage={bgimage}>
           <BlurCont>
-              <Title>{titletext1}</Title>
-              <Description>{desctext1}</Description>
+              <Title>{truncateString(titletext, 30)}</Title>
+              <Description>{truncateString(desctext, 180)}</Description>
               <Bookmark>
                   {favourite === true ? (<BsBookmarkCheckFill size="45px"  />) : (<BsBookmark size="45px"/>) }
               </Bookmark>
