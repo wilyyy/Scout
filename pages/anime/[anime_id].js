@@ -14,6 +14,18 @@ import AnimePageRecs from '@/components/AnimePageRecs';
 import SettingsModal from '@/components/SettingsModal';
 import AnimePageRecCard from '@/components/AnimePageRecCard';
 
+import {
+    useTheme,
+    useGenre, 
+    useScore, 
+    useEpisodes, 
+    useSortKey, 
+    useSortType,
+    useSearch,
+    useData,
+    useYourList
+  } from '@/utils/ScoutThemeProvider';
+
 const Page = styled.div`
     width: 100%;
     height: auto;

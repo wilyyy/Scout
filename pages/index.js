@@ -147,6 +147,7 @@ const Home = () => {
 
       new_Anime[obj.uid] = obj;
       setYourList(new_Anime);
+      alert("added" + obj.title + "to your list"); //replace with modal?
     } else {
       const new_Anime = {
         ...yourList
@@ -154,6 +155,7 @@ const Home = () => {
 
       delete new_Anime[obj.uid];
       setYourList(new_Anime);
+      alert("removed" + obj.title + "from your list"); //replace with modal?
     }
   }
 
@@ -200,6 +202,10 @@ const Home = () => {
             <input 
               type="checkbox"
               onChange={(e)=>AddAnimeToYourList(e.target.checked, el)}
+              checked={
+                //if this is in yourlist, then dont show it on index?
+                yourList[el.uid] !== undefined && yourList[el.uid] !== null
+              }
             />
             Add anime to your list
           </div>
