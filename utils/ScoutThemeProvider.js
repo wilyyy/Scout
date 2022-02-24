@@ -46,6 +46,7 @@ const ScoutThemeProvider = ({children}) => {
     const [data, setData] = useState(initialStates.data);
     const [yourList, setYourList] = useState(initialStates.yourList);
 
+    console.log("your list", yourList);
     return (
         <MyContext.Provider value={{
             theme, setTheme,
