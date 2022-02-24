@@ -95,7 +95,7 @@ const AnimePage = () => {
                 <NavigationBar 
                     onSearchType={(e)=>{inputFilter(e.target.value)}}
                     onFilterClick={SettingsAppear}
-                    onYourListClick={()=>router.push('./blah')} 
+                    onYourListClick={()=>router.push(`../yourlist/${uuidv4()}`)} 
                 />
                 <Error>
                     <p>Error - Anime not found</p>

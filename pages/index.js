@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import {Router, useRouter} from 'next/router';
 import { LightColors, ThemeConfig } from '@/utils/ThemeConfig';
-import { useTheme } from '@/utils/ScoutThemeProvider';
 import { v4 as uuidv4 } from 'uuid';
 
 import NavigationBar from '@/components/NavigationBar';
@@ -16,13 +15,16 @@ import qs from 'qs';
 import { useEffect, useState, useRef } from 'react';
 
 import {
+  useTheme,
   useGenre, 
   useScore, 
   useEpisodes, 
   useSortKey, 
   useSortType,
   useSearch,
-  useData} from '@/utils/ScoutThemeProvider';
+  useData,
+  useYourList
+} from '@/utils/ScoutThemeProvider';
 
 const Page = styled.div`
   display: flex;
@@ -76,6 +78,7 @@ const Home = () => {
   const {sortKey} = useSortKey();
   const {sortType} = useSortType();
   const {search, setSearch} = useSearch();
+  const {yourList, setYourList} = useYourList();
 
   useEffect(()=>{
     const GetAnime = async()=>{
@@ -132,8 +135,26 @@ const Home = () => {
     setModalVisible(false);
   }
 
-  const AddAnimeToYourList = () => {
-    //
+  const AddAnimeToYourList = (checked, obj) => {
+    //adds anime to global state yourList
+    //func takes 2 params, checked on in future clicked and the mapped data json object itself
+    console.log(checked, obj);
+    // if its checked, add to yourlist, if unchecked, delete from yourlist
+    if(checked){
+      const new_Anime = {
+        ...yourList
+      };
+
+      new_Anime[obj.uid] = obj;
+      setYourList(new_Anime);
+    } else {
+      const new_Anime = {
+        ...yourList
+      };
+
+      delete new_Anime[obj.uid];
+      setYourList(new_Anime);
+    }
   }
 
   return (
@@ -176,7 +197,11 @@ const Home = () => {
               aired={el.score}
               onButtonClick={()=>router.push(`./anime/${el.uid}`)}
             />
-            <button>Save Anime to your list</button>
+            <input 
+              type="checkbox"
+              onChange={(e)=>AddAnimeToYourList(e.target.checked, el)}
+            />
+            Add anime to your list
           </div>
           
         )}
