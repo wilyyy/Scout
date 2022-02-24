@@ -2,17 +2,18 @@ import styled from 'styled-components';
 import {Router, useRouter} from 'next/router';
 import { LightColors, ThemeConfig } from '@/utils/ThemeConfig';
 import { useTheme } from '@/utils/ScoutThemeProvider';
+import { v4 as uuidv4 } from 'uuid';
 
 import NavigationBar from '@/components/NavigationBar';
 import MainContentSlider from '@/components/MainContentSlider';
 import SettingsModal from '@/components/SettingsModal';
+import AnimeCard from '@/components/AnimeCard';
 
 import { IoMdFunnel } from 'react-icons/io';
 
 import axios from 'axios';
 import qs from 'qs';
-import { useEffect, useState } from 'react';
-import AnimeCard from '@/components/AnimeCard';
+import { useEffect, useState, useRef } from 'react';
 
 import {
   useGenre, 
@@ -84,6 +85,7 @@ const Home = () => {
     }
 
     GetAnime();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const inputFilter = async (txt) => {
@@ -130,6 +132,10 @@ const Home = () => {
     setModalVisible(false);
   }
 
+  const AddAnimeToYourList = () => {
+    //
+  }
+
   return (
     <Page>
       <DarkenBackground 
@@ -138,8 +144,9 @@ const Home = () => {
         onClick = {SettingsExit}
       />
       <NavigationBar 
-      onSearchType={(e)=>{inputFilter(e.target.value)}}
-      onFilterClick={SettingsAppear}
+        onSearchType={(e)=>{inputFilter(e.target.value)}}
+        onFilterClick={SettingsAppear}
+        onYourListClick={()=>router.push(`./yourlist/${uuidv4()}`)}
       />
       <MainContentSlider 
         titletext1='Demon Slayer' 
@@ -159,17 +166,19 @@ const Home = () => {
           setZ = {modalVisible? 10 : -10}
           />
       <AnimeCardCont>
-        
         {data.map((el, index) => 
-          <AnimeCard 
-            key={index}
-            title={el.title}
-            synopsis={el.synopsis}
-            episodes={el.episodes}
-            img_url={el.img_url}
-            aired={el.score}
-            onButtonClick={()=>router.push(`./anime/${el.uid}`)}
-          />
+          <div key={index}>
+            <AnimeCard 
+              title={el.title}
+              synopsis={el.synopsis}
+              episodes={el.episodes}
+              img_url={el.img_url}
+              aired={el.score}
+              onButtonClick={()=>router.push(`./anime/${el.uid}`)}
+            />
+            <button>Save Anime to your list</button>
+          </div>
+          
         )}
       </AnimeCardCont>
     </Page>

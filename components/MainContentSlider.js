@@ -39,6 +39,7 @@ const MainContentSlider = () => {
         }
     
         GetAnime();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -61,6 +62,7 @@ const MainContentSlider = () => {
                             curEp="21"
                             totEp={o.episodes}
                             slideIndex={i}
+                            key={i}
                         />
                     )}
                 </Slider>
