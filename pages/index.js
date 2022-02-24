@@ -11,7 +11,7 @@ import { IoMdFunnel } from 'react-icons/io';
 
 import axios from 'axios';
 import qs from 'qs';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import AnimeCard from '@/components/AnimeCard';
 
 import {
@@ -84,6 +84,7 @@ const Home = () => {
     }
 
     GetAnime();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const inputFilter = async (txt) => {
