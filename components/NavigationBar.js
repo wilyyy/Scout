@@ -22,6 +22,7 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 50px;
     
     h1:hover{
         cursor: pointer;
@@ -30,19 +31,23 @@ const Container = styled.div`
 
 const Row = styled.div`
     ${({links})=> links && `
-        width: 15%;
+        width: 25%;
+        min-width: 300px;
         height: 54px;
         justify-content: space-between;
+        font-size: 1.6em;
+        
     `}
 
     ${({right})=> right && `
-        width: 45%;
+        min-width: 450px;
+        width: 40%;
         height: 75px;
-        justify-content: flex-end;
+        justify-content: space-between;
     `}
 
     font-family: "Poppins";
-    font-weight: 200;
+    font-weight: 300;
     display: flex;
     align-items: center; 
     
@@ -66,6 +71,7 @@ const MoonIcon = styled(MoonStarsFill)`
 const FilterIcon = styled(Filter)`
     width: 40px;
     height: 26px;
+    cursor: pointer;
 `;
 
 const AvatarCont = styled(motion.div)`
@@ -117,14 +123,14 @@ const NavigationBar = ({
                 <SearchBar onChange={onSearchType} />
                 <FilterIcon onClick={onFilterClick} />
                 <ReactSwitch
-                    onChange={()=>{setTheme(theme === 'dark' ? 'light' : 'dark')}}
-                    checked={theme === 'dark' ? false : true}
-                    offColor = "#FFf"
-                    offHandleColor = {DarkColors.Pumpkin}
-                    onColor = "#1E1E1E"
-                    onHandleColor ={LightColors.Denim} 
+                    onChange={()=>{setTheme(theme === 'light' ? 'dark' : 'light')}}
+                    checked={theme === 'light' ? false : true}
+                    offColor = "#E0E0E0"
+                    offHandleColor = {DarkColors.Gunmetal}
+                    onColor = "#1C2A36"
+                    onHandleColor ={LightColors.PapayaWhip} 
                     activeBoxShadow="0px 0px 1px 2px #fffc35"
-                    uncheckedIcon={<SunIcon />}
+                    uncheckedIcon={<SunIcon  />}
                     checkedIcon={<MoonIcon />}
                 />
                 <AvatarCont

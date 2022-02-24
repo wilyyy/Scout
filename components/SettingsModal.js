@@ -9,6 +9,7 @@ import { ThemeConfig } from "@/utils/ThemeConfig";
 import { Genres, ScoreMarks, EpisodeMarks } from "@/utils/filters";
 import { FormControl, Select, MenuItem, ListItemText, Checkbox, Box, Slider } from "@mui/material";
 import {BsCaretUpFill, BsCaretDownFill} from "react-icons/bs";
+import { AiOutlineClose } from "react-icons/ai";
 
 import Button from "./Button";
 
@@ -23,6 +24,16 @@ const SettingsCont = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px 10px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -300px;
+  margin-left: -250px;
+  z-index: ${props=>props.setZ};
+  transform: scale(${props=>props.setScaleFactor});
+  opacity: ${props=>props.setOp};
+  transition: 0.25s;
 `;
 
 const SettingsRow = styled.div`
@@ -78,7 +89,7 @@ const SectionHeader = styled.label`
 const Line = styled.div`
   height: 320px;
   width: 2px;
-  background-color: #4F4F4F;
+  background-color: ${props=>props.lineColor};
 `
 
 const SortCont = styled.div`
@@ -93,11 +104,11 @@ const SortCont = styled.div`
 const SortLabel = styled.div`
   width: 100%;
   height: 50%;
-  background-color: ${props=>props.sortlabelcolor}; //#D8D8D8
+  background-color: ${props=>props.sortLabelColor}; //#D8D8D8
   display: flex;
   justify-content: center;
   align-items: center;
-  color: black;
+  color: ${props=>props.sortTextColor};
   font-family: Inter, sans-serif;
   font-weight: 600;
 `
@@ -109,6 +120,18 @@ const SortArrowCont = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+`
+
+const ExitCont = styled.div`
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 `
 
 const ITEM_HEIGHT = 48;
@@ -125,7 +148,11 @@ const MenuProps = {
 };
 
 const SettingsModal = ({
-  tcolor
+  tcolor,
+  ExitClick = () => {},
+  setScaleFactor = 1,
+  setOp = 1,
+  setZ = -5
 }) => {
 
   const {theme} = useTheme();
@@ -210,7 +237,15 @@ const SettingsModal = ({
 
 
   return (
-    <SettingsCont bgcolor={ThemeConfig[theme].cardBackground}>
+    <SettingsCont 
+      bgcolor={ThemeConfig[theme].cardBackground}
+      setScaleFactor = {setScaleFactor}
+      setOp = {setOp}
+      setZ = {setZ}
+      >
+      <ExitCont onClick={ExitClick}>
+        <AiOutlineClose size="30px"/>
+      </ExitCont>
       <SettingsRow>
         <SectionCont>
           <SectionTitle tcolor={tcolor}>Filter By</SectionTitle>
@@ -278,12 +313,15 @@ const SettingsModal = ({
             </FilterCont>
           </SubSection>
         </SectionCont>
-        <Line />
+        <Line lineColor = {ThemeConfig[theme].cardHeader} />
         <SectionCont>
           <SectionTitle tcolor={tcolor}>Sort By</SectionTitle>
           <SubSection>
           <SortCont>
-              <SortLabel sortlabelcolor={tempKey === 'title' ? ThemeConfig[theme].text : '#D8D8D8'}>
+              <SortLabel 
+                sortLabelColor={tempKey === 'title' ? ThemeConfig[theme].text : '#D8D8D8'}
+                sortTextColor={tempKey === 'title' ? ThemeConfig[theme].background : 'black'}
+              >
                 Title
               </SortLabel>
               <SortArrowCont>
@@ -300,7 +338,10 @@ const SettingsModal = ({
               </SortArrowCont>
             </SortCont>
             <SortCont>
-              <SortLabel sortlabelcolor={tempKey === 'score' ? ThemeConfig[theme].text : '#D8D8D8'}>
+              <SortLabel 
+                sortLabelColor={tempKey === 'score' ? ThemeConfig[theme].text : '#D8D8D8'}
+                sortTextColor={tempKey === 'score' ? ThemeConfig[theme].background : 'black'}
+              >
                 Score
               </SortLabel>
               <SortArrowCont>
@@ -317,8 +358,11 @@ const SettingsModal = ({
               </SortArrowCont>
             </SortCont>
             <SortCont>
-            <SortLabel sortlabelcolor={tempKey === 'popularity' ? ThemeConfig[theme].text : '#D8D8D8'}>
-                  Popularity
+              <SortLabel 
+                sortLabelColor={tempKey === 'popularity' ? ThemeConfig[theme].text : '#D8D8D8'}
+                sortTextColor={tempKey === 'popularity' ? ThemeConfig[theme].background : 'black'}
+              >
+                Popularity
               </SortLabel>
               <SortArrowCont>
                 <BsCaretUpFill 
@@ -348,7 +392,6 @@ const SettingsModal = ({
           btnwidth="120px" 
           btnmargin="0 10px" />
       </Row>
-      <button onClick={()=>console.log('Temp', tempGenre, 'Real', genre)}>Button Check</button>
     </SettingsCont>
   )
 }

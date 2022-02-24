@@ -29,6 +29,7 @@ const Icon = styled(SearchAlt)`
     position: absolute;
     right: 5%;
     top: 23%;
+    cursor: pointer;
 `;
 
 const Input = styled.input`
@@ -60,7 +61,7 @@ const SearchBar = ({
     return (
         <Container>
             <Input 
-                placeholder={search !== null ? search : "Search"}
+                placeholder={"Search"}
                 color={ThemeConfig[theme].text}
                 onChange = {onChange}
             />

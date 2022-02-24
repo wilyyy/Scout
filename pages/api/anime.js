@@ -5,6 +5,7 @@ import anime from '@/utils/animes.json';
 export default async function handler(req, res) {
   const {
     a_id,
+    origin,
     txt,
     genreFilter,
     scoreFilter,
