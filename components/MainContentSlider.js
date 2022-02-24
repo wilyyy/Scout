@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {useEffect} from 'react';
-import { useData } from "@/utils/ScoutThemeProvider";
+import { useCarousel } from "@/utils/ScoutThemeProvider";
+import { useRouter } from 'next/router';
 import { BsBookmarkCheckFill, BsBookmark } from 'react-icons/bs';
 
 import { CarouselProvider, Slider } from 'pure-react-carousel';
@@ -12,7 +13,6 @@ import Button from "./Button";
 import { ThemeConfig } from "@/utils/ThemeConfig"
 
 import axios from 'axios';
-import qs from 'qs';
 
 const Container = styled.div`
     width: 80%;
@@ -29,31 +29,36 @@ const Container = styled.div`
 
 const MainContentSlider = () => {
 
-    const {data, setData} = useData();
-
+    const router = useRouter();
+    const {carousel, setCarousel} = useCarousel();
+    
     useEffect(()=>{
         const GetAnime = async()=>{
-        const result = await axios.get("/api/anime");
+        const result = await axios.get("/api/anime", {
+            params: {
+                scoreFilter: [9, 10]
+            }
+        });
         console.log(result.data);
-        setData(result.data);
+        setCarousel(result.data);
         }
-    
+
         GetAnime();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
+    },[])
+    
     return (
         <Container>
             <CarouselProvider
                 naturalSlideWidth={1000}
                 naturalSlideHeight={494}
-                totalSlides={data.length}
+                totalSlides={carousel.length}
                 infinite={true}
                 isPlaying={true}
                 className="Carousel"
                 >
                 <Slider className="slider">
-                    {data.map((o, i) => 
+                    {carousel.map((o, i) => 
                         <MySlide
                             bgimage={o.img_url}
                             titletext={o.title}
@@ -61,6 +66,7 @@ const MainContentSlider = () => {
                             bottext="Your pog anime"
                             curEp="21"
                             totEp={o.episodes}
+                            carouselOnClick={()=>router.push(`./anime/${o.uid}`)}
                             slideIndex={i}
                             key={i}
                         />

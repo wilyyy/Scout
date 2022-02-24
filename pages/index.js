@@ -212,7 +212,6 @@ const Home = () => {
           
         )}
       </AnimeCardCont>
-      <button onClick={()=>console.log(search)}>Button Check</button>
     </Page>
   )
 }

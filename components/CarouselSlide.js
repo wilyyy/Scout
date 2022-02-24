@@ -85,7 +85,8 @@ const MySlide = ({
     bottext = "Default",
     curEp = "##",
     totEp = "##",
-    slideIndex = 1
+    slideIndex = 1,
+    carouselOnClick = () => {}
 }) => {
 
   const [favourite, setFavourite] = useState(false);
@@ -103,7 +104,7 @@ const MySlide = ({
                   <BottomText textcolor="white">
                       {bottext} | Episode {curEp}/{totEp}
                   </BottomText>
-                  <Button btnText="Continue" />
+                  <Button btnText="Continue" onClick={carouselOnClick} />
               </Row>
           </BlurCont>
       </ImgCont>

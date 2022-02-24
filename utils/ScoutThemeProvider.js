@@ -30,6 +30,12 @@ const initialStates = {
     yourList: {},
     setYourList: ()=>{},
 
+    carousel: [],
+    setCarousel: ()=>{},
+
+    searchRes: [],
+    setSearchRes: ()=>{}
+
 }
 
 const MyContext = createContext(initialStates);
@@ -45,6 +51,8 @@ const ScoutThemeProvider = ({children}) => {
     const [search, setSearch] = useState(initialStates.search);
     const [data, setData] = useState(initialStates.data);
     const [yourList, setYourList] = useState(initialStates.yourList);
+    const [carousel, setCarousel] = useState(initialStates.carousel);
+    const [searchRes, setSearchRes] = useState(initialStates.searchRes);
 
     console.log("your list", yourList);
     return (
@@ -57,7 +65,9 @@ const ScoutThemeProvider = ({children}) => {
             sortType, setSortType,
             search, setSearch,
             data, setData,
-            yourList, setYourList
+            yourList, setYourList,
+            carousel, setCarousel,
+            searchRes, setSearchRes
         }}>
             <style jsx global>
                 {`
@@ -115,11 +125,21 @@ export const useSearch = () => {
 export const useData = () => {
     const {data, setData} = useContext(MyContext);
     return {data, setData};
-}
+};
 
 export const useYourList = () => {
     const {yourList, setYourList} = useContext(MyContext);
     return {yourList, setYourList};
+};
+
+export const useCarousel = () => {
+    const {carousel, setCarousel} = useContext(MyContext);
+    return {carousel, setCarousel};
+};
+
+export const useSearchRes = () => {
+    const {searchRes, setSearchRes} = useContext(MyContext);
+    return {searchRes, setSearchRes};
 }
 
 
