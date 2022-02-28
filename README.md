@@ -1,5 +1,13 @@
 # Scout
 
+Anime database utilizing a kaggle dataset, features involve machine learning algorithms to return data from the dataset
+
+##Collaborators
+- **William Alvarez** - Project Manager & Full Stack Developer
+- **Danny Nguyen** - Full Stack Developer
+- **Jody Prinsloo** - UI/UX Designer
+- **Josh Reyes** - UI/UX Designer
+
 ### FIRST TIME SET UP
 
 	git clone https://github.com/wilyyy/Scout.git
