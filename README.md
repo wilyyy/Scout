@@ -2,7 +2,7 @@
 
 Anime database utilizing a kaggle dataset, features involve machine learning algorithms to return data from the dataset
 
-##Collaborators
+## Collaborators
 - **William Alvarez** - Project Manager & Full Stack Developer
 - **Danny Nguyen** - Full Stack Developer
 - **Jody Prinsloo** - UI/UX Designer
