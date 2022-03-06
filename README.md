@@ -9,6 +9,7 @@ Scout utilizes an Express and MongoDB back end stack and the source code for tha
 - **Danny Nguyen** - Full Stack Developer
 - **Jody Prinsloo** - UI/UX Designer
 - **Josh Reyes** - UI/UX Designer
+- **Ibjyot Gill** - Front End Developer
 
 ## Dev notes
 
