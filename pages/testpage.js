@@ -1,13 +1,11 @@
 import styled from 'styled-components';
-import {Router, useRouter} from 'next/router';
-import { LightColors, ThemeConfig } from '@/utils/ThemeConfig';
+import { useRouter} from 'next/router';
 import { v4 as uuidv4 } from 'uuid';
 
 import NavigationBar from '@/components/NavigationBar';
 import AccountCard from '@/components/AccountCard';
 import FavCard from '@/components/FavCard';
-
-import { IoMdFunnel } from 'react-icons/io';
+import FavSection from '@/components/FavSection';
 
 import axios from 'axios';
 import qs from 'qs';
@@ -171,11 +169,7 @@ const TestPage = () => {
       />
       <Body>
       <AccountCard />
-        <FavCard />
-        <FavCard />
-        <FavCard />
-        <FavCard />
-        <FavCard />
+        <FavSection />
       </Body>
     </Page>
   )

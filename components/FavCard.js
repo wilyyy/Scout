@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
 
-import { BsBookmarkCheckFill, BsBookmark } from 'react-icons/bs';
 import { useTheme } from '../utils/ScoutThemeProvider';
 import { ThemeConfig } from '../utils/ThemeConfig';
 import { HoverZoom } from "../utils/Animations";
@@ -16,7 +14,6 @@ const CardCont = styled(motion.div)`
   width: 125px;
   height: 150px;
   border-radius: 16px;
-  padding: 10px;
   cursor: pointer;
   border: 1px solid #6D7992;
   background: ${props=>props.bgcolor};
@@ -29,19 +26,18 @@ const CardImage = styled.img`
   width: 100%;
   height: 280px;
   border-radius: 16px;
-  margin-bottom: 10px;
   object-fit: cover;
   object-position: top center;
 
 `
-
-const DetailCont = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  color: #FFFFFF;
+const Header = styled.h4`
+  margin: 0;
+  padding: 2px;
   font-size: 12px;
+  line-height: 21px;
+  color: ${props=>props.hcolor};
+  font-weight: 300;
+  width: 100%;
 `
 
 const TextCont = styled.div`
@@ -63,6 +59,7 @@ function truncateString(string, limit) {
 const FavCard = ({
   img_url = "/anime.png",
   fontFamily = "Poppins",
+  title = "Tokyo Ghoul",
   onButtonClick,
 }) => {
 
@@ -78,9 +75,9 @@ const FavCard = ({
     >
       <CardImage src={img_url} alt="anime image"/>
       <TextCont>
-        <DetailCont>
-          Tokyo Ghoul
-        </DetailCont>
+        <Header hcolor={ThemeConfig[theme].body}>
+            {truncateString(title, 30)}
+        </Header>
       </TextCont>
     </CardCont>
   )
