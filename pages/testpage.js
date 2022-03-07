@@ -48,6 +48,11 @@ background: linear-gradient(152.97deg, rgba(42, 76, 198, 0) 0%, rgba(246, 119, 7
 border-radius: 16px;
 `;
 
+const CardCont = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
 const DarkenBackground = styled.div`
   position: fixed;
   top: 0;
@@ -169,7 +174,10 @@ const TestPage = () => {
       />
       <Body>
       <AccountCard />
+      <CardCont>
         <FavSection />
+        <FavSection />
+      </CardCont>
       </Body>
     </Page>
   )
