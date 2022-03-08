@@ -173,7 +173,7 @@ const Home = () => {
               synopsis={el.synopsis}
               episodes={el.episodes}
               img_url={el.img_url}
-              aired={el.score}
+              score={el.score}
               onButtonClick={()=>router.push(`./anime/${el.uid}`)}
             />
             <button>Save Anime to your list</button>

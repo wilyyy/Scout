@@ -21,7 +21,7 @@ const initialStates = {
     sortType: 'asc',
     setSortType: ()=>{},
 
-    search: null,
+    search: '',
     setSearch: ()=>{},
 
     data: [],

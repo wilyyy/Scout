@@ -12,7 +12,7 @@ const ImgCont = styled.div`
     height: 494px;
     overflow: hidden;
     background-image: url(${props=>props.bgimage});
-    background-position: center center;
+    background-position: top center;
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 16px;
