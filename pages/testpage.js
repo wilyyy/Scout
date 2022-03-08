@@ -6,6 +6,7 @@ import NavigationBar from '@/components/NavigationBar';
 import AccountCard from '@/components/AccountCard';
 import FavCard from '@/components/FavCard';
 import FavSection from '@/components/FavSection';
+import FavouriteGenre from '@/components/FavouriteGenre';
 
 import axios from 'axios';
 import qs from 'qs';
@@ -177,6 +178,7 @@ const TestPage = () => {
       <CardCont>
         <FavSection />
         <FavSection />
+        <FavouriteGenre />
       </CardCont>
       </Body>
     </Page>

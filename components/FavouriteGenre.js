@@ -14,6 +14,14 @@ const GenreCont = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    background: #F4A259;
+    color: #000;
+`;
+const TextCont = styled.h1`
+    font-size: 20px;
+    align-self: flex-start;
+    margin-left: 50px;
+    font-weight: 300;
 `;
 
 const FavouriteGenre = ({
@@ -21,7 +29,7 @@ const FavouriteGenre = ({
 }) => {
     return (
         <Cont>
-            <GenreCont />
+            <GenreCont> {genreName} </GenreCont>
         </Cont>
     )
 }
