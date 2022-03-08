@@ -16,6 +16,7 @@ import axios from 'axios';
 
 const Container = styled.div`
     width: 80%;
+    min-width: 1000px;
     height: 494px;
     display: flex;
     flex-direction: column;
