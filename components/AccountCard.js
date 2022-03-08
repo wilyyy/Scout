@@ -13,7 +13,7 @@ const AccountCont = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 645px;
+    height: 600px;
     width: 350px;
     border-radius: 15px;
     background-color: ${props=>props.backgroundColor};
