@@ -122,19 +122,30 @@ const AnimeCard = ({
   synopsis = "[Missing Description]",
   episodes = "24",
   score = "#.##",
-  onButtonClick,
+  onButtonClick=()=>{},
+  onCheckClick=()=>{},
+  onUncheckClick=()=>{}
 }) => {
 
   const { theme } = useTheme();
 
-  const [favourite, setFavourite] = useState(true);
+  const [favourite, setFavourite] = useState(false);
+
+  const ClickCheck = () => {
+    setFavourite(true);
+    onCheckClick();
+  }
+
+  const ClickUncheck = () => {
+    setFavourite(false);
+    onUncheckClick();
+  }
 
   return (
     <CardCont 
       fontFamily={fontFamily}
       onClick={onButtonClick}
       whileHover={{scale: 1.1}}
-      whileTap={{scale: 0.96}}
       transition={HoverZoom.spring}
       gradient1={ThemeConfig[theme].cardGradient}
       gradient2={ThemeConfig[theme].cardGradient2}
@@ -145,7 +156,10 @@ const AnimeCard = ({
         <Header hcolor={ThemeConfig[theme].body}>
           {truncateString(title, 30)}
         </Header>
-        {favourite === true ? (<BsBookmarkCheckFill size="40px"  />) : (<BsBookmark size="40px"/>) }
+        {favourite === true ? 
+          (<BsBookmarkCheckFill size="40px" onClick={ClickUncheck}/>) : 
+          (<BsBookmark size="40px" onClick={ClickCheck} />) 
+        }
         </Row>
         <Body bcolor={ThemeConfig[theme].body}>
           {truncateString(synopsis, 120)}

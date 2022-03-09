@@ -135,29 +135,49 @@ const Home = () => {
     setModalVisible(false);
   }
 
-  const AddAnimeToYourList = (checked, obj) => {
-    //adds anime to global state yourList
-    //func takes 2 params, checked on in future clicked and the mapped data json object itself
-    console.log(checked, obj);
-    // if its checked, add to yourlist, if unchecked, delete from yourlist
-    if(checked){
-      const new_Anime = {
-        ...yourList
-      };
+  const AddAnime = (obj) => {
+    const new_Anime = {
+      ...yourList
+    };
 
-      new_Anime[obj.uid] = obj;
-      setYourList(new_Anime);
-      alert("added" + obj.title + "to your list"); //replace with modal?
-    } else {
-      const new_Anime = {
-        ...yourList
-      };
-
-      delete new_Anime[obj.uid];
-      setYourList(new_Anime);
-      alert("removed" + obj.title + "from your list"); //replace with modal?
-    }
+    new_Anime[obj.uid] = obj;
+    setYourList(new_Anime);
+    alert("added" + obj.title + "to your list"); //replace with modal?
   }
+
+  const RemoveAnime = (obj) => {
+    const new_Anime = {
+      ...yourList
+    };
+
+    delete new_Anime[obj.uid];
+    setYourList(new_Anime);
+    alert("removed" + obj.title + "from your list");
+  }
+
+  // const AddAnimeToYourList = (checked, obj) => {
+  //   //adds anime to global state yourList
+  //   //func takes 2 params, checked on in future clicked and the mapped data json object itself
+  //   console.log(checked, obj);
+  //   // if its checked, add to yourlist, if unchecked, delete from yourlist
+  //   if(checked){
+  //     const new_Anime = {
+  //       ...yourList
+  //     };
+
+  //     new_Anime[obj.uid] = obj;
+  //     setYourList(new_Anime);
+  //     alert("added" + obj.title + "to your list"); //replace with modal?
+  //   } else {
+  //     const new_Anime = {
+  //       ...yourList
+  //     };
+
+  //     delete new_Anime[obj.uid];
+  //     setYourList(new_Anime);
+  //     alert("removed" + obj.title + "from your list"); //replace with modal?
+  //   }
+  // }
 
   return (
     <Page>
@@ -197,16 +217,18 @@ const Home = () => {
               episodes={el.episodes}
               img_url={el.img_url}
               score={el.score}
-              onButtonClick={()=>router.push(`./anime/${el.uid}`)}
+              // onButtonClick={()=>router.push(`./anime/${el.uid}`)}
+              onCheckClick={AddAnime(el)}
+              onUncheckClick={RemoveAnime(el)}
             />
-            <input 
+            {/* <input 
               type="checkbox"
               onChange={(e)=>AddAnimeToYourList(e.target.checked, el)}
               checked={
                 //if this is in yourlist, then dont show it on index?
                 yourList[el.uid] !== undefined && yourList[el.uid] !== null
               }
-            />
+            /> */}
             Add anime to your list
           </div>
           
