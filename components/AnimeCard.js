@@ -136,6 +136,12 @@ const AnimeCard = ({
   //   }
   // }
 
+  const ClickCard = () => {
+    if(canClick === false){
+      onButtonClick();
+    }
+  }
+
   const ClickCheck = () => {
     setFavourite(true);
     onCheckClick();
@@ -149,7 +155,7 @@ const AnimeCard = ({
   return (
     <CardCont 
       fontFamily={fontFamily}
-      onClick={()=>console.log("temp")}
+      onClick={ClickCard}
       whileHover={{scale: 1.1}}
       transition={HoverZoom.spring}
       gradient1={ThemeConfig[theme].cardGradient}
@@ -162,8 +168,8 @@ const AnimeCard = ({
           {truncateString(title, 30)}
         </Header>
         {favourite === true ? 
-          (<BsBookmarkCheckFill size="40px" onClick={ClickUncheck}/>) : 
-          (<BsBookmark size="40px" onClick={ClickCheck} />) 
+          (<BsBookmarkCheckFill size="40px" onClick={ClickUncheck} onMouseOver={()=>setCanClick(true)} />) : 
+          (<BsBookmark size="40px" onClick={ClickCheck} onMouseOver={()=>setCanClick(true)} />) 
         }
         </Row>
         <Body bcolor={ThemeConfig[theme].body}>
