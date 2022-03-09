@@ -127,14 +127,7 @@ const AnimeCard = ({
   const { theme } = useTheme();
 
   const [favourite, setFavourite] = useState(false);
-  const [canClick, setCanClick] = useState(false);
-
-  // const ClickCard = () =>{
-  //   setCanClick(true);
-  //   if(setCanClick === true){
-  //     onButtonClick();
-  //   }
-  // }
+  const [canClick, setCanClick] = useState();
 
   const ClickCard = () => {
     if(canClick === false){
@@ -144,11 +137,13 @@ const AnimeCard = ({
 
   const ClickCheck = () => {
     setFavourite(true);
+    setCanClick(true);
     onCheckClick();
   }
 
   const ClickUncheck = () => {
     setFavourite(false);
+    setCanClick(true);
     onUncheckClick();
   }
 
@@ -160,6 +155,7 @@ const AnimeCard = ({
       transition={HoverZoom.spring}
       gradient1={ThemeConfig[theme].cardGradient}
       gradient2={ThemeConfig[theme].cardGradient2}
+      onMouseEnter={()=>setCanClick(false)}
     >
       <CardImage src={img_url} alt="anime image"/>
       <TextCont>
@@ -168,8 +164,16 @@ const AnimeCard = ({
           {truncateString(title, 30)}
         </Header>
         {favourite === true ? 
-          (<BsBookmarkCheckFill size="40px" onClick={ClickUncheck} onMouseOver={()=>setCanClick(true)} />) : 
-          (<BsBookmark size="40px" onClick={ClickCheck} onMouseOver={()=>setCanClick(true)} />) 
+          (<BsBookmarkCheckFill 
+            size="40px" 
+            onClick={ClickUncheck} 
+            onMouseEnter={()=>setCanClick(true)}
+          />) : 
+          (<BsBookmark 
+            size="40px" 
+            onClick={ClickCheck}
+            onMouseEnter={()=>setCanClick(true)} 
+          />) 
         }
         </Row>
         <Body bcolor={ThemeConfig[theme].body}>
