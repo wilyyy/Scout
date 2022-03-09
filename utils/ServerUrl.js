@@ -1,0 +1,1 @@
+export const ServerUrl = "https://scout-serverside.herokuapp.com/"

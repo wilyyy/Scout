@@ -3,6 +3,7 @@ import {Router, useRouter} from 'next/router';
 import { LightColors, ThemeConfig } from '@/utils/ThemeConfig';
 import { v4 as uuidv4 } from 'uuid';
 
+import ServerUrl from "@/utils/ServerUrl";
 import NavigationBar from '@/components/NavigationBar';
 import MainContentSlider from '@/components/MainContentSlider';
 import SettingsModal from '@/components/SettingsModal';
@@ -136,10 +137,7 @@ const Home = () => {
   }
 
   const AddAnimeToYourList = (checked, obj) => {
-    //adds anime to global state yourList
-    //func takes 2 params, checked on in future clicked and the mapped data json object itself
     console.log(checked, obj);
-    // if its checked, add to yourlist, if unchecked, delete from yourlist
     if(checked){
       const new_Anime = {
         ...yourList
@@ -148,14 +146,18 @@ const Home = () => {
       new_Anime[obj.uid] = obj;
       setYourList(new_Anime);
       alert("added" + obj.title + "to your list"); //replace with modal?
-    } else {
+    } 
+  }
+
+  const RemoveAnime = (checked, obj) => {
+    if(checked){
       const new_Anime = {
         ...yourList
       };
 
       delete new_Anime[obj.uid];
       setYourList(new_Anime);
-      alert("removed" + obj.title + "from your list"); //replace with modal?
+      alert("removed" + obj.title + "from your list");
     }
   }
 
@@ -198,16 +200,15 @@ const Home = () => {
               img_url={el.img_url}
               score={el.score}
               onButtonClick={()=>router.push(`./anime/${el.uid}`)}
-            />
-            <input 
-              type="checkbox"
-              onChange={(e)=>AddAnimeToYourList(e.target.checked, el)}
-              checked={
-                //if this is in yourlist, then dont show it on index?
-                yourList[el.uid] !== undefined && yourList[el.uid] !== null
+              onCheckClick={
+                // if(yourList[el.uid] !== undefined && yourList[el.uid] !== null)
+                (onAddClick=()=>{}) => AddAnimeToYourList(onAddClick, el)
+              }
+              onUncheckClick={
+                // if(yourList[el.uid] !== undefined && yourList[el.uid] !== null)
+                (onDelClick=()=>{}) => RemoveAnime(onDelClick, el)
               }
             />
-            Add anime to your list
           </div>
           
         )}
