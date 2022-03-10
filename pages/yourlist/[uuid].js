@@ -12,6 +12,18 @@ import MainContentSlider from '@/components/MainContentSlider';
 import SettingsModal from '@/components/SettingsModal';
 import AnimeCard from '@/components/AnimeCard';
 
+import {
+    useTheme,
+    useGenre, 
+    useScore, 
+    useEpisodes, 
+    useSortKey, 
+    useSortType,
+    useSearch,
+    useData,
+    useYourList
+  } from '@/utils/ScoutThemeProvider';
+
 const Page = styled.div`
   display: flex;
   flex-direction: column;
@@ -54,6 +66,7 @@ const YourList = () => {
     const router = useRouter();
     const {uuid} = router.query;
 
+    const {yourList, setYourList} = useYourList();
     const [modalVisible, setModalVisible] = useState(false);
 
 
@@ -63,6 +76,10 @@ const YourList = () => {
 
     const SettingsExit = () => {
         setModalVisible(false);
+    }
+
+    const DelAnimeFromYourList = (checked, obj) => {
+        
     }
     
     return (
@@ -96,17 +113,17 @@ const YourList = () => {
             />
             <AnimeCardCont>
             
-            {/* {data.map((el, index) =>  */}
+            {Object.values(yourList).map((el, index) =>
                 <AnimeCard 
-                // key={index}
-                // title={el.title}
-                // synopsis={el.synopsis}
-                // episodes={el.episodes}
-                // img_url={el.img_url}
-                // aired={el.score}
-                // onButtonClick={()=>router.push(`./anime/${el.uid}`)}
+                    key={index}
+                    title={el.title}
+                    synopsis={el.synopsis}
+                    episodes={el.episodes}
+                    img_url={el.img_url}
+                    aired={el.score}
+                    onButtonClick={()=>router.push(`../anime/${el.uid}`)}
                 />
-            {/* )} */}
+            )}
             </AnimeCardCont>
             <button onClick={()=>console.log(search)}>Button Check</button>
         </Page>
