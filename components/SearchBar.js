@@ -1,17 +1,18 @@
 import styled from "styled-components";
 import { SearchAlt } from "styled-icons/boxicons-regular";
 
-import { useTheme } from "../utils/ScoutThemeProvider";
+import {
+	useTheme,
+	useSearch,
+	useSortKey,
+	useSortType,
+	useSearchRes,
+} from "../utils/ScoutThemeProvider";
 import { ThemeConfig } from "../utils/ThemeConfig";
-
-import { useSearch } from "../utils/ScoutThemeProvider";
-
 import axios from "axios";
 import qs from "qs";
 import { useRouter } from "next/router";
-import { useSearchRes } from "../utils/ScoutThemeProvider";
-
-// Search Bar stuff
+import { useState } from "react";
 
 const SearchContainer = styled.div`
 	z-index: 2;
@@ -61,15 +62,12 @@ const DropdownCont = styled.div`
 	padding: 10px;
 	z-index: 2;
 	position: absolute;
-
 	box-sizing: border-box;
 	border-radius: 16px;
 	border: 1px solid #6d7992;
-
 	backdrop-filter: blur(20px) saturate(164%);
 	-webkit-backdrop-filter: blur(20px) saturate(164%);
 	font-family: ${(props) => props.fontFamily};
-
 	background: linear-gradient(
 		135deg,
 		${(props) => props.gradient1} 20%,
@@ -91,12 +89,16 @@ const ListItem = styled.div`
 	cursor: pointer;
 `;
 
-const SearchBar = ({ onSearchClick }) => {
+const SearchBar = ({ onSearchClick, onBarClick }) => {
 	const { theme } = useTheme();
 	const { search, setSearch } = useSearch();
+	const { sortKey, setSortKey } = useSortKey();
+	const { sortType, setSortType } = useSortType();
+	const { searchRes, setSearchRes } = useSearchRes();
 
 	const router = useRouter();
-	const { searchRes, setSearchRes } = useSearchRes();
+
+	const [barFocus, setBarFocus] = useState(false);
 
 	const onSearch = async (txt) => {
 		setSearch(txt);
@@ -104,6 +106,8 @@ const SearchBar = ({ onSearchClick }) => {
 			params: {
 				txt: txt,
 				origin: "dropdownlist",
+				sortKeyFilter: sortKey,
+				sortTypeFilter: sortType,
 			},
 
 			paramsSerializer: (params) => {
@@ -129,10 +133,12 @@ const SearchBar = ({ onSearchClick }) => {
 					onChange={(e) => {
 						onSearch(e.target.value);
 					}}
+					onClick={() => setBarFocus(true)}
+					onBlur={() => setBarFocus(false)}
 				/>
 				<Icon onClick={onSearchClick} />
 			</SearchBarContainer>
-			{search !== "" && (
+			{search !== "" && barFocus && (
 				<DropdownCont
 					gradient1={ThemeConfig[theme].cardGradient}
 					gradient2={ThemeConfig[theme].cardGradient2}
