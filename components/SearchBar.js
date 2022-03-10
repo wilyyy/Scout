@@ -8,18 +8,21 @@ import { useSearch } from "../utils/ScoutThemeProvider";
 
 import axios from "axios";
 import qs from "qs";
-import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSearchRes } from "../utils/ScoutThemeProvider";
 
 // Search Bar stuff
 
-const SearchContainer = styled.div``;
+const SearchContainer = styled.div`
+	z-index: 2;
+`;
 
 const SearchBarContainer = styled.div`
 	width: 250px;
 	height: 45px;
 	background-color: rgba(196, 196, 196, 0.1);
+	box-shadow: inset 3px -3px 3px rgba(149, 149, 149, 0.1),
+		inset -3px 3px 3px rgba(255, 255, 255, 0.1);
 	border-radius: 15px;
 	backdrop-filter: blur(6px) saturate(164%);
 	-webkit-backdrop-filter: blur(9px) saturate(164%);
@@ -28,7 +31,6 @@ const SearchBarContainer = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	padding: 2px 15px;
-	z-index: 2;
 `;
 
 const Icon = styled(SearchAlt)`
@@ -56,23 +58,38 @@ const DropdownCont = styled.div`
 	align-items: center;
 	width: 250px;
 	height: auto;
-	background-color: ${(props) => props.ddcolor};
 	padding: 10px;
 	z-index: 2;
+	position: absolute;
+
+	box-sizing: border-box;
+	border-radius: 16px;
+	border: 1px solid #6d7992;
+
+	backdrop-filter: blur(20px) saturate(164%);
+	-webkit-backdrop-filter: blur(20px) saturate(164%);
+	font-family: ${(props) => props.fontFamily};
+
+	background: linear-gradient(
+		135deg,
+		${(props) => props.gradient1} 20%,
+		${(props) => props.gradient2} 100%
+	);
+	/* box-shadow: inset 43.3333px -43.3333px 43.3333px rgba(149, 149, 149, 0.1), 
+              inset -43.3333px 43.3333px 43.3333px rgba(255, 255, 255, 0.1); */
 `;
 
-const DropdownList = styled.div`
-	text-align: center;
+const ListItem = styled.div`
+	padding: 4px 14px;
+	width: 100%;
+	margin: 12px;
+	background: rgba(196, 196, 196, 0.1);
+	box-shadow: inset 1.33333px -1.33333px 1.33333px rgba(165, 165, 165, 0.4),
+		inset -1.33333px 1.33333px 1.33333px rgba(255, 255, 255, 0.4);
+	backdrop-filter: blur(13.3333px);
+	border-radius: 10px;
 	cursor: pointer;
 `;
-
-const test = [
-	"Made in Abyss",
-	"My Hero Academia",
-	"Berserk",
-	"evangelion",
-	"violet evergarden",
-];
 
 const SearchBar = ({
 	onSearchClick,
@@ -120,12 +137,15 @@ const SearchBar = ({
 				<Icon onClick={onSearchClick} />
 			</SearchBarContainer>
 			{search !== "" && (
-				<DropdownCont ddcolor={ThemeConfig[theme].background}>
-					{searchRes.map(
+				<DropdownCont
+					gradient1={ThemeConfig[theme].cardGradient}
+					gradient2={ThemeConfig[theme].cardGradient2}
+				>
+					{searchRes.slice(0, 5).map(
 						(o, i) => (
-							<DropdownList key={i} onClick={() => SearchClick(o)}>
-								{o.title} <br /> -----------------------------
-							</DropdownList>
+							<ListItem key={i} onClick={() => SearchClick(o)}>
+								{o.title}
+							</ListItem>
 						) //make styled comp for this
 					)}
 				</DropdownCont>
