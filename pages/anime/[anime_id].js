@@ -86,7 +86,7 @@ const AnimePage = () => {
         if(anime_id){
             const GetAnime = async()=>{
                 //get the show and setData to result
-                const result = await axios.get("https://scout-serverside.herokuapp.com/animes/all", {
+                const result = await axios.get("../api/anime", {
                     params: {
                         a_id: anime_id
                     }
