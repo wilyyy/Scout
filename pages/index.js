@@ -107,7 +107,7 @@ const Home = () => {
 		});
 
 		setData(res.data);
-		ref.current.scrollIntoView();
+		ref.current.scrollIntoView({ behavior: "smooth" });
 	};
 
 	const SettingsAppear = () => {
