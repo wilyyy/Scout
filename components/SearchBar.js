@@ -75,14 +75,14 @@ const DropdownCont = styled.div`
 		${(props) => props.gradient1} 20%,
 		${(props) => props.gradient2} 100%
 	);
-	/* box-shadow: inset 43.3333px -43.3333px 43.3333px rgba(149, 149, 149, 0.1), 
-              inset -43.3333px 43.3333px 43.3333px rgba(255, 255, 255, 0.1); */
+	box-shadow: inset 43.3333px -43.3333px 43.3333px rgba(149, 149, 149, 0.1),
+		inset -43.3333px 43.3333px 43.3333px rgba(255, 255, 255, 0.1);
 `;
 
 const ListItem = styled.div`
 	padding: 4px 14px;
 	width: 100%;
-	margin: 12px;
+	margin: 6px;
 	background: rgba(196, 196, 196, 0.1);
 	box-shadow: inset 1.33333px -1.33333px 1.33333px rgba(165, 165, 165, 0.4),
 		inset -1.33333px 1.33333px 1.33333px rgba(255, 255, 255, 0.4);
@@ -91,11 +91,7 @@ const ListItem = styled.div`
 	cursor: pointer;
 `;
 
-const SearchBar = ({
-	onSearchClick,
-	onChange = () => {},
-	onSearchResClick = () => {},
-}) => {
+const SearchBar = ({ onSearchClick }) => {
 	const { theme } = useTheme();
 	const { search, setSearch } = useSearch();
 

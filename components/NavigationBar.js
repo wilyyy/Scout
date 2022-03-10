@@ -38,7 +38,6 @@ const Row = styled.div`
         height: 54px;
         justify-content: space-between;
         font-size: 1.6em;
-        
     `}
 
 	${({ right }) =>
