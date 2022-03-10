@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import {Router, useRouter} from 'next/router';
 import { LightColors, ThemeConfig } from '@/utils/ThemeConfig';
-import { useTheme } from "@/utils/ScoutThemeProvider";
 import { v4 as uuidv4 } from 'uuid';
 
 import NavigationBar from '@/components/NavigationBar';
