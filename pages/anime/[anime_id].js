@@ -14,6 +14,18 @@ import AnimePageRecs from "@/components/AnimePageRecs";
 import SettingsModal from "@/components/SettingsModal";
 import AnimePageRecCard from "@/components/AnimePageRecCard";
 
+import {
+	useTheme,
+	useGenre,
+	useScore,
+	useEpisodes,
+	useSortKey,
+	useSortType,
+	useSearch,
+	useData,
+	useYourList,
+} from "@/utils/ScoutThemeProvider";
+
 const Page = styled.div`
 	width: 100%;
 	height: auto;
@@ -95,7 +107,7 @@ const AnimePage = () => {
 						inputFilter(e.target.value);
 					}}
 					onFilterClick={SettingsAppear}
-					onYourListClick={() => router.push("./blah")}
+					onYourListClick={() => router.push(`../yourlist/${uuidv4()}`)}
 				/>
 				<Error>
 					<p>Error - Anime not found</p>

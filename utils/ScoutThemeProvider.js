@@ -53,6 +53,7 @@ const ScoutThemeProvider = ({ children }) => {
 	const [carousel, setCarousel] = useState(initialStates.carousel);
 	const [searchRes, setSearchRes] = useState(initialStates.searchRes);
 
+	console.log("your list", yourList);
 	return (
 		<MyContext.Provider
 			value={{
