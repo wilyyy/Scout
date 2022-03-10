@@ -68,8 +68,8 @@ let timer = null;
 const Home = () => {
 	const router = useRouter();
 	const [modalVisible, setModalVisible] = useState(false);
+	const ref = useRef(null);
 
-	const { theme } = useTheme();
 	const { data, setData } = useData();
 	const { genre } = useGenre();
 	const { score } = useScore();
@@ -90,39 +90,24 @@ const Home = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const inputFilter = async (txt) => {
-		setSearch(txt);
-		console.log(search);
-		if (timer) {
-			clearTimeout(timer);
-			timer = null;
-		}
+	const FullSearch = async () => {
+		const res = await axios.get("/api/anime", {
+			params: {
+				txt: search,
+				genreFilter: genre,
+				scoreFilter: score,
+				episodeFilter: episodes,
+				sortKeyFilter: sortKey,
+				sortTypeFilter: sortType,
+			},
 
-		if (timer === null) {
-			timer = setTimeout(async () => {
-				console.log("async call");
+			paramsSerializer: (params) => {
+				return qs.stringify(params, { arrayFormat: "repeat" });
+			},
+		});
 
-				console.log(genre);
-
-				const res = await axios.get("/api/anime", {
-					params: {
-						txt: txt,
-						genreFilter: genre,
-						scoreFilter: score,
-						episodeFilter: episodes,
-						sortKeyFilter: sortKey,
-						sortTypeFilter: sortType,
-					},
-
-					paramsSerializer: (params) => {
-						return qs.stringify(params, { arrayFormat: "repeat" });
-					},
-				});
-
-				setData(res.data);
-				timer = null;
-			}, 1000);
-		}
+		setData(res.data);
+		ref.current.scrollIntoView();
 	};
 
 	const SettingsAppear = () => {
@@ -166,9 +151,7 @@ const Home = () => {
 				onClick={SettingsExit}
 			/>
 			<NavigationBar
-				onSearchType={(e) => {
-					inputFilter(e.target.value);
-				}}
+				onSearchClick={FullSearch}
 				onFilterClick={SettingsAppear}
 				onYourListClick={() => router.push(`./yourlist/${uuidv4()}`)}
 			/>
@@ -189,7 +172,7 @@ const Home = () => {
 				setOp={modalVisible ? 1 : 0}
 				setZ={modalVisible ? 10 : -10}
 			/>
-			<AnimeCardCont>
+			<AnimeCardCont ref={ref}>
 				{data.map((el, index) => (
 					<div key={index}>
 						<AnimeCard

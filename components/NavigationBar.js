@@ -88,7 +88,7 @@ const NavigationBar = ({
 	onYourListClick,
 	onProfileClick,
 	onFilterClick,
-	onSearchType = () => {},
+	onSearchClick = () => {},
 }) => {
 	const router = useRouter();
 	const { theme, setTheme } = useTheme();
@@ -122,7 +122,7 @@ const NavigationBar = ({
 				</motion.a>
 			</Row>
 			<Row right>
-				<SearchBar onChange={onSearchType} />
+				<SearchBar onSearchClick={onSearchClick} />
 				<FilterIcon onClick={onFilterClick} />
 				<ReactSwitch
 					onChange={() => {

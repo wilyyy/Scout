@@ -80,7 +80,7 @@ const DropdownCont = styled.div`
 const ListItem = styled.div`
 	padding: 4px 14px;
 	width: 100%;
-	margin: 6px;
+	margin: 2px;
 	background: rgba(196, 196, 196, 0.1);
 	box-shadow: inset 1.33333px -1.33333px 1.33333px rgba(165, 165, 165, 0.4),
 		inset -1.33333px 1.33333px 1.33333px rgba(255, 255, 255, 0.4);
@@ -89,7 +89,7 @@ const ListItem = styled.div`
 	cursor: pointer;
 `;
 
-const SearchBar = ({ onSearchClick, onBarClick }) => {
+const SearchBar = ({ onSearchClick = () => {} }) => {
 	const { theme } = useTheme();
 	const { search, setSearch } = useSearch();
 	const { sortKey, setSortKey } = useSortKey();
@@ -142,14 +142,13 @@ const SearchBar = ({ onSearchClick, onBarClick }) => {
 				<DropdownCont
 					gradient1={ThemeConfig[theme].cardGradient}
 					gradient2={ThemeConfig[theme].cardGradient2}
+					onClick={() => setBarFocus(true)}
 				>
-					{searchRes.slice(0, 5).map(
-						(o, i) => (
-							<ListItem key={i} onClick={() => SearchClick(o)}>
-								{o.title}
-							</ListItem>
-						) //make styled comp for this
-					)}
+					{searchRes.slice(0, 5).map((o, i) => (
+						<ListItem key={i} onClick={() => SearchClick(o)}>
+							{o.title}
+						</ListItem>
+					))}
 				</DropdownCont>
 			)}
 		</SearchContainer>
