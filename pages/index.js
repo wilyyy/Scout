@@ -3,7 +3,6 @@ import {Router, useRouter} from 'next/router';
 import { LightColors, ThemeConfig } from '@/utils/ThemeConfig';
 import { v4 as uuidv4 } from 'uuid';
 
-import ServerUrl from "@/utils/ServerUrl";
 import NavigationBar from '@/components/NavigationBar';
 import MainContentSlider from '@/components/MainContentSlider';
 import SettingsModal from '@/components/SettingsModal';
@@ -83,9 +82,14 @@ const Home = () => {
 
   useEffect(()=>{
     const GetAnime = async()=>{
-      const result = await axios.get("/api/anime");
-      console.log(result.data);
-      setData(result.data);
+      try {
+        const result = await axios.get("https://scout-serverside.herokuapp.com/animes/all");
+        console.log(result.data);
+        setData(result.data);
+      }
+      catch (e) {
+        console.log(e); //use notification modal to alert error
+      }
     }
 
     GetAnime();
