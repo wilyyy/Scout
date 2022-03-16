@@ -13,6 +13,7 @@ import axios from "axios";
 import qs from "qs";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 const SearchContainer = styled.div`
 	z-index: 2;
@@ -96,9 +97,8 @@ const SearchBar = ({ onSearchClick = () => {} }) => {
 	const { sortType, setSortType } = useSortType();
 	const { searchRes, setSearchRes } = useSearchRes();
 
+	const [open, setOpen] = useState(false);
 	const router = useRouter();
-
-	const [barFocus, setBarFocus] = useState(false);
 
 	const onSearch = async (txt) => {
 		setSearch(txt);
@@ -124,33 +124,43 @@ const SearchBar = ({ onSearchClick = () => {} }) => {
 		setSearch("");
 	};
 
+	const ClickAway = () => {
+		setOpen(false);
+	};
+
+	const ClickOn = () => {
+		setOpen(true);
+	};
+
 	return (
 		<SearchContainer>
-			<SearchBarContainer>
-				<Input
-					placeholder={"Search"}
-					color={ThemeConfig[theme].text}
-					onChange={(e) => {
-						onSearch(e.target.value);
-					}}
-					onClick={() => setBarFocus(true)}
-					onBlur={() => setBarFocus(false)}
-				/>
-				<Icon onClick={onSearchClick} />
-			</SearchBarContainer>
-			{search !== "" && barFocus && (
-				<DropdownCont
-					gradient1={ThemeConfig[theme].cardGradient}
-					gradient2={ThemeConfig[theme].cardGradient2}
-					onClick={() => setBarFocus(true)}
-				>
-					{searchRes.slice(0, 5).map((o, i) => (
-						<ListItem key={i} onClick={() => SearchClick(o)}>
-							{o.title}
-						</ListItem>
-					))}
-				</DropdownCont>
-			)}
+			<ClickAwayListener onClickAway={ClickAway}>
+				<div>
+					<SearchBarContainer>
+						<Input
+							placeholder={"Search"}
+							color={ThemeConfig[theme].text}
+							onChange={(e) => {
+								onSearch(e.target.value);
+							}}
+							onClick={ClickOn}
+						/>
+						<Icon onClick={onSearchClick} />
+					</SearchBarContainer>
+					{search !== "" && open && (
+						<DropdownCont
+							gradient1={ThemeConfig[theme].cardGradient}
+							gradient2={ThemeConfig[theme].cardGradient2}
+						>
+							{searchRes.slice(0, 5).map((o, i) => (
+								<ListItem key={i} onClick={() => SearchClick(o)}>
+									{o.title}
+								</ListItem>
+							))}
+						</DropdownCont>
+					)}
+				</div>
+			</ClickAwayListener>
 		</SearchContainer>
 	);
 };
