@@ -12,9 +12,9 @@ const ButtonCont = styled.div`
     justify-content: center;
     align-items: center;
     color: ${props=>props.btncolor};
-    font-size: 24;
+    font-size: ${props=>props.btnsize};
     font-family: "Poppins";
-    font-weight: 400;
+    font-weight: ${props=>props.btnweight};
     cursor: pointer;
     margin: ${props=>props.btnmargin};
 `
@@ -25,7 +25,9 @@ const Button = ({
     onClick = () => {},
     btnwidth = '166px',
     btnheight = '49px',
-    btnmargin = '0px'
+    btnmargin = '0px',
+    btnweight = '400',
+    btnsize = '24'
 
 }) => {
 
@@ -38,7 +40,10 @@ const Button = ({
             btncolor={ThemeConfig[theme].background}
             btnwidth={btnwidth}
             btnheight={btnheight}
-            btnmargin={btnmargin}>
+            btnmargin={btnmargin}
+            btnweight={btnweight}
+            btnsize={btnsize}
+            >
             {btnText}
         </ButtonCont>
     )
