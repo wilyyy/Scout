@@ -77,6 +77,10 @@ const YourList = () => {
     const SettingsExit = () => {
         setModalVisible(false);
     }
+
+    const DelAnimeFromYourList = (checked, obj) => {
+        
+    }
     
     return (
         <Page>

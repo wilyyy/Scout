@@ -20,11 +20,12 @@ const CardCont = styled(motion.div)`
   margin: 40px 20px;
   cursor: pointer;
   border: 1px solid #6D7992;
-
-  background: ${props=>props.bgcolor};
-  backdrop-filter: blur(5px) saturate(164%);
-  -webkit-backdrop-filter: blur(5px) saturate(164%);
+  backdrop-filter: blur(20px) saturate(164%);
+  -webkit-backdrop-filter: blur(20px) saturate(164%);
   font-family: ${props=>props.fontFamily};
+  background: linear-gradient(135deg, ${props=>props.gradient1} 20%, ${props=>props.gradient2} 100%);
+  /* box-shadow: inset 43.3333px -43.3333px 43.3333px rgba(149, 149, 149, 0.1), 
+              inset -43.3333px 43.3333px 43.3333px rgba(255, 255, 255, 0.1); */
 `
 
 const CardImage = styled.img`
@@ -33,8 +34,7 @@ const CardImage = styled.img`
   border-radius: 16px;
   margin-bottom: 10px;
   object-fit: cover;
-  object-position: top center;
-
+  object-position: center center;
 `
 
 const Row = styled.div`
@@ -94,7 +94,7 @@ const TextCont = styled.div`
 const Divider = styled.p`
   font-size: 18px;
   color: ${props=>props.dcolor};
-  opacity: ${props=>props.dopacity};
+  opacity: 0.2;
   margin: 15px 0;
 `
 
@@ -104,7 +104,7 @@ const DataRow = styled.div`
   justify-content: space-between;
 `
 
-function truncateString(string, limit) {
+const truncateString = (string, limit) => {
   if (string.length > limit) {
     return string.substring(0, limit) + "..."
   } else {
@@ -118,22 +118,44 @@ const AnimeCard = ({
   title = "[Missing Title]",
   synopsis = "[Missing Description]",
   episodes = "24",
-  aired = "[Missing Status]",
-  onButtonClick,
+  score = "#.##",
+  onButtonClick=()=>{},
+  onCheckClick=()=>{},
+  onUncheckClick=()=>{}
 }) => {
 
   const { theme } = useTheme();
 
-  const [favourite, setFavourite] = useState(true);
+  const [favourite, setFavourite] = useState(false);
+  const [canClick, setCanClick] = useState();
+
+  const ClickCard = () => {
+    if(canClick === false){
+      onButtonClick();
+    }
+  }
+
+  const ClickCheck = () => {
+    setFavourite(true);
+    setCanClick(true);
+    onCheckClick();
+  }
+
+  const ClickUncheck = () => {
+    setFavourite(false);
+    setCanClick(true);
+    onUncheckClick();
+  }
 
   return (
     <CardCont 
       fontFamily={fontFamily}
-      onClick={onButtonClick}
+      onClick={ClickCard}
       whileHover={{scale: 1.1}}
-      whileTap={{scale: 0.96}}
       transition={HoverZoom.spring}
-      bgcolor={ThemeConfig[theme].cardBackground}
+      gradient1={ThemeConfig[theme].cardGradient}
+      gradient2={ThemeConfig[theme].cardGradient2}
+      onMouseEnter={()=>setCanClick(false)}
     >
       <CardImage src={img_url} alt="anime image"/>
       <TextCont>
@@ -141,12 +163,23 @@ const AnimeCard = ({
         <Header hcolor={ThemeConfig[theme].body}>
           {truncateString(title, 30)}
         </Header>
-        {favourite === true ? (<BsBookmarkCheckFill size="40px"  />) : (<BsBookmark size="40px"/>) }
+        {favourite === true ? 
+          (<BsBookmarkCheckFill 
+            size="40px" 
+            onClick={ClickUncheck} 
+            onMouseEnter={()=>setCanClick(true)}
+          />) : 
+          (<BsBookmark 
+            size="40px" 
+            onClick={ClickCheck}
+            onMouseEnter={()=>setCanClick(true)} 
+          />) 
+        }
         </Row>
         <Body bcolor={ThemeConfig[theme].body}>
           {truncateString(synopsis, 120)}
         </Body>
-        <Divider dopacity="0.2" dcolor={ThemeConfig[theme].body}>------------------</Divider>
+        <Divider dcolor={ThemeConfig[theme].body}>------------------</Divider>
         <DetailCont>
           <DataRow>
             <Details bcolor={ThemeConfig[theme].body}>Episodes</Details>
@@ -154,7 +187,7 @@ const AnimeCard = ({
           </DataRow>
           <DataRow>
             <Details bcolor={ThemeConfig[theme].body}>Score</Details>
-            <DataHeader hcolor={ThemeConfig[theme].text}>{aired}</DataHeader>
+            <DataHeader hcolor={ThemeConfig[theme].text}>{score}</DataHeader>
           </DataRow>
         </DetailCont>
       </TextCont>

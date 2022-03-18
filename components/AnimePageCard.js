@@ -24,7 +24,7 @@ const Card = styled.div`
     align-items: center;
     background: linear-gradient(152.97deg, ${props=>props.gradient1} 0%, ${props=>props.gradient2} 100%);
     box-shadow: inset 43.3333px -43.3333px 43.3333px rgba(149, 149, 149, 0.1), 
-              inset -43.3333px 43.3333px 43.3333px rgba(255, 255, 255, 0.1);
+                inset -43.3333px 43.3333px 43.3333px rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px) saturate(164%);
     -webkit-backdrop-filter: blur(20px) saturate(164%);
 `;
