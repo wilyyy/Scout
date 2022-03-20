@@ -29,7 +29,9 @@ const CardCont = styled.div`
 
 const FavSection = ({
 
-    nameFav = "Steven's Favourites:"
+    nameFav = "Steven's Favourites:",
+    img_url = "/anime.png",
+    title = "[Missing Title]"
 
 }) => {
     return (
@@ -37,11 +39,11 @@ const FavSection = ({
             <TextCont> {nameFav} </TextCont>
             <CardCont>
             <BsChevronLeft size={30} />
-            <FavCard />
-            <FavCard />
-            <FavCard />
-            <FavCard />
-            <FavCard />
+            <FavCard src={img_url} alt="anime image"/>
+            <FavCard src={img_url} alt="anime image"/>
+            <FavCard src={img_url} alt="anime image"/>
+            <FavCard src={img_url} alt="anime image"/>
+            <FavCard src={img_url} alt="anime image"/>
             <BsChevronRight size={30} />
             </CardCont>
         </Cont>
