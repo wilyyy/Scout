@@ -15,24 +15,24 @@ import { DarkColors, LightColors } from "../utils/ThemeConfig";
 import SearchBar from "./SearchBar";
 
 const Container = styled.div`
-	width: 80vw;
-	height: 54px;
-	font-family: "Poppins";
-	font-weight: 200;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 50px;
+   width: 80vw;
+   height: 54px;
+   font-family: "Poppins";
+   font-weight: 200;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 50px;
 
-	h1:hover {
-		cursor: pointer;
-	}
+   h1:hover {
+      cursor: pointer;
+   }
 `;
 
 const Row = styled.div`
-	${({ links }) =>
-		links &&
-		`
+   ${({ links }) =>
+      links &&
+      `
         width: 25%;
         min-width: 300px;
         height: 54px;
@@ -41,9 +41,9 @@ const Row = styled.div`
         
     `}
 
-	${({ right }) =>
-		right &&
-		`
+   ${({ right }) =>
+      right &&
+      `
         min-width: 450px;
         width: 40%;
         height: 75px;
@@ -51,104 +51,104 @@ const Row = styled.div`
     `}
 
     font-family: "Poppins";
-	font-weight: 300;
-	display: flex;
-	align-items: center;
+   font-weight: 300;
+   display: flex;
+   align-items: center;
 
-	a:hover {
-		cursor: pointer;
-	}
+   a:hover {
+      cursor: pointer;
+   }
 `;
 
 const SunIcon = styled(SunFill)`
-	width: 20px;
-	height: 20px;
-	margin-left: 5px;
+   width: 20px;
+   height: 20px;
+   margin-left: 5px;
 `;
 
 const MoonIcon = styled(MoonStarsFill)`
-	width: 20px;
-	height: 20px;
-	margin-left: 5px;
+   width: 20px;
+   height: 20px;
+   margin-left: 5px;
 `;
 
 const FilterIcon = styled(Filter)`
-	width: 40px;
-	height: 26px;
-	cursor: pointer;
+   width: 40px;
+   height: 26px;
+   cursor: pointer;
 `;
 
 const AvatarCont = styled(motion.div)`
-	width: 75px;
-	height: 75px;
-	border-radius: 100px;
-	overflow: hidden;
+   width: 75px;
+   height: 75px;
+   border-radius: 100px;
+   overflow: hidden;
 `;
 
 const NavigationBar = ({
-	onYourListClick,
-	onProfileClick,
-	onFilterClick,
-	onSearchType = () => {},
+   onYourListClick,
+   onProfileClick,
+   onFilterClick,
+   onSearchType = () => {},
 }) => {
-	const router = useRouter();
-	const { theme, setTheme } = useTheme();
+   const router = useRouter();
+   const { theme, setTheme } = useTheme();
 
-	return (
-		<Container>
-			<motion.h1
-				whileHover={HoverZoom.hover}
-				whileTap={HoverZoom.tap}
-				transition={HoverZoom.spring}
-				onClick={() => router.push("/")}
-			>
-				Scout
-			</motion.h1>
-			<Row links>
-				<motion.a
-					whileHover={HoverZoom.hover}
-					whileTap={HoverZoom.tap}
-					transition={HoverZoom.spring}
-					onClick={() => router.push("/")}
-				>
-					Home
-				</motion.a>
-				<motion.a
-					whileHover={HoverZoom.hover}
-					whileTap={HoverZoom.tap}
-					transition={HoverZoom.spring}
-					onClick={onYourListClick}
-				>
-					Your List
-				</motion.a>
-			</Row>
-			<Row right>
-				<SearchBar onChange={onSearchType} />
-				<FilterIcon onClick={onFilterClick} />
-				<ReactSwitch
-					onChange={() => {
-						setTheme(theme === "light" ? "dark" : "light");
-					}}
-					checked={theme === "light" ? false : true}
-					offColor="#E0E0E0"
-					offHandleColor={DarkColors.Gunmetal}
-					onColor="#1C2A36"
-					onHandleColor={LightColors.PapayaWhip}
-					activeBoxShadow="0px 0px 1px 2px #fffc35"
-					uncheckedIcon={<SunIcon />}
-					checkedIcon={<MoonIcon />}
-				/>
-				<AvatarCont
-					whileHover={HoverZoom.hover}
-					whileTap={HoverZoom.tap}
-					transition={HoverZoom.spring}
-					onClick={onProfileClick}
-				>
-					<img src="https://placekitten.com/100/100" alt="profile image" />
-				</AvatarCont>
-			</Row>
-		</Container>
-	);
+   return (
+      <Container>
+         <motion.h1
+            whileHover={HoverZoom.hover}
+            whileTap={HoverZoom.tap}
+            transition={HoverZoom.spring}
+            onClick={() => router.push("/")}
+         >
+            Scout
+         </motion.h1>
+         <Row links>
+            <motion.a
+               whileHover={HoverZoom.hover}
+               whileTap={HoverZoom.tap}
+               transition={HoverZoom.spring}
+               onClick={() => router.push("/")}
+            >
+               Home
+            </motion.a>
+            <motion.a
+               whileHover={HoverZoom.hover}
+               whileTap={HoverZoom.tap}
+               transition={HoverZoom.spring}
+               onClick={onYourListClick}
+            >
+               Your List
+            </motion.a>
+         </Row>
+         <Row right>
+            <SearchBar onChange={onSearchType} />
+            <FilterIcon onClick={onFilterClick} />
+            <ReactSwitch
+               onChange={() => {
+                  setTheme(theme === "light" ? "dark" : "light");
+               }}
+               checked={theme === "light" ? false : true}
+               offColor="#E0E0E0"
+               offHandleColor={DarkColors.Gunmetal}
+               onColor="#1C2A36"
+               onHandleColor={LightColors.PapayaWhip}
+               activeBoxShadow="0px 0px 1px 2px #fffc35"
+               uncheckedIcon={<SunIcon />}
+               checkedIcon={<MoonIcon />}
+            />
+            <AvatarCont
+               whileHover={HoverZoom.hover}
+               whileTap={HoverZoom.tap}
+               transition={HoverZoom.spring}
+               onClick={onProfileClick}
+            >
+               <img src="https://placekitten.com/100/100" alt="profile image" />
+            </AvatarCont>
+         </Row>
+      </Container>
+   );
 };
 
 export default NavigationBar;
