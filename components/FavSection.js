@@ -27,11 +27,20 @@ const CardCont = styled.div`
     align-items: center;
 `;
 
-const FavSection = ({
+const truncateString = (string, limit) => {
+    if (string.length > limit) {
+      return string.substring(0, limit) + "..."
+    } else {
+      return string
+    }
+  }
 
+const FavSection = ({
+    
     nameFav = "Steven's Favourites:",
     img_url = "/anime.png",
-    title = "[Missing Title]"
+    title = "[Missing Title]",
+    onButtonClick=()=>{}
 
 }) => {
     return (
@@ -39,11 +48,16 @@ const FavSection = ({
             <TextCont> {nameFav} </TextCont>
             <CardCont>
             <BsChevronLeft size={30} />
-            <FavCard src={img_url} alt="anime image"/>
-            <FavCard src={img_url} alt="anime image"/>
-            <FavCard src={img_url} alt="anime image"/>
-            <FavCard src={img_url} alt="anime image"/>
-            <FavCard src={img_url} alt="anime image"/>
+            <FavCard 
+            src={img_url} alt="anime image"
+            onClick={onButtonClick}
+            >
+            {truncateString(title, 30)}
+            </FavCard> 
+            <FavCard />
+            <FavCard />
+            <FavCard />
+            <FavCard />
             <BsChevronRight size={30} />
             </CardCont>
         </Cont>

@@ -10,6 +10,10 @@ import FavouriteGenre from '@/components/FavouriteGenre';
 import Button from '@/components/Button';
 import AnimeCard from '@/components/AnimeCard';
 
+import {
+  exportComponentAsPNG
+} from "react-component-export-image";
+
 import axios from 'axios';
 import qs from 'qs';
 import { useEffect, useState, useRef } from 'react';
@@ -61,6 +65,7 @@ const CardCont = styled.div`
 const ExportCont = styled.div`
     display: flex;
     justify-content: flex-end;
+    width: 100%;
 `;
 
 const DarkenBackground = styled.div`
@@ -185,18 +190,8 @@ const TestPage = () => {
       <Body>
       <AccountCard />
       <CardCont>
-      {data.map((el, index) => 
-          <div key={index}>
-            <FavSection 
-              title={el.title}
-              img_url={el.img_url}
-            />
-          </div>
-          
-        )}
-        <FavSection 
-        nameFav='Steven is currently watching:'
-        />
+        <FavSection />
+        <FavSection nameFav='Steven is currently watching:' /> 
         <FavouriteGenre />
         <ExportCont>
         <Button 
@@ -204,6 +199,7 @@ const TestPage = () => {
           btnwidth="100px"
           btnheight="30px"
           btnsize="12px"
+          onClick={() => exportComponentAsPNG(CardCont)}
         />
         </ExportCont>
       </CardCont>
