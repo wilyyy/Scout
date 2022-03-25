@@ -34,11 +34,13 @@ a {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	overflow: visible;
 }
 
 .slider {
 	width: 100%;
-	height: 100%;
+	height: 434px;
+	overflow: visible;
 }
 
 .slide {
@@ -58,7 +60,6 @@ a {
 .carousel__inner-slide {
 	display: flex;
 	justify-content: center;
-	align-items: center;
 	height: 100%;
 }
 
@@ -68,6 +69,6 @@ a {
 
 .carousel__dot {
 	width: 10px;
-	margin: 10px;
+	margin: 0 10px;
 	height: 10px;
 }

@@ -84,7 +84,7 @@ const MySlide = ({}) => {
 						<FaArrowLeft size={20} />
 					</ButtonBack>
 					<Slider className="slider">
-						{carousel.slice(0, 5).map((o, i) => (
+						{carousel.slice(0, 6).map((o, i) => (
 							<Slide index={i}>
 								<AnimeCard
 									key={i}
@@ -99,27 +99,11 @@ const MySlide = ({}) => {
 									cardWidth="200px"
 									episodes={o.episodes}
 									score={o.score}
+									transition={null}
+									scale={1}
 								/>
 							</Slide>
 						))}
-						{/* <Slide index={0} className="caroSlide">
-							<AnimeCard cardMargin="0" cardHeight="426px" cardWidth="200px" />
-						</Slide>
-						<Slide index={1} className="caroSlide">
-							<AnimeCard cardMargin="0" cardHeight="426px" cardWidth="200px" />
-						</Slide>
-						<Slide index={2} className="caroSlide">
-							<AnimeCard cardMargin="0" cardHeight="426px" cardWidth="200px" />
-						</Slide>
-						<Slide index={3} className="caroSlide">
-							<AnimeCard cardMargin="0" cardHeight="426px" cardWidth="200px" />
-						</Slide>
-						<Slide index={4} className="caroSlide">
-							<AnimeCard cardMargin="0" cardHeight="426px" cardWidth="200px" />
-						</Slide>
-						<Slide index={5} className="caroSlide">
-							<AnimeCard cardMargin="0" cardHeight="426px" cardWidth="200px" />
-						</Slide> */}
 					</Slider>
 					<ButtonNext
 						style={{
@@ -143,27 +127,3 @@ const MySlide = ({}) => {
 };
 
 export default MySlide;
-
-{
-	/* <Slide index={slideIndex} className="slide">
-			<ImgCont bgimage={bgimage}>
-				<BlurCont>
-					<Title>{truncateString(titletext, 30)}</Title>
-					<Description>{truncateString(desctext, 180)}</Description>
-					<Bookmark>
-						{favourite === true ? (
-							<BsBookmarkCheckFill size="45px" />
-						) : (
-							<BsBookmark size="45px" />
-						)}
-					</Bookmark>
-					<Row>
-						<BottomText textcolor="white">
-							{bottext} | Episode {curEp}/{totEp}
-						</BottomText>
-						<Button btnText="Continue" onClick={carouselOnClick} />
-					</Row>
-				</BlurCont>
-			</ImgCont>
-		</Slide> */
-}

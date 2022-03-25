@@ -16,7 +16,7 @@ import axios from "axios";
 
 const Container = styled.div`
 	width: 80%;
-	min-width: 1000px;
+	min-width: 1200px;
 	height: 494px;
 	display: flex;
 	align-items: center;
@@ -49,6 +49,7 @@ const SliderText = styled.h2`
 const Col = styled.div`
 	display: flex;
 	flex-direction: column;
+	height: 100%;
 `;
 
 const MainContentSlider = ({}) => {

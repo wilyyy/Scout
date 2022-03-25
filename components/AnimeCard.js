@@ -133,6 +133,8 @@ const AnimeCard = ({
 	onButtonClick = () => {},
 	onCheckClick = () => {},
 	onUncheckClick = () => {},
+	transition = HoverZoom.spring,
+	scale = 1.1,
 }) => {
 	const { theme } = useTheme();
 
@@ -161,8 +163,8 @@ const AnimeCard = ({
 		<CardCont
 			fontFamily={fontFamily}
 			onClick={ClickCard}
-			whileHover={{ scale: 1.1 }}
-			transition={HoverZoom.spring}
+			whileHover={{ scale: scale }}
+			transition={transition}
 			gradient1={ThemeConfig[theme].cardGradient}
 			gradient2={ThemeConfig[theme].cardGradient2}
 			onMouseEnter={() => setCanClick(false)}
