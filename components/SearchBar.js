@@ -115,7 +115,6 @@ const SearchBar = ({ onSearchClick = () => {} }) => {
 			},
 		});
 
-		console.log(result.data);
 		setSearchRes(result.data);
 	};
 

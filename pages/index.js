@@ -82,7 +82,6 @@ const Home = () => {
 	useEffect(() => {
 		const GetAnime = async () => {
 			const result = await axios.get("/api/anime");
-			console.log(result.data);
 			setData(result.data);
 		};
 
@@ -119,7 +118,6 @@ const Home = () => {
 	};
 
 	const AddAnimeToYourList = (checked, obj) => {
-		console.log(checked, obj);
 		if (checked) {
 			const new_Anime = {
 				...yourList,
@@ -184,8 +182,7 @@ const Home = () => {
 							onButtonClick={() => router.push(`./anime/${el.uid}`)}
 							onCheckClick={
 								// if(yourList[el.uid] !== undefined && yourList[el.uid] !== null)
-								(onAddClick = () => {}) =>
-									AddAnimeToYourList(onAddClick, el)
+								(onAddClick = () => {}) => AddAnimeToYourList(onAddClick, el)
 							}
 							onUncheckClick={
 								// if(yourList[el.uid] !== undefined && yourList[el.uid] !== null)

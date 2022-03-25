@@ -50,7 +50,6 @@ const MySlide = ({}) => {
 					scoreFilter: [9, 10],
 				},
 			});
-			console.log(result.data);
 			setCarousel(result.data);
 		};
 

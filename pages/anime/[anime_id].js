@@ -90,7 +90,6 @@ const AnimePage = () => {
 						a_id: anime_id,
 					},
 				});
-				console.log(result);
 				if (result.data[0]) {
 					setData(result.data[0]);
 				}
