@@ -52,24 +52,7 @@ const Col = styled.div`
 `;
 
 const MainContentSlider = ({}) => {
-	const router = useRouter();
-	const { carousel, setCarousel } = useCarousel();
 	const { theme } = useTheme();
-
-	useEffect(() => {
-		const GetAnime = async () => {
-			const result = await axios.get("/api/anime", {
-				params: {
-					scoreFilter: [9, 10],
-				},
-			});
-			console.log(result.data);
-			setCarousel(result.data);
-		};
-
-		GetAnime();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
 
 	return (
 		<Container>

@@ -9,12 +9,12 @@ import {
 	DotGroup,
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import Button from "./Button";
-import { useState } from "react";
 import AnimeCard from "./AnimeCard";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { ThemeConfig } from "@/utils/ThemeConfig";
-import { useTheme } from "@/utils/ScoutThemeProvider";
+import { useTheme, useCarousel, useYourList } from "@/utils/ScoutThemeProvider";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function truncateString(string, limit) {
 	if (string.length > limit) {
@@ -38,18 +38,25 @@ const Row = styled.div`
 	width: 100%;
 `;
 
-const MySlide = ({
-	bgimage = "test_demonslayer.jpg",
-	titletext = "Default",
-	desctext = "Default",
-	bottext = "Default",
-	curEp = "##",
-	totEp = "##",
-	slideIndex = 1,
-	carouselOnClick = () => {},
-}) => {
-	const [favourite, setFavourite] = useState(false);
+const MySlide = ({}) => {
+	const { yourList, setYourList } = useYourList();
 	const { theme } = useTheme();
+	const { carousel, setCarousel } = useCarousel();
+
+	useEffect(() => {
+		const GetAnime = async () => {
+			const result = await axios.get("/api/anime", {
+				params: {
+					scoreFilter: [9, 10],
+				},
+			});
+			console.log(result.data);
+			setCarousel(result.data);
+		};
+
+		GetAnime();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<CarouselProvider
@@ -77,7 +84,25 @@ const MySlide = ({
 						<FaArrowLeft size={20} />
 					</ButtonBack>
 					<Slider className="slider">
-						<Slide index={0} className="caroSlide">
+						{carousel.slice(0, 5).map((o, i) => (
+							<Slide index={i}>
+								<AnimeCard
+									key={i}
+									img_url={o.img_url}
+									title={truncateString(o.title, 30)}
+									titlesize="12px"
+									synopsis=""
+									detailsize="12px"
+									episodes={o.episodes}
+									cardMargin="0"
+									cardHeight="426px"
+									cardWidth="200px"
+									episodes={o.episodes}
+									score={o.score}
+								/>
+							</Slide>
+						))}
+						{/* <Slide index={0} className="caroSlide">
 							<AnimeCard cardMargin="0" cardHeight="426px" cardWidth="200px" />
 						</Slide>
 						<Slide index={1} className="caroSlide">
@@ -94,7 +119,7 @@ const MySlide = ({
 						</Slide>
 						<Slide index={5} className="caroSlide">
 							<AnimeCard cardMargin="0" cardHeight="426px" cardWidth="200px" />
-						</Slide>
+						</Slide> */}
 					</Slider>
 					<ButtonNext
 						style={{
@@ -111,7 +136,7 @@ const MySlide = ({
 						<FaArrowRight size={20} />
 					</ButtonNext>
 				</Row>
-				<DotGroup style={{ alignSelf: "center" }} />
+				<DotGroup className="dotGroup" />
 			</Col>
 		</CarouselProvider>
 	);

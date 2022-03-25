@@ -61,3 +61,13 @@ a {
 	align-items: center;
 	height: 100%;
 }
+
+.dotGroup {
+	align-self: center;
+}
+
+.carousel__dot {
+	width: 10px;
+	margin: 10px;
+	height: 10px;
+}

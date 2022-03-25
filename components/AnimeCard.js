@@ -51,8 +51,7 @@ const Row = styled.div`
 
 const Header = styled.h4`
 	margin: 0;
-	font-size: 18px;
-	line-height: 21px;
+	font-size: ${(props) => props.titlesize};
 	color: ${(props) => props.hcolor};
 	font-weight: 400;
 	width: 100%;
@@ -67,14 +66,14 @@ const DataHeader = styled.h4`
 `;
 
 const Body = styled.div`
-	font-size: 14px;
+	font-size: ${(props) => props.synopsissize};
 	color: ${(props) => props.bcolor};
 	font-weight: 200;
 	margin: 0;
 `;
 
 const Details = styled.p`
-	font-size: 16px;
+	font-size: ${(props) => props.detailsize};
 	color: ${(props) => props.bcolor};
 	opacity: ${(props) => props.bopacity};
 	margin: 0;
@@ -100,7 +99,7 @@ const Divider = styled.p`
 	font-size: 18px;
 	color: ${(props) => props.dcolor};
 	opacity: 0.2;
-	margin: 15px 0;
+	margin: 0;
 `;
 
 const DataRow = styled.div`
@@ -121,7 +120,10 @@ const AnimeCard = ({
 	img_url = "/anime.png",
 	fontFamily = "Poppins",
 	title = "[Missing Title]",
+	titlesize = "18px",
 	synopsis = "[Missing Description]",
+	synopsissize = "14px",
+	detailsize = "14px",
 	episodes = "24",
 	score = "#.##",
 	cardMargin = "40px 20px",
@@ -171,7 +173,9 @@ const AnimeCard = ({
 			<CardImage src={img_url} alt="anime image" imageHeight={imageHeight} />
 			<TextCont>
 				<Row>
-					<Header hcolor={ThemeConfig[theme].body}>{truncateString(title, 30)}</Header>
+					<Header titlesize={titlesize} hcolor={ThemeConfig[theme].body}>
+						{truncateString(title, 40)}
+					</Header>
 					{favourite === true ? (
 						<BsBookmarkCheckFill
 							size="40px"
@@ -186,15 +190,21 @@ const AnimeCard = ({
 						/>
 					)}
 				</Row>
-				<Body bcolor={ThemeConfig[theme].body}>{truncateString(synopsis, 120)}</Body>
+				<Body synopsissize={synopsissize} bcolor={ThemeConfig[theme].body}>
+					{truncateString(synopsis, 120)}
+				</Body>
 				<Divider dcolor={ThemeConfig[theme].body}>------------------</Divider>
 				<DetailCont>
 					<DataRow>
-						<Details bcolor={ThemeConfig[theme].body}>Episodes</Details>
-						<DataHeader hcolor={ThemeConfig[theme].text}>21/{episodes}</DataHeader>
+						<Details detailsize={detailsize} bcolor={ThemeConfig[theme].body}>
+							Episodes
+						</Details>
+						<DataHeader hcolor={ThemeConfig[theme].text}>{episodes}</DataHeader>
 					</DataRow>
 					<DataRow>
-						<Details bcolor={ThemeConfig[theme].body}>Score</Details>
+						<Details detailsize={detailsize} bcolor={ThemeConfig[theme].body}>
+							Score
+						</Details>
 						<DataHeader hcolor={ThemeConfig[theme].text}>{score}</DataHeader>
 					</DataRow>
 				</DetailCont>
