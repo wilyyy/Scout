@@ -47,7 +47,7 @@ const AuthSignup = ({ onLoginClick }) => {
                password,
             }
          );
-         router.push("/");
+         router.push("/home");
       } catch (e) {
          console.log("Sign Up failed: " + e);
       }

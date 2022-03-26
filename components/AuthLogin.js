@@ -55,7 +55,7 @@ const AuthLogin = ({ onSignUpClick }) => {
                password,
             }
          );
-         router.push("/");
+         router.push("/home");
          localStorage.setItem("email", result.data.email);
          localStorage.setItem("password", result.data._id);
       } catch (e) {
