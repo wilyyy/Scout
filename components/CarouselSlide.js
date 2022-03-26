@@ -2,9 +2,7 @@ import styled from "styled-components";
 import { BsBookmarkCheckFill, BsBookmark } from 'react-icons/bs';
 import { Slide } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
-import { useTheme } from "@/utils/ScoutThemeProvider";
 import Button from "./Button";
-import { ThemeConfig } from "@/utils/ThemeConfig";
 import { useState } from 'react';
 
 const ImgCont = styled.div`
@@ -113,56 +111,3 @@ const MySlide = ({
 }
 
 export default MySlide;
-
-//Original Template
-                    {/* <Slide index={0} className="slide">
-                        <ImgCont bgimage={bgimage}>
-                            <BlurCont>
-                                <Title>{titletext1}</Title>
-                                <Description>{desctext1}</Description>
-                                <Bookmark>
-                                    {favourite === true ? (<BsBookmarkCheckFill size="45px"  />) : (<BsBookmark size="45px"/>) }
-                                </Bookmark>
-                                <Row>
-                                    <BottomText textcolor="white">
-                                        {bottext} | Episode {curEp}/{totEp}
-                                    </BottomText>
-                                    <Button btnText="Continue" />
-                                </Row>
-                            </BlurCont>
-                        </ImgCont>
-                    </Slide>
-                    <Slide index={1} className="slide">
-                        <ImgCont bgimage={bgimage}>
-                            <BlurCont>
-                                <Title>{titletext1}</Title>
-                                <Description>{desctext1}</Description>
-                                <Bookmark>
-                                    {favourite === true ? (<BsBookmarkCheckFill size="45px"  />) : (<BsBookmark size="45px"/>) }
-                                </Bookmark>
-                                <Row>
-                                    <BottomText textcolor="white">
-                                        {bottext} | Episode {curEp}/{totEp}
-                                    </BottomText>
-                                    <Button btnText="Continue" />
-                                </Row>
-                            </BlurCont>
-                        </ImgCont>
-                    </Slide>
-                    <Slide index={2} className="slide">
-                        <ImgCont bgimage={bgimage}>
-                            <BlurCont>
-                                <Title>{titletext1}</Title>
-                                <Description>{desctext1}</Description>
-                                <Bookmark>
-                                    {favourite === true ? (<BsBookmarkCheckFill size="45px"  />) : (<BsBookmark size="45px"/>) }
-                                </Bookmark>
-                                <Row>
-                                    <BottomText textcolor="white">
-                                        {bottext} | Episode {curEp}/{totEp}
-                                    </BottomText>
-                                    <Button btnText="Continue" />
-                                </Row>
-                            </BlurCont>
-                        </ImgCont>
-                    </Slide> */}

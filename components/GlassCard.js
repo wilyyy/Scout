@@ -1,7 +1,4 @@
-// needs background, grabbing from themeconfig
 import styled from "styled-components";
-
-import { ThemeConfig } from "../utils/ThemeConfig";
 
 const Container = styled.div`
     width: ${props=>props.width};

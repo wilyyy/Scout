@@ -2,15 +2,10 @@ import styled from "styled-components";
 import {useEffect} from 'react';
 import { useCarousel } from "@/utils/ScoutThemeProvider";
 import { useRouter } from 'next/router';
-import { BsBookmarkCheckFill, BsBookmark } from 'react-icons/bs';
 
 import { CarouselProvider, Slider } from 'pure-react-carousel';
 import MySlide from '@/components/CarouselSlide'
 import 'pure-react-carousel/dist/react-carousel.es.css';
-
-import { useTheme } from "@/utils/ScoutThemeProvider";
-import Button from "./Button";
-import { ThemeConfig } from "@/utils/ThemeConfig"
 
 import axios from 'axios';
 
@@ -45,7 +40,6 @@ const MainContentSlider = () => {
         }
 
         GetAnime();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     
     return (

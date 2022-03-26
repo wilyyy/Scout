@@ -75,8 +75,6 @@ const DropdownCont = styled.div`
 		${(props) => props.gradient1} 20%,
 		${(props) => props.gradient2} 100%
 	);
-	/* box-shadow: inset 43.3333px -43.3333px 43.3333px rgba(149, 149, 149, 0.1), 
-              inset -43.3333px 43.3333px 43.3333px rgba(255, 255, 255, 0.1); */
 `;
 
 const ListItem = styled.div`
@@ -93,8 +91,6 @@ const ListItem = styled.div`
 
 const SearchBar = ({
 	onSearchClick,
-	onChange = () => {},
-	onSearchResClick = () => {},
 }) => {
 	const { theme } = useTheme();
 	const { search, setSearch } = useSearch();
@@ -146,7 +142,7 @@ const SearchBar = ({
 							<ListItem key={i} onClick={() => SearchClick(o)}>
 								{o.title}
 							</ListItem>
-						) //make styled comp for this
+						)
 					)}
 				</DropdownCont>
 			)}

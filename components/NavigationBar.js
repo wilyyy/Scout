@@ -1,4 +1,3 @@
-import Link from "next/link";
 import styled from "styled-components";
 import { SunFill } from "@styled-icons/bootstrap/SunFill";
 import { MoonStarsFill } from "@styled-icons/bootstrap/MoonStarsFill";
@@ -6,10 +5,8 @@ import { Filter } from "@styled-icons/ionicons-solid/Filter";
 import ReactSwitch from "react-switch";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
-import Image from "next/image";
 
 import { useTheme } from "../utils/ScoutThemeProvider";
-import { ThemeConfig } from "../utils/ThemeConfig";
 import { HoverZoom } from "../utils/Animations";
 import { DarkColors, LightColors } from "../utils/ThemeConfig";
 import SearchBar from "./SearchBar";

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-
 import { useTheme } from '../utils/ScoutThemeProvider';
 import { ThemeConfig } from '../utils/ThemeConfig';
 import { HoverZoom } from "../utils/Animations";
