@@ -3,11 +3,14 @@ import { Router, useRouter } from "next/router";
 import { LightColors, ThemeConfig } from "@/utils/ThemeConfig";
 import { v4 as uuidv4 } from "uuid";
 
-import ServerUrl from "@/utils/ServerUrl";
 import NavigationBar from "@/components/NavigationBar";
 import MainContentSlider from "@/components/MainContentSlider";
 import SettingsModal from "@/components/SettingsModal";
 import AnimeCard from "@/components/AnimeCard";
+
+import Auth from "./auth";
+import { IoMdFunnel } from "react-icons/io";
+
 
 import axios from "axios";
 import qs from "qs";
@@ -26,41 +29,41 @@ import {
 } from "@/utils/ScoutThemeProvider";
 
 const Page = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
-	align-items: center;
-	width: 100%;
-	margin-top: 20px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   align-items: center;
+   width: 100%;
+   margin-top: 20px;
 `;
 
 const BodyHeader = styled.div`
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
 `;
 
 const HeaderText = styled.div`
-	font-size: 24px;
+   font-size: 24px;
 `;
 
 const AnimeCardCont = styled.div`
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
 `;
 
 const DarkenBackground = styled.div`
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	background-color: rgba(0, 0, 0, 0.5);
-	z-index: ${(props) => props.darkz};
-	opacity: ${(props) => props.darkop};
-	transition: opacity 0.5s;
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   background-color: rgba(0, 0, 0, 0.5);
+   z-index: ${(props) => props.darkz};
+   opacity: ${(props) => props.darkop};
+   transition: opacity 0.5s;
 `;
 
 let timer = null;
@@ -79,15 +82,22 @@ const Home = () => {
 	const { search, setSearch } = useSearch();
 	const { yourList, setYourList } = useYourList();
 
-	useEffect(() => {
-		const GetAnime = async () => {
-			const result = await axios.get("/api/anime");
-			setData(result.data);
-		};
+   useEffect(() => {
+      const GetAnime = async () => {
+         try {
+            const result = await axios.get(
+               "https://scout-serverside.herokuapp.com/animes/all"
+            );
+            console.log(result.data);
+            setData(result.data);
+         } catch (e) {
+            console.log(e); //use notification modal to alert error
+         }
+      };
 
-		GetAnime();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+      GetAnime();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, []);
 
 	const FullSearch = async () => {
 		const res = await axios.get("/api/anime", {
