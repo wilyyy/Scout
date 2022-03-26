@@ -7,6 +7,7 @@ import NavigationBar from "@/components/NavigationBar";
 import MainContentSlider from "@/components/MainContentSlider";
 import SettingsModal from "@/components/SettingsModal";
 import AnimeCard from "@/components/AnimeCard";
+import Auth from "./auth";
 
 import { IoMdFunnel } from "react-icons/io";
 
