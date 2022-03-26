@@ -142,7 +142,7 @@ const NavigationBar = ({
                whileHover={HoverZoom.hover}
                whileTap={HoverZoom.tap}
                transition={HoverZoom.spring}
-               onClick={() => router.push("/testpage")}
+               onClick={() => router.push("/profilepage")}
             >
                <img src="https://placekitten.com/100/100" alt="profile image" />
             </AvatarCont>
