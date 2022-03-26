@@ -1,5 +1,3 @@
-const anime = require("./animes.json");
-
 export function GetAllAnime(shows = []) {
 	const results = shows.slice(0, 20);
 
@@ -10,7 +8,7 @@ export function filtering(
 	arr = [],
 	config = {
 		title: null,
-		genre: [], //don't work, ask Chris
+		genre: [], 
 		score: [],
 		episodes: [],
 	}
@@ -57,12 +55,6 @@ export function filtering(
 		return [];
 	}
 }
-
-// use to test, add console.log(filtered_arr) to function
-// const animes = require('./animes.json');
-// filtering(animes, {
-//   genre: ['Action', 'Comedy']
-// })
 
 function splitDate(string = null) {
 	const Months = {
@@ -134,7 +126,3 @@ export function sortArr(arr = [], config = { key: null, type: null }) {
 	}
 }
 
-// sortArr(animes, {
-//   key: 'aired',
-//   type: 'desc'
-// })
