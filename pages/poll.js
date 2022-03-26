@@ -116,7 +116,6 @@ const DarkenBackground = styled.div`
 const Home = () => {
 	const router = useRouter();
 	const [modalVisible, setModalVisible] = useState(false);
-	const ref = useRef(null);
 	const [pollSearchRes, setPollSearchRes] = useState([]);
 	const [pollSearchQuery, setPollSearchQuery] = useState("");
 	const [open, setOpen] = useState(false);
@@ -209,6 +208,7 @@ const Home = () => {
 
 		newPoll[obj.uid] = obj;
 		setPollList(newPoll);
+		setOpen(false);
 	};
 
 	const RemoveFromPoll = (obj) => {
@@ -273,7 +273,7 @@ const Home = () => {
 					))}
 				</Row>
 				<Row>
-					<Button btnmargin="0 50px" btnText="Reset" />
+					<Button btnmargin="0 50px" btnText="Reset" onClick={() => setPollList([])} />
 					<Button btnmargin="0 50px" btnText="Confirm" />
 				</Row>
 			</PollCont>
