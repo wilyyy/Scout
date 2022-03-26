@@ -9,10 +9,8 @@ import FavSection from '@/components/FavSection';
 import FavouriteGenre from '@/components/FavouriteGenre';
 import Button from '@/components/Button';
 import AnimeCard from '@/components/AnimeCard';
+import { exportComponentAsPNG } from "react-component-export-image";
 
-import {
-  exportComponentAsPNG
-} from "react-component-export-image";
 
 import axios from 'axios';
 import qs from 'qs';
@@ -83,6 +81,8 @@ const DarkenBackground = styled.div`
 let timer = null;
 
 const TestPage = () => {
+
+  const componentRef = useRef();
   const router = useRouter();
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -174,7 +174,7 @@ const TestPage = () => {
       alert("removed" + obj.title + "from your list"); //replace with modal?
     }
   }
-
+  
   return (
     <Page>
       <DarkenBackground 
@@ -189,7 +189,7 @@ const TestPage = () => {
       />
       <Body>
       <AccountCard />
-      <CardCont>
+      <CardCont id="export" ref={componentRef}>
         <FavSection />
         <FavSection nameFav='Steven is currently watching:' /> 
         <FavouriteGenre />
@@ -199,8 +199,16 @@ const TestPage = () => {
           btnwidth="100px"
           btnheight="30px"
           btnsize="12px"
-          onClick={() => exportComponentAsPNG(CardCont)}
-        />
+          onClick={() =>
+          exportComponentAsPNG(componentRef, {
+            html2CanvasOptions: {
+              onclone: (clonedDoc) => {
+                clonedDoc.getElementById("export").style.visibility = "visible";
+              }
+            }
+          })
+        }
+      />
         </ExportCont>
       </CardCont>
       </Body>

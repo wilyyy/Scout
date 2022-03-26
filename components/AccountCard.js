@@ -122,16 +122,16 @@ const AccountCard = ({
             </MemConst>
             <MediaCont>
                 <MediaBox>
-                    <RedditAlien width={width} height={height} />
+                    <RedditAlien href="https://github.com/" width={width} height={height} />
                 </MediaBox>
                 <MediaBox>
-                    <Twitter width={width} height={height}/>
+                    <Twitter href="https://twitter.com/" width={width} height={height}/>
                 </MediaBox>
                 <MediaBox>
-                    <DiscordAlt width={width} height={height}/>
+                    <DiscordAlt href="https://discord.com/" width={width} height={height}/>
                 </MediaBox>
                 <MediaBox>
-                    <InstagramAlt width={width} height={height}/>
+                    <InstagramAlt href="https://www.instagram.com/" width={width} height={height}/>
                 </MediaBox>
             </MediaCont>
         </AccountCont>
