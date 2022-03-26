@@ -144,7 +144,7 @@ const NavigationBar = ({
 					transition={HoverZoom.spring}
 					onClick={onProfileClick}
 				>
-					<img src="https://placekitten.com/100/100" alt="profile image" onClick={() => router.push("/testpage")}/>
+					<img src="https://placekitten.com/100/100" alt="profile image" onClick={() => router.push("/profilepage")}/>
 				</AvatarCont>
 			</Row>
 		</Container>

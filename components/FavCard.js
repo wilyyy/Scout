@@ -60,7 +60,7 @@ const FavCard = ({
   img_url = "/anime.png",
   fontFamily = "Poppins",
   title = "Tokyo Ghoul",
-  onButtonClick,
+  onButtonClick=()=>{},
 }) => {
 
   const { theme } = useTheme();

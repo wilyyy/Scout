@@ -80,7 +80,7 @@ const DarkenBackground = styled.div`
 
 let timer = null;
 
-const TestPage = () => {
+const ProfilePage = () => {
 
   const componentRef = useRef();
   const router = useRouter();
@@ -216,4 +216,4 @@ const TestPage = () => {
   )
 }
 
-export default TestPage;
+export default ProfilePage;
