@@ -1,13 +1,19 @@
 import styled from "styled-components";
 import { Router, useRouter } from "next/router";
 import { LightColors, ThemeConfig } from "@/utils/ThemeConfig";
-import { v4 as uuidv4 } from "uuid";
 
 import ServerUrl from "@/utils/ServerUrl";
 import NavigationBar from "@/components/NavigationBar";
 import PollCard from "@/components/PollCard";
+import DragPollCard from "@/components/DragPollCard";
 import PollSearch from "@/components/PollSearch";
 import Button from "@/components/Button";
+import SettingsModal from "@/components/SettingsModal";
+import Dropzone from "@/components/Dropzone";
+import { TouchBackend } from "react-dnd-touch-backend";
+import { DndProvider } from "react-dnd";
+import { v4 as uuidv4 } from "uuid";
+
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 import axios from "axios";
@@ -57,7 +63,7 @@ const PollCont = styled.div`
 const PollSearchCont = styled.div`
 	width: 60%;
 	height: auto;
-	z-index: 10;
+	z-index: 7;
 	position: relative;
 `;
 
@@ -101,6 +107,12 @@ const Row = styled.div`
 	display: flex;
 `;
 
+const DropRow = styled.div`
+	display: flex;
+	width: 80%;
+	justify-content: space-between;
+`;
+
 const DarkenBackground = styled.div`
 	position: fixed;
 	top: 0;
@@ -113,12 +125,17 @@ const DarkenBackground = styled.div`
 	transition: opacity 0.5s;
 `;
 
-const Home = () => {
+const Poll = () => {
 	const router = useRouter();
 	const [modalVisible, setModalVisible] = useState(false);
 	const [pollSearchRes, setPollSearchRes] = useState([]);
 	const [pollSearchQuery, setPollSearchQuery] = useState("");
 	const [open, setOpen] = useState(false);
+	const [inSession, setInSession] = useState(false);
+	const r = useRouter();
+	const { uuid } = r.query;
+	const [watch, setWatch] = useState({});
+	const [noWatch, setNoWatch] = useState({});
 
 	const { theme } = useTheme();
 	const [data, setData] = useState([]);
@@ -220,65 +237,215 @@ const Home = () => {
 		setPollList(newPoll);
 	};
 
-	return (
-		<Page>
-			<DarkenBackground
-				darkz={open === true ? 5 : -5}
-				darkop={open === true ? 1 : 0}
-				onClick={SettingsExit}
-			/>
-			<NavigationBar
-				onSearchClick={FullSearch}
-				onFilterClick={SettingsAppear}
-				onYourListClick={() => router.push(`./yourlist/${uuidv4()}`)}
-			/>
-			<PollCont>
-				<Header>
-					<h2>Start A Poll</h2>
-					<p>
-						Search for an Anime that you would like your friends to vote on whether or not
-						they want to watch it!
-					</p>
-					<ClickAwayListener onClickAway={ClickAway}>
-						<PollSearchCont>
-							<PollSearch
-								onChange={(e) => {
-									onSearch(e.target.value);
-								}}
-								onClick={ClickOn}
+	const HandleUpdateWatchPoll = (id, pollData) => {
+		watch[id] = {
+			...watch[id],
+			...pollData,
+		};
+
+		setWatch({
+			...watch,
+		});
+	};
+
+	const HandleUpdateNoWatchPoll = (id, pollData) => {
+		noWatch[id] = {
+			...noWatch[id],
+			...pollData,
+		};
+
+		setNoWatch({
+			...noWatch,
+		});
+	};
+
+	if (inSession === false) {
+		return (
+			<Page>
+				<DarkenBackground
+					darkz={open === true || modalVisible === true ? 5 : -5}
+					darkop={open === true || modalVisible === true ? 1 : 0}
+					onClick={SettingsExit}
+				/>
+				<NavigationBar
+					onSearchClick={FullSearch}
+					onFilterClick={SettingsAppear}
+					onYourListClick={() => router.push(`./yourlist/${uuidv4()}`)}
+				/>
+				<PollCont>
+					<SettingsModal
+						tcolor={LightColors.PapayaWhip}
+						ExitClick={SettingsExit}
+						setScaleFactor={modalVisible ? 1 : 0.5}
+						setOp={modalVisible ? 1 : 0}
+						setZ={modalVisible ? 10 : -10}
+					/>
+					<Header>
+						<h2>Start A Poll</h2>
+						<p>
+							Search for an Anime that you would like your friends to vote on whether or not
+							they want to watch it!
+						</p>
+						<ClickAwayListener onClickAway={ClickAway}>
+							<PollSearchCont>
+								<PollSearch
+									onChange={(e) => {
+										onSearch(e.target.value);
+									}}
+									onClick={ClickOn}
+								/>
+								{pollSearchQuery !== "" && open && (
+									<PollDropDown
+										gradient1={ThemeConfig[theme].cardGradient}
+										gradient2={ThemeConfig[theme].cardGradient2}
+									>
+										{pollSearchRes.slice(0, 10).map((o, i) => (
+											<ListItem key={i} onClick={() => AddToPoll(o)}>
+												{o.title}
+											</ListItem>
+										))}
+									</PollDropDown>
+								)}
+							</PollSearchCont>
+						</ClickAwayListener>
+					</Header>
+					<Row>
+						{Object.values(pollList).map((o, i) => (
+							<PollCard
+								key={i}
+								onDelete={() => RemoveFromPoll(o)}
+								title={truncateString(o.title, 60)}
+								imglink={o.img_url}
 							/>
-							{pollSearchQuery !== "" && open && (
-								<PollDropDown
-									gradient1={ThemeConfig[theme].cardGradient}
-									gradient2={ThemeConfig[theme].cardGradient2}
+						))}
+					</Row>
+					<Row>
+						<Button btnmargin="0 50px" btnText="Reset" onClick={() => setPollList([])} />
+						<Button btnmargin="0 50px" btnText="Confirm" onClick={() => setInSession(true)} />
+					</Row>
+				</PollCont>
+			</Page>
+		);
+	} else if (inSession === true) {
+		return (
+			<Page>
+				<DarkenBackground
+					darkz={open === true || modalVisible === true ? 5 : -5}
+					darkop={open === true || modalVisible === true ? 1 : 0}
+					onClick={SettingsExit}
+				/>
+				<NavigationBar
+					onSearchClick={FullSearch}
+					onFilterClick={SettingsAppear}
+					onYourListClick={() => router.push(`./yourlist/${uuidv4()}`)}
+				/>
+				<PollCont>
+					<SettingsModal
+						tcolor={LightColors.PapayaWhip}
+						ExitClick={SettingsExit}
+						setScaleFactor={modalVisible ? 1 : 0.5}
+						setOp={modalVisible ? 1 : 0}
+						setZ={modalVisible ? 10 : -10}
+					/>
+					<Header>
+						<h2>Start A Poll</h2>
+						<p>
+							Search for an Anime that you would like your friends to vote on whether or not
+							they want to watch it!
+						</p>
+					</Header>
+					<DropRow>
+						<DndProvider
+							backend={TouchBackend}
+							options={{
+								enableTouchEvents: false,
+								enableMouseEvents: true,
+							}}
+						>
+							{
+								<Dropzone
+									onDropItem={(item) => {
+										const newID = uuidv4();
+										setNoWatch((prev) => ({
+											...prev,
+											[newID]: {
+												id: newID,
+												title: item.title,
+												imglink: item.imglink,
+												uid: item.uid,
+											},
+										}));
+										const newPoll = {
+											...pollList,
+										};
+
+										delete newPoll[item.uid];
+										setPollList(newPoll);
+									}}
 								>
-									{pollSearchRes.slice(0, 10).map((o, i) => (
-										<ListItem key={i} onClick={() => AddToPoll(o)}>
-											{o.title}
-										</ListItem>
+									{Object.values(noWatch).map((o) => (
+										<PollCard
+											title={o.title}
+											imglink={o.imglink}
+											type="pollCard"
+											key={o.uid}
+											pollCardPos={o.pos}
+											onUpdatePollCard={(obj) => HandleUpdateNoWatchPoll(o.id, obj)}
+											displayDelete="none"
+										/>
 									))}
-								</PollDropDown>
-							)}
-						</PollSearchCont>
-					</ClickAwayListener>
-				</Header>
-				<Row>
-					{Object.values(pollList).map((o, i) => (
-						<PollCard
-							key={i}
-							onDelete={() => RemoveFromPoll(o)}
-							title={truncateString(o.title, 60)}
-							imglink={o.img_url}
-						/>
-					))}
-				</Row>
-				<Row>
-					<Button btnmargin="0 50px" btnText="Reset" onClick={() => setPollList([])} />
-					<Button btnmargin="0 50px" btnText="Confirm" />
-				</Row>
-			</PollCont>
-		</Page>
-	);
+								</Dropzone>
+							}
+							{Object.values(pollList).map((o, i) => (
+								<DragPollCard
+									key={o.uid}
+									title={truncateString(o.title, 60)}
+									imglink={o.img_url}
+									uid={o.uid}
+								/>
+							))}
+							{
+								<Dropzone
+									onDropItem={(item) => {
+										const newID = uuidv4();
+										console.log(item);
+										setWatch((prev) => ({
+											...prev,
+											[newID]: {
+												id: newID,
+												title: item.title,
+												imglink: item.imglink,
+												uid: item.uid,
+											},
+										}));
+										const newPoll = {
+											...pollList,
+										};
+
+										delete newPoll[item.uid];
+										setPollList(newPoll);
+									}}
+								>
+									{Object.values(watch).map((o) => (
+										<PollCard
+											title={o.title}
+											imglink={o.imglink}
+											type="pollCard"
+											key={o.uid}
+											pollCardPos={o.pos}
+											onUpdatePollCard={(obj) => HandleUpdateWatchPoll(o.id, obj)}
+											displayDelete="none"
+										/>
+									))}
+								</Dropzone>
+							}
+						</DndProvider>
+					</DropRow>
+					<button onClick={() => console.log(pollList)}>Press Me</button>
+				</PollCont>
+			</Page>
+		);
+	}
 };
 
-export default Home;
+export default Poll;

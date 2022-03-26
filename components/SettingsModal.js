@@ -16,15 +16,7 @@ import { ThemeConfig } from "@/utils/ThemeConfig";
 
 //Filter Stuff
 import { Genres, ScoreMarks, EpisodeMarks } from "@/utils/filters";
-import {
-	FormControl,
-	Select,
-	MenuItem,
-	ListItemText,
-	Checkbox,
-	Box,
-	Slider,
-} from "@mui/material";
+import { FormControl, Select, MenuItem, ListItemText, Checkbox, Box, Slider } from "@mui/material";
 import { BsCaretUpFill, BsCaretDownFill } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -245,8 +237,8 @@ const SettingsModal = ({
 		setTempGenre([]);
 		setTempScore([0, 10]);
 		setTempEpisodes([0, 100]);
-		setTempKey(["title"]);
-		setTempType(["asc"]);
+		setTempKey("title");
+		setTempType("asc");
 	};
 
 	return (
@@ -335,15 +327,9 @@ const SettingsModal = ({
 					<SubSection>
 						<SortCont>
 							<SortLabel
-								sortLabelColor={
-									tempKey === "title"
-										? ThemeConfig[theme].text
-										: "#D8D8D8"
-								}
+								sortLabelColor={tempKey === "title" ? ThemeConfig[theme].text : "#D8D8D8"}
 								sortTextColor={
-									tempKey === "title"
-										? ThemeConfig[theme].background
-										: "black"
+									tempKey === "title" ? ThemeConfig[theme].background : "black"
 								}
 							>
 								Title
@@ -373,15 +359,9 @@ const SettingsModal = ({
 						</SortCont>
 						<SortCont>
 							<SortLabel
-								sortLabelColor={
-									tempKey === "score"
-										? ThemeConfig[theme].text
-										: "#D8D8D8"
-								}
+								sortLabelColor={tempKey === "score" ? ThemeConfig[theme].text : "#D8D8D8"}
 								sortTextColor={
-									tempKey === "score"
-										? ThemeConfig[theme].background
-										: "black"
+									tempKey === "score" ? ThemeConfig[theme].background : "black"
 								}
 							>
 								Score
@@ -412,14 +392,10 @@ const SettingsModal = ({
 						<SortCont>
 							<SortLabel
 								sortLabelColor={
-									tempKey === "popularity"
-										? ThemeConfig[theme].text
-										: "#D8D8D8"
+									tempKey === "popularity" ? ThemeConfig[theme].text : "#D8D8D8"
 								}
 								sortTextColor={
-									tempKey === "popularity"
-										? ThemeConfig[theme].background
-										: "black"
+									tempKey === "popularity" ? ThemeConfig[theme].background : "black"
 								}
 							>
 								Popularity
@@ -451,18 +427,8 @@ const SettingsModal = ({
 				</SectionCont>
 			</SettingsRow>
 			<Row>
-				<Button
-					btnText="Apply"
-					onClick={ApplyFilters}
-					btnwidth="120px"
-					btnmargin="0 10px"
-				/>
-				<Button
-					btnText="Reset"
-					onClick={ResetFilters}
-					btnwidth="120px"
-					btnmargin="0 10px"
-				/>
+				<Button btnText="Apply" onClick={ApplyFilters} btnwidth="120px" btnmargin="0 10px" />
+				<Button btnText="Reset" onClick={ResetFilters} btnwidth="120px" btnmargin="0 10px" />
 			</Row>
 		</SettingsCont>
 	);

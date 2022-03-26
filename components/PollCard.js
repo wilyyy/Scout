@@ -15,7 +15,6 @@ const PollCardCont = styled.div`
 	align-items: center;
 	justify-content: flex-start;
 	padding: 25px 10px 10px;
-	cursor: pointer;
 	margin: 15px;
 `;
 
@@ -48,21 +47,27 @@ const PollDelete = styled.div`
 	align-items: center;
 	color: black;
 	z-index: 5;
+	cursor: pointer;
+	display: ${(props) => props.displayDelete};
 `;
 
 const PollCard = ({
-	onClick = () => {},
 	onDelete = () => {},
 	title = "Missing Title",
 	imglink = "/anime.png",
+	displayDelete = "flex",
 }) => {
 	const { theme } = useTheme();
 
 	return (
-		<PollCardCont onClick={onClick}>
+		<PollCardCont>
 			<PollPic src={imglink} />
 			<PollTitle txtcolor={ThemeConfig[theme].body}>{title}</PollTitle>
-			<PollDelete deletecolor={ThemeConfig[theme].text} onClick={onDelete}>
+			<PollDelete
+				displayDelete={displayDelete}
+				deletecolor={ThemeConfig[theme].text}
+				onClick={onDelete}
+			>
 				x
 			</PollDelete>
 		</PollCardCont>
