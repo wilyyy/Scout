@@ -5,7 +5,7 @@ import { useTheme } from '../utils/ScoutThemeProvider';
 import { ThemeConfig } from '../utils/ThemeConfig';
 import { HoverZoom } from "../utils/Animations";
 
-const CardCont = styled(motion.div)`
+const NewCont = styled(motion.div)`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -60,12 +60,12 @@ const FavCard = ({
   img_url = "/anime.png",
   fontFamily = "Poppins",
   title = "Tokyo Ghoul",
-  onButtonClick,
+  onButtonClick=()=>{},
 }) => {
 
   const { theme } = useTheme();
   return (
-    <CardCont 
+    <NewCont 
       fontFamily={fontFamily}
       onClick={onButtonClick}
       whileHover={{scale: 1.1}}
@@ -79,7 +79,7 @@ const FavCard = ({
             {truncateString(title, 30)}
         </Header>
       </TextCont>
-    </CardCont>
+    </NewCont>
   )
 }
 

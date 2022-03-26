@@ -9,6 +9,8 @@ import FavSection from '@/components/FavSection';
 import FavouriteGenre from '@/components/FavouriteGenre';
 import Button from '@/components/Button';
 import AnimeCard from '@/components/AnimeCard';
+import { exportComponentAsPNG } from "react-component-export-image";
+
 
 import axios from 'axios';
 import qs from 'qs';
@@ -61,6 +63,7 @@ const CardCont = styled.div`
 const ExportCont = styled.div`
     display: flex;
     justify-content: flex-end;
+    width: 100%;
 `;
 
 const DarkenBackground = styled.div`
@@ -77,7 +80,9 @@ const DarkenBackground = styled.div`
 
 let timer = null;
 
-const TestPage = () => {
+const ProfilePage = () => {
+
+  const componentRef = useRef();
   const router = useRouter();
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -169,7 +174,7 @@ const TestPage = () => {
       alert("removed" + obj.title + "from your list"); //replace with modal?
     }
   }
-
+  
   return (
     <Page>
       <DarkenBackground 
@@ -184,19 +189,9 @@ const TestPage = () => {
       />
       <Body>
       <AccountCard />
-      <CardCont>
-      {data.map((el, index) => 
-          <div key={index}>
-            <FavSection 
-              title={el.title}
-              img_url={el.img_url}
-            />
-          </div>
-          
-        )}
-        <FavSection 
-        nameFav='Steven is currently watching:'
-        />
+      <CardCont id="export" ref={componentRef}>
+        <FavSection />
+        <FavSection nameFav='Steven is currently watching:' /> 
         <FavouriteGenre />
         <ExportCont>
         <Button 
@@ -204,7 +199,16 @@ const TestPage = () => {
           btnwidth="100px"
           btnheight="30px"
           btnsize="12px"
-        />
+          onClick={() =>
+          exportComponentAsPNG(componentRef, {
+            html2CanvasOptions: {
+              onclone: (clonedDoc) => {
+                clonedDoc.getElementById("export").style.visibility = "visible";
+              }
+            }
+          })
+        }
+      />
         </ExportCont>
       </CardCont>
       </Body>
@@ -212,4 +216,4 @@ const TestPage = () => {
   )
 }
 
-export default TestPage;
+export default ProfilePage;

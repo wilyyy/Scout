@@ -37,8 +37,8 @@ const ContainerGenre = styled.div`
     justify-content: space-between;
 `;
 const FavouriteGenre = ({
-    genreName = "Romance",
-    nameGenre = "Steven's favourite genres"
+    genreName = "Action",
+    nameGenre = "Steven's favourite genres",
 }) => {
     return (
         <Cont>
