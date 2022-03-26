@@ -100,7 +100,7 @@ const NavigationBar = ({
             whileHover={HoverZoom.hover}
             whileTap={HoverZoom.tap}
             transition={HoverZoom.spring}
-            onClick={() => router.push("/")}
+            onClick={() => router.push("/home")}
          >
             Scout
          </motion.h1>
@@ -109,7 +109,7 @@ const NavigationBar = ({
                whileHover={HoverZoom.hover}
                whileTap={HoverZoom.tap}
                transition={HoverZoom.spring}
-               onClick={() => router.push("/")}
+               onClick={() => router.push("/home")}
             >
                Home
             </motion.a>
@@ -142,7 +142,7 @@ const NavigationBar = ({
                whileHover={HoverZoom.hover}
                whileTap={HoverZoom.tap}
                transition={HoverZoom.spring}
-               onClick={onProfileClick}
+               onClick={() => router.push("/testpage")}
             >
                <img src="https://placekitten.com/100/100" alt="profile image" />
             </AvatarCont>
