@@ -3,28 +3,13 @@ import {useRouter} from 'next/router';
 import styled from "styled-components";
 import { useState, useEffect } from 'react';
 import axios from "axios";
-import { LightColors, ThemeConfig } from '@/utils/ThemeConfig';
+import { LightColors } from '@/utils/ThemeConfig';
 import { v4 as uuidv4 } from 'uuid';
 
 import NavigationBar from "@/components/NavigationBar";
-import GlassCard from "@/components/GlassCard";
-import SearchBar from "@/components/SearchBar";
 import AnimePageCard from "@/components/AnimePageCard";
 import AnimePageRecs from '@/components/AnimePageRecs';
 import SettingsModal from '@/components/SettingsModal';
-import AnimePageRecCard from '@/components/AnimePageRecCard';
-
-import {
-    useTheme,
-    useGenre, 
-    useScore, 
-    useEpisodes, 
-    useSortKey, 
-    useSortType,
-    useSearch,
-    useData,
-    useYourList
-  } from '@/utils/ScoutThemeProvider';
 
 const Page = styled.div`
     width: 100%;

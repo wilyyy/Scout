@@ -4,18 +4,15 @@ import { v4 as uuidv4 } from 'uuid';
 
 import NavigationBar from '@/components/NavigationBar';
 import AccountCard from '@/components/AccountCard';
-import FavCard from '@/components/FavCard';
 import FavSection from '@/components/FavSection';
 import FavouriteGenre from '@/components/FavouriteGenre';
 import Button from '@/components/Button';
-import AnimeCard from '@/components/AnimeCard';
 
 import axios from 'axios';
 import qs from 'qs';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
-  useTheme,
   useGenre, 
   useScore, 
   useEpisodes, 
@@ -81,7 +78,6 @@ const TestPage = () => {
   const router = useRouter();
   const [modalVisible, setModalVisible] = useState(false);
 
-  const {theme} = useTheme();
   const {data, setData} = useData();
   const {genre} = useGenre();
   const {score} = useScore();
@@ -99,7 +95,6 @@ const TestPage = () => {
     }
 
     GetAnime();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const inputFilter = async (txt) => {

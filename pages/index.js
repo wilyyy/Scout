@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Router, useRouter } from "next/router";
-import { LightColors, ThemeConfig } from "@/utils/ThemeConfig";
+import { useRouter } from "next/router";
+import { LightColors } from "@/utils/ThemeConfig";
 import { v4 as uuidv4 } from "uuid";
 
 import NavigationBar from "@/components/NavigationBar";
@@ -8,11 +8,9 @@ import MainContentSlider from "@/components/MainContentSlider";
 import SettingsModal from "@/components/SettingsModal";
 import AnimeCard from "@/components/AnimeCard";
 
-import { IoMdFunnel } from "react-icons/io";
-
 import axios from "axios";
 import qs from "qs";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 import {
    useTheme,
@@ -70,7 +68,6 @@ const Home = () => {
    const router = useRouter();
    const [modalVisible, setModalVisible] = useState(false);
 
-   const { theme } = useTheme();
    const { data, setData } = useData();
    const { genre } = useGenre();
    const { score } = useScore();
@@ -94,7 +91,6 @@ const Home = () => {
       };
 
       GetAnime();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
    const inputFilter = async (txt) => {
@@ -207,11 +203,9 @@ const Home = () => {
                      score={el.score}
                      onButtonClick={() => router.push(`./anime/${el.uid}`)}
                      onCheckClick={
-                        // if(yourList[el.uid] !== undefined && yourList[el.uid] !== null)
                         (onAddClick = () => {}) => AddAnimeToYourList(onAddClick, el)
                      }
                      onUncheckClick={
-                        // if(yourList[el.uid] !== undefined && yourList[el.uid] !== null)
                         (onDelClick = () => {}) => RemoveAnime(onDelClick, el)
                      }
                   />

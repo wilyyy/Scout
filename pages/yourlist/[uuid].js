@@ -1,26 +1,16 @@
 //use uuid to generate user personal list?
 
-import axios from "axios";
 import styled from "styled-components";
-import { useEffect, useState, useRef } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
-import { LightColors, ThemeConfig } from "@/utils/ThemeConfig";
+import { LightColors } from "@/utils/ThemeConfig";
 import { v4 as uuidv4 } from "uuid";
 
 import NavigationBar from "@/components/NavigationBar";
-import MainContentSlider from "@/components/MainContentSlider";
 import SettingsModal from "@/components/SettingsModal";
 import AnimeCard from "@/components/AnimeCard";
 
 import {
-   useTheme,
-   useGenre,
-   useScore,
-   useEpisodes,
-   useSortKey,
-   useSortType,
-   useSearch,
-   useData,
    useYourList,
 } from "@/utils/ScoutThemeProvider";
 
@@ -64,9 +54,8 @@ const DarkenBackground = styled.div`
 
 const YourList = () => {
    const router = useRouter();
-   const { uuid } = router.query;
 
-   const { yourList, setYourList } = useYourList();
+   const { yourList } = useYourList();
    const [modalVisible, setModalVisible] = useState(false);
 
    const SettingsAppear = () => {
@@ -76,8 +65,6 @@ const YourList = () => {
    const SettingsExit = () => {
       setModalVisible(false);
    };
-
-   const DelAnimeFromYourList = (checked, obj) => {};
 
    return (
       <Page>
@@ -93,13 +80,7 @@ const YourList = () => {
             onFilterClick={SettingsAppear}
             onYourListClick={() => router.push(`./${uuidv4()}`)}
          />
-         {/* <MainContentSlider 
-                titletext1='Demon Slayer' 
-                desctext1='After a demon attack leaves his family slain and his sister cursed, Tanjiro embarks upon a perilious journey to find a cure and avenge those he’s lost.'
-                bottext='Your most recently watched anime'
-                curEp='7'
-                totEp='12'
-            /> */}
+         
          <BodyHeader>
             <HeaderText>Your List</HeaderText>
          </BodyHeader>
