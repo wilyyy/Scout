@@ -101,11 +101,6 @@ export function sortArr(arr = [], config = { key: null, type: null }) {
 			let num1 = Number(cur[key]);
 			let num2 = Number(next[key]);
 
-			if (cur[key] === "aired") {
-				num1 = splitDate(cur[key]);
-				num2 = splitDate(next[key]);
-			}
-
 			if (isNaN(cur[key])) {
 				num1 = cur[key];
 				num2 = next[key];

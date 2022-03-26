@@ -1,17 +1,19 @@
 import styled from "styled-components";
 import { SearchAlt } from "styled-icons/boxicons-regular";
 
-import { useTheme } from "../utils/ScoutThemeProvider";
+import {
+	useTheme,
+	useSearch,
+	useSortKey,
+	useSortType,
+	useSearchRes,
+} from "../utils/ScoutThemeProvider";
 import { ThemeConfig } from "../utils/ThemeConfig";
-
-import { useSearch } from "../utils/ScoutThemeProvider";
-
 import axios from "axios";
 import qs from "qs";
 import { useRouter } from "next/router";
-import { useSearchRes } from "../utils/ScoutThemeProvider";
-
-// Search Bar stuff
+import { useState } from "react";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 const SearchContainer = styled.div`
 	z-index: 2;
@@ -61,28 +63,25 @@ const DropdownCont = styled.div`
 	padding: 10px;
 	z-index: 2;
 	position: absolute;
-
 	box-sizing: border-box;
 	border-radius: 16px;
 	border: 1px solid #6d7992;
-
 	backdrop-filter: blur(20px) saturate(164%);
 	-webkit-backdrop-filter: blur(20px) saturate(164%);
 	font-family: ${(props) => props.fontFamily};
-
 	background: linear-gradient(
 		135deg,
 		${(props) => props.gradient1} 20%,
 		${(props) => props.gradient2} 100%
 	);
-	/* box-shadow: inset 43.3333px -43.3333px 43.3333px rgba(149, 149, 149, 0.1), 
-              inset -43.3333px 43.3333px 43.3333px rgba(255, 255, 255, 0.1); */
+	box-shadow: inset 43.3333px -43.3333px 43.3333px rgba(149, 149, 149, 0.1),
+		inset -43.3333px 43.3333px 43.3333px rgba(255, 255, 255, 0.1);
 `;
 
 const ListItem = styled.div`
 	padding: 4px 14px;
 	width: 100%;
-	margin: 12px;
+	margin: 2px;
 	background: rgba(196, 196, 196, 0.1);
 	box-shadow: inset 1.33333px -1.33333px 1.33333px rgba(165, 165, 165, 0.4),
 		inset -1.33333px 1.33333px 1.33333px rgba(255, 255, 255, 0.4);
@@ -91,16 +90,15 @@ const ListItem = styled.div`
 	cursor: pointer;
 `;
 
-const SearchBar = ({
-	onSearchClick,
-	onChange = () => {},
-	onSearchResClick = () => {},
-}) => {
+const SearchBar = ({ onSearchClick = () => {} }) => {
 	const { theme } = useTheme();
 	const { search, setSearch } = useSearch();
-
-	const router = useRouter();
+	const { sortKey, setSortKey } = useSortKey();
+	const { sortType, setSortType } = useSortType();
 	const { searchRes, setSearchRes } = useSearchRes();
+
+	const [open, setOpen] = useState(false);
+	const router = useRouter();
 
 	const onSearch = async (txt) => {
 		setSearch(txt);
@@ -108,6 +106,8 @@ const SearchBar = ({
 			params: {
 				txt: txt,
 				origin: "dropdownlist",
+				sortKeyFilter: sortKey,
+				sortTypeFilter: sortType,
 			},
 
 			paramsSerializer: (params) => {
@@ -115,7 +115,6 @@ const SearchBar = ({
 			},
 		});
 
-		console.log(result.data);
 		setSearchRes(result.data);
 	};
 
@@ -124,32 +123,43 @@ const SearchBar = ({
 		setSearch("");
 	};
 
+	const ClickAway = () => {
+		setOpen(false);
+	};
+
+	const ClickOn = () => {
+		setOpen(true);
+	};
+
 	return (
 		<SearchContainer>
-			<SearchBarContainer>
-				<Input
-					placeholder={"Search"}
-					color={ThemeConfig[theme].text}
-					onChange={(e) => {
-						onSearch(e.target.value);
-					}}
-				/>
-				<Icon onClick={onSearchClick} />
-			</SearchBarContainer>
-			{search !== "" && (
-				<DropdownCont
-					gradient1={ThemeConfig[theme].cardGradient}
-					gradient2={ThemeConfig[theme].cardGradient2}
-				>
-					{searchRes.slice(0, 5).map(
-						(o, i) => (
-							<ListItem key={i} onClick={() => SearchClick(o)}>
-								{o.title}
-							</ListItem>
-						) //make styled comp for this
+			<ClickAwayListener onClickAway={ClickAway}>
+				<div>
+					<SearchBarContainer>
+						<Input
+							placeholder={"Search"}
+							color={ThemeConfig[theme].text}
+							onChange={(e) => {
+								onSearch(e.target.value);
+							}}
+							onClick={ClickOn}
+						/>
+						<Icon onClick={onSearchClick} />
+					</SearchBarContainer>
+					{search !== "" && open && (
+						<DropdownCont
+							gradient1={ThemeConfig[theme].cardGradient}
+							gradient2={ThemeConfig[theme].cardGradient2}
+						>
+							{searchRes.slice(0, 5).map((o, i) => (
+								<ListItem key={i} onClick={() => SearchClick(o)}>
+									{o.title}
+								</ListItem>
+							))}
+						</DropdownCont>
 					)}
-				</DropdownCont>
-			)}
+				</div>
+			</ClickAwayListener>
 		</SearchContainer>
 	);
 };

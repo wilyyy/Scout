@@ -8,27 +8,27 @@ import { ThemeConfig } from "../utils/ThemeConfig";
 import { HoverZoom } from "../utils/Animations";
 
 const CardCont = styled(motion.div)`
-   box-sizing: border-box;
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
-   align-items: center;
-   width: 271px;
-   height: 578px;
-   padding: 15px;
-   border-radius: 16px;
-   margin: 40px 20px;
-   cursor: pointer;
-   border: 1px solid #6d7992;
-   backdrop-filter: blur(20px) saturate(164%);
-   -webkit-backdrop-filter: blur(20px) saturate(164%);
-   font-family: ${(props) => props.fontFamily};
-   background: linear-gradient(
-      135deg,
-      ${(props) => props.gradient1} 20%,
-      ${(props) => props.gradient2} 100%
-   );
-   /* box-shadow: inset 43.3333px -43.3333px 43.3333px rgba(149, 149, 149, 0.1), 
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: ${(props) => props.cardWidth};
+	height: ${(props) => props.cardHeight};
+	padding: 15px;
+	border-radius: 16px;
+	margin: ${(props) => props.cardMargin};
+	cursor: pointer;
+	border: 1px solid #6d7992;
+	backdrop-filter: blur(20px) saturate(164%);
+	-webkit-backdrop-filter: blur(20px) saturate(164%);
+	font-family: ${(props) => props.fontFamily};
+	background: linear-gradient(
+		135deg,
+		${(props) => props.gradient1} 20%,
+		${(props) => props.gradient2} 100%
+	);
+	/* box-shadow: inset 43.3333px -43.3333px 43.3333px rgba(149, 149, 149, 0.1), 
               inset -43.3333px 43.3333px 43.3333px rgba(255, 255, 255, 0.1); */
 `;
 

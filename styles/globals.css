@@ -1,53 +1,74 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@100;200;400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@100;200;400;600&display=swap");
 
 html,
 body {
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: sans-serif;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-family: sans-serif;
 }
 
 body {
-  width: 85vw;
+	width: 85vw;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
-
 
 #__next {
-  width: 100%;
+	width: 100%;
 }
-
 
 /* Carousel stuff */
 .carousel {
-  width: 100%;
-  height: 494px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+	width: 883px;
+	height: 464px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: visible;
 }
 
 .slider {
-  width: 100%;
-  height: 100%;
+	width: 100%;
+	height: 434px;
+	overflow: visible;
 }
 
 .slide {
-  width: 100%;
-  height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
-  padding: 5px 10px;
+	padding: 5px 10px;
+}
+
+.carousel__inner-slide {
+	height: 436px;
+	width: 188px;
+}
+
+.carousel__inner-slide {
+	display: flex;
+	justify-content: center;
+	height: 100%;
+}
+
+.dotGroup {
+	align-self: center;
+}
+
+.carousel__dot {
+	width: 10px;
+	margin: 0 10px;
+	height: 10px;
 }
