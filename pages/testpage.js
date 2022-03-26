@@ -7,6 +7,8 @@ import AccountCard from '@/components/AccountCard';
 import FavCard from '@/components/FavCard';
 import FavSection from '@/components/FavSection';
 import FavouriteGenre from '@/components/FavouriteGenre';
+import Button from '@/components/Button';
+import AnimeCard from '@/components/AnimeCard';
 
 import axios from 'axios';
 import qs from 'qs';
@@ -50,8 +52,15 @@ border-radius: 16px;
 `;
 
 const CardCont = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
+const ExportCont = styled.div`
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
 `;
 
 const DarkenBackground = styled.div`
@@ -176,9 +185,27 @@ const TestPage = () => {
       <Body>
       <AccountCard />
       <CardCont>
-        <FavSection />
-        <FavSection />
+      {data.map((el, index) => 
+          <div key={index}>
+            <FavSection 
+              title={el.title}
+              img_url={el.img_url}
+            />
+          </div>
+          
+        )}
+        <FavSection 
+        nameFav='Steven is currently watching:'
+        />
         <FavouriteGenre />
+        <ExportCont>
+        <Button 
+          btnText="Export as PNG"
+          btnwidth="100px"
+          btnheight="30px"
+          btnsize="12px"
+        />
+        </ExportCont>
       </CardCont>
       </Body>
     </Page>
