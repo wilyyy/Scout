@@ -80,7 +80,7 @@ const AuthLogin = ({ onSignUpClick }) => {
                onChange={(e) => setPassword(e.target.value)}
             />
             <button onClick={LoginAccount}>Log In</button>
-            <p>Don't have an account?</p>
+            <p>Dont have an account?</p>
             <a onClick={onSignUpClick}>Create an account</a>
          </Form>
       </Container>
