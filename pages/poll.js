@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { LightColors, ThemeConfig } from "@/utils/ThemeConfig";
 
-import ServerUrl from "@/utils/ServerUrl";
 import NavigationBar from "@/components/NavigationBar";
 import PollCard from "@/components/PollCard";
 import DragPollCard from "@/components/DragPollCard";
@@ -28,8 +27,6 @@ import {
 	useSortKey,
 	useSortType,
 	useSearch,
-	useData,
-	useYourList,
 	usePollList,
 } from "@/utils/ScoutThemeProvider";
 
@@ -48,7 +45,8 @@ const Header = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	height: 200px;
+	max-height: 200px;
+	height: 10%;
 `;
 
 const PollCont = styled.div`
@@ -133,29 +131,17 @@ const Poll = () => {
 	const [open, setOpen] = useState(false);
 	const [inSession, setInSession] = useState(false);
 	const r = useRouter();
-	const { uuid } = r.query;
 	const [watch, setWatch] = useState({});
 	const [noWatch, setNoWatch] = useState({});
 
 	const { theme } = useTheme();
-	const [data, setData] = useState([]);
 	const { genre } = useGenre();
 	const { score } = useScore();
 	const { episodes } = useEpisodes();
 	const { sortKey } = useSortKey();
 	const { sortType } = useSortType();
-	const { search, setSearch } = useSearch();
+	const { search } = useSearch();
 	const { pollList, setPollList } = usePollList();
-
-	useEffect(() => {
-		const GetAnime = async () => {
-			const result = await axios.get("/api/anime");
-			setData(result.data);
-		};
-
-		GetAnime();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
 
 	const FullSearch = async () => {
 		const res = await axios.get("/api/anime", {
@@ -441,7 +427,10 @@ const Poll = () => {
 							}
 						</DndProvider>
 					</DropRow>
-					<button onClick={() => console.log(pollList)}>Press Me</button>
+					<Row>
+						<Button btnmargin="0 50px" btnText="Again?" onClick={() => setInSession(false)} />
+						<Button btnmargin="0 50px" btnText="Home" onClick={() => r.push("/")} />
+					</Row>
 				</PollCont>
 			</Page>
 		);
